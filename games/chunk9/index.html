@@ -1,0 +1,1504 @@
+<title>Games - SGGames</title>
+    <!-- Add mimicry.js to enable site-wide tab cloaking -->
+    <script src="/js/mimicry.js"></script>
+<script>
+    // Make sure the openSettings function is defined globally
+    function openSettings() {
+        console.log("Settings button clicked");
+        var modal = document.getElementById('settingsModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            loadSavedSettings();
+        } else {
+            console.error("Settings modal not found");
+        }
+    }
+    
+    // Initialize particles background
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 } },
+            opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
+            size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
+            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+            modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+        },
+        retina_detect: true
+    });
+
+    // Search functionality
+    document.querySelector('.search-bar').addEventListener('input', function() {
+        search();
+    });
+
+    document.querySelector('.search-enter').addEventListener('click', function() {
+        search();
+    });
+
+    function search() {
+        const searchTerm = document.querySelector('.search-bar').value.toLowerCase();
+        const games = document.querySelectorAll('.game');
+        const sections = document.querySelectorAll('.section-header');
+        const requestButton = document.querySelector('.request-button');
+
+        // Always show sections and request button during search
+        sections.forEach(section => {
+            section.style.display = 'block';
+        });
+        
+        if (requestButton) {
+            requestButton.style.display = 'flex';
+        }
+
+        games.forEach(function(game) {
+            const gameTitle = game.querySelector('.game-title').textContent.toLowerCase();
+            
+            if (searchTerm === '' || gameTitle.includes(searchTerm)) {
+                game.style.display = 'flex';
+            } else {
+                game.style.display = 'none';
+            }
+        });
+    }
+    
+    // Settings Modal Functionality
+    // Add immediate self-executing function to set up event listeners right away
+    (function() {
+        // Get the settings button and modal
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsModal = document.getElementById('settingsModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const closeSettingsBtn = document.querySelector('.close-settings');
+        
+        // Add event listener to settings button
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', function() {
+                console.log('Settings button clicked');
+                if (settingsModal) {
+                    settingsModal.style.display = 'flex';
+                    loadSavedSettings();
+                } else {
+                    console.error('Settings modal not found');
+                }
+            });
+        } else {
+            console.error('Settings button not found');
+        }
+        
+        // Close settings modal
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', function() {
+                settingsModal.style.display = 'none';
+            });
+        }
+        
+        // Save settings and close
+        if (closeSettingsBtn) {
+            closeSettingsBtn.addEventListener('click', function() {
+                saveAllSettings();
+                settingsModal.style.display = 'none';
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+        });
+        
+        // Apply any saved mimicry settings immediately
+        applySavedMimicry();
+    })();
+    
+    // Also keep the DOMContentLoaded event for other setup
+    document.addEventListener('DOMContentLoaded', function() {
+        // Setup rename options
+        const renameOptions = document.querySelectorAll('.rename-option');
+        renameOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                renameOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show/hide email customization for Gmail
+                const emailCustomization = document.getElementById('emailCustomization');
+                if (emailCustomization) {
+                    emailCustomization.style.display = this.dataset.type === 'gmail' ? 'block' : 'none';
+                }
+                
+                // Auto-save when option is selected
+                savePageStyle();
+            });
+        });
+        
+        // Setup email customization
+        const applyEmailBtn = document.querySelector('.apply-email');
+        if (applyEmailBtn) {
+            applyEmailBtn.addEventListener('click', function() {
+                applyCustomEmail();
+            });
+        }
+        
+        // Check if Gmail is selected on load
+        const activeOption = document.querySelector('.rename-option.active');
+        if (activeOption && activeOption.dataset.type === 'gmail') {
+            const emailCustomization = document.getElementById('emailCustomization');
+            if (emailCustomization) {
+                emailCustomization.style.display = 'block';
+            }
+        }
+    });
+    
+    function loadSavedSettings() {
+        // Tab cloaking settings
+        const savedType = localStorage.getItem('pageMimicType');
+        
+        if (savedType) {
+            const options = document.querySelectorAll('.rename-option');
+            options.forEach(opt => {
+                if (opt.dataset.type === savedType) {
+                    opt.classList.add('active');
+                } else {
+                    opt.classList.remove('active');
+                }
+            });
+            
+            // Show/hide email customization if Gmail is selected
+            const emailCustomization = document.getElementById('emailCustomization');
+            if (emailCustomization) {
+                emailCustomization.style.display = savedType === 'gmail' ? 'block' : 'none';
+            }
+        }
+        
+        // Security settings
+        const verificationToggle = document.getElementById('verificationToggle');
+        const panicButtonToggle = document.getElementById('panicButtonToggle');
+        const panicKeyInput = document.getElementById('panicKeyInput');
+        
+        if (verificationToggle) {
+            verificationToggle.checked = localStorage.getItem('verificationEnabled') === 'true';
+        }
+        
+        if (panicButtonToggle) {
+            panicButtonToggle.checked = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
+        }
+        
+        if (panicKeyInput) {
+            panicKeyInput.value = localStorage.getItem('panicKey') || '[';
+        }
+        
+        // Email customization settings
+        const usernameInput = document.getElementById('username');
+        const domainInput = document.getElementById('domain');
+        
+        if (usernameInput && domainInput) {
+            usernameInput.value = localStorage.getItem('emailUsername') || '';
+            domainInput.value = localStorage.getItem('emailDomain') || 'gmail.com';
+        }
+    }
+    
+    function savePageStyle() {
+        const selectedOption = document.querySelector('.rename-option.active');
+        if (selectedOption) {
+            const pageType = selectedOption.dataset.type;
+            let pageTitle = selectedOption.dataset.title;
+            const pageIcon = selectedOption.dataset.icon;
+            
+            // If this is a Gmail type and we have a custom email, use it
+            if (pageType === 'gmail') {
+                const username = localStorage.getItem('emailUsername');
+                const domain = localStorage.getItem('emailDomain');
+                
+                if (username && domain) {
+                    pageTitle = `Inbox - ${username}@${domain} - Gmail`;
+                }
+            }
+            
+            // Save preferences to localStorage
+            localStorage.setItem('pageMimicType', pageType);
+            localStorage.setItem('pageMimicTitle', pageTitle);
+            localStorage.setItem('pageMimicIcon', pageIcon);
+            
+            // Apply changes immediately
+            document.title = pageTitle;
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = pageIcon;
+            } else {
+                // Create favicon if it doesn't exist
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.href = pageIcon;
+                document.head.appendChild(newFavicon);
+            }
+        }
+    }
+    
+    function applyCustomEmail() {
+        const usernameInput = document.getElementById('username');
+        const domainInput = document.getElementById('domain');
+        
+        if (usernameInput && domainInput) {
+            const username = usernameInput.value.trim();
+            const domain = domainInput.value.trim() || 'gmail.com';
+            
+            // Save to localStorage
+            localStorage.setItem('emailUsername', username);
+            localStorage.setItem('emailDomain', domain);
+            
+            // If Gmail is currently selected, update the title immediately
+            const selectedOption = document.querySelector('.rename-option.active');
+            if (selectedOption && selectedOption.dataset.type === 'gmail') {
+                const newTitle = `Inbox - ${username}@${domain} - Gmail`;
+                document.title = newTitle;
+                localStorage.setItem('pageMimicTitle', newTitle);
+            }
+            
+            // Show brief feedback
+            const applyButton = document.querySelector('.apply-email');
+            if (applyButton) {
+                const originalText = applyButton.textContent;
+                applyButton.textContent = 'Saved!';
+                applyButton.style.backgroundColor = '#4CAF50'; // Green
+                
+                // Reset after a short delay
+                setTimeout(() => {
+                    applyButton.textContent = originalText;
+                    applyButton.style.backgroundColor = '';
+                }, 1500);
+            }
+        }
+    }
+    
+    function saveSecuritySettings() {
+        const verificationToggle = document.getElementById('verificationToggle');
+        const panicButtonToggle = document.getElementById('panicButtonToggle');
+        const panicKeyInput = document.getElementById('panicKeyInput');
+        
+        if (verificationToggle) {
+            localStorage.setItem('verificationEnabled', verificationToggle.checked);
+        }
+        
+        if (panicButtonToggle) {
+            localStorage.setItem('panicEnabled', panicButtonToggle.checked);
+        }
+        
+        if (panicKeyInput && panicKeyInput.value) {
+            localStorage.setItem('panicKey', panicKeyInput.value);
+        }
+        
+        // Reinitialize security features with new settings
+        initSecurityFeatures();
+    }
+    
+    function saveAllSettings() {
+        savePageStyle();
+        saveSecuritySettings();
+    }
+    
+    function applySavedMimicry() {
+        // Check if there's a saved style and apply it
+        const savedTitle = localStorage.getItem('pageMimicTitle');
+        const savedIcon = localStorage.getItem('pageMimicIcon');
+        
+        // Apply saved title if available
+        if (savedTitle) {
+            document.title = savedTitle;
+        }
+        
+        // Apply saved favicon if available
+        if (savedIcon) {
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = savedIcon;
+            } else {
+                // Create favicon if it doesn't exist
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.href = savedIcon;
+                document.head.appendChild(newFavicon);
+            }
+        }
+        
+        // Initialize security features
+        initSecurityFeatures();
+    }
+    
+    function initSecurityFeatures() {
+        // Initialize panic key
+        initPanicKey();
+        
+        // Initialize tab close prevention
+        initTabClosePrevention();
+    }
+    
+    function initPanicKey() {
+        // Remove any existing event listener to prevent duplicates
+        document.removeEventListener('keydown', handlePanicKey);
+        
+        // Only add listener if panic button is enabled
+        const panicEnabled = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
+        if (panicEnabled) {
+            document.addEventListener('keydown', handlePanicKey);
+        }
+    }
+    
+    function handlePanicKey(event) {
+        const panicKey = localStorage.getItem('panicKey') || '[';
+        if (event.key === panicKey) {
+            // Set a flag that this is a panic activation so verification can be bypassed
+            sessionStorage.setItem('panicActivation', 'true');
+            
+            // Redirect to Google immediately
+            window.location.href = 'https://www.google.com';
+        }
+    }
+    
+    function initTabClosePrevention() {
+        const verificationEnabled = localStorage.getItem('verificationEnabled') === 'true';
+        
+        // Remove any existing event listener
+        window.onbeforeunload = null;
+        
+        if (verificationEnabled) {
+            window.onbeforeunload = function(e) {
+                // Check if this is a panic button activation
+                const isPanicActivation = sessionStorage.getItem('panicActivation') === 'true';
+                if (isPanicActivation) {
+                    // Clear the flag and allow the navigation
+                    sessionStorage.removeItem('panicActivation');
+                    return undefined;
+                }
+                
+                // Otherwise show the confirmation dialog
+                return "Are you sure you want to leave this page?";
+            };
+        }
+    }
+</script>
+</body>
+</html><!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="CybriaTech">
+<meta name="keywords"
+    content="games, unblocked games, video games, unity, webgl, swf, html5, cybriagames, cybriagames sequel, emulators, sggame">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="mimicry.js"></script>
+<title>Untitled Document - Google Docs</title>
+<!-- Import Google fonts first, outside of the style tag -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --primary-color: #0a0e17;
+        --secondary-color: #1a1f2c;
+        --accent-color: #5644ff;
+        --text-color: #ffffff;
+        --button-hover: #7366ff;
+        --highlight-color: #ff4656;
+        --gray-dark: rgba(26, 31, 44, 0.8);
+        --gray-light: rgba(56, 56, 56, 0.8);
+        --modal-background: rgba(10, 14, 23, 0.95);
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+    
+    /* Header Styling */
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        background-color: var(--secondary-color);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .home-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: bold;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .home-link:hover {
+        color: var(--accent-color);
+    }
+    
+    /* Settings Button */
+    .settings-button {
+        background: transparent;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .settings-button:hover {
+        color: var(--accent-color);
+    }
+    
+    /* Settings Modal */
+    #settingsModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .settings-modal-content {
+        background-color: var(--secondary-color);
+        border-radius: 12px;
+        width: 90%;
+        max-width: 700px;
+        padding: 2rem;
+        position: relative;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5rem;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    
+    .close-modal:hover {
+        color: var(--highlight-color);
+    }
+    
+    .settings-section {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 1.5rem;
+    }
+    
+    .settings-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: var(--accent-color);
+    }
+    
+    .settings-options {
+        margin-top: 1.5rem;
+    }
+    
+    /* Rename Options Grid */
+    .rename-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .rename-option {
+        background-color: #2a2f3c;
+        border-radius: 8px;
+        padding: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .rename-option:hover {
+        background-color: #3a4155;
+        transform: translateY(-3px);
+    }
+    
+    .rename-option.active {
+        border: 2px solid var(--highlight-color);
+        background-color: rgba(255, 70, 86, 0.1);
+    }
+    
+    .rename-option-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .rename-option-title {
+        font-weight: bold;
+        margin-bottom: 0.3rem;
+    }
+    
+    .rename-option-subtitle {
+        font-size: 0.75rem;
+        opacity: 0.7;
+    }
+    
+    /* Toggle Switch Styles */
+    .settings-toggle {
+        margin-bottom: 1.5rem;
+    }
+    
+    .toggle-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
+    
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #333;
+        transition: .4s;
+        border-radius: 34px;
+    }
+    
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+    
+    input:checked + .toggle-slider {
+        background-color: var(--accent-color);
+    }
+    
+    input:checked + .toggle-slider:before {
+        transform: translateX(26px);
+    }
+    
+    .toggle-desc {
+        font-size: 0.8rem;
+        opacity: 0.7;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Panic Key Setting Styles */
+    .panic-key-setting {
+        margin-top: 1rem;
+    }
+    
+    #panicKeyInput {
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        border: 1px solid var(--accent-color);
+        border-radius: 4px;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        width: 50px;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    
+    .setting-note {
+        font-size: 0.8rem;
+        opacity: 0.7;
+        margin-top: 0.3rem;
+    }
+    
+    .setting-warning {
+        font-size: 0.8rem;
+        color: var(--highlight-color);
+        margin-top: 0.3rem;
+    }
+    
+    /* Save Button Styles */
+    .close-settings {
+        background-color: var(--highlight-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.8rem 1.5rem;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+        width: 100%;
+    }
+    
+    .close-settings:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 10px rgba(255, 70, 86, 0.3);
+    }
+    
+    /* Email Customization */
+    .email-customization {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: var(--primary-color);
+        border-radius: 8px;
+    }
+    
+    .email-input-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .email-input {
+        background-color: var(--secondary-color);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.5rem;
+        color: white;
+        border-radius: 4px;
+    }
+    
+    .email-input-group span {
+        margin: 0 0.5rem;
+    }
+    
+    .apply-email {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 0.5rem;
+    }
+    
+    .apply-email:hover {
+        background-color: var(--button-hover);
+    }
+    
+    /* Search Bar */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin: 2rem auto;
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+        z-index: 10;
+    }
+    
+    .search-bar {
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 8px;
+        border: 2px solid var(--accent-color);
+        background-color: var(--secondary-color);
+        color: white;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    
+    .search-bar:focus {
+        box-shadow: 0 0 0 3px rgba(86, 68, 255, 0.3);
+    }
+    
+    .search-enter {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: var(--accent-color);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+    
+    /* Games Grid */
+    main {
+        padding: 0 2rem 2rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    #games {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.2rem;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .game {
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 1.2rem;
+        min-height: 100px;
+        position: relative;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .game:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(86, 68, 255, 0.3);
+        background-color: var(--button-hover);
+    }
+    
+    .game-title {
+        font-weight: 600;
+        font-size: 1rem;
+        margin: 0;
+        width: 100%;
+    }
+    
+    /* Special Game Categories */
+    .popular::before {
+    content: ""; /* Remove "POPULAR" text */
+    display: none; /* Hide the ribbon completely */
+    }
+
+    .new::before {
+    content: ""; /* Remove "NEW" text */
+    display: none; /* Hide the ribbon completely */
+    }
+
+    .flash::before {
+    content: ""; /* Remove "FLASH" text */
+    display: none; /* Hide the ribbon completely */
+    }
+    
+    /* Gradient Text Styling - Higher specificity */
+    #games .game .game-title {
+        background: linear-gradient(90deg, #5644ff, #9f44ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent; /* Fallback */
+        font-weight: bold;
+    }
+    
+    /* Section Headers */
+    .section-header {
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 2rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--accent-color);
+        grid-column: 1 / -1;
+        color: var(--text-color);
+    }
+    
+    /* Request/Support Button */
+    .request-button {
+        grid-column: span 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 1.2rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background: linear-gradient(90deg, #5644ff, #9f44ff);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+    }
+    
+    .request-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(86, 68, 255, 0.3);
+    }
+    
+    /* Particles Background */
+    #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        z-index: 1;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .header {
+            padding: 0.8rem 1rem;
+        }
+        
+        .search-container {
+            width: 90%;
+        }
+        
+        main {
+            padding: 0 1rem 1rem;
+        }
+        
+        #games {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        #games {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        }
+        
+        .game {
+            padding: 1rem;
+            min-height: 80px;
+        }
+        
+        .game-title {
+            font-size: 0.9rem;
+        }
+    }
+    
+    /* Keep the existing gradient text in normal state */
+    #games .game .game-title {
+        background: linear-gradient(90deg, #5644ff, #9f44ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent; /* Fallback */
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    /* Just change the text color on hover, but keep the gradient */
+    #games .game:hover .game-title {
+        -webkit-text-fill-color: white; /* Plain white text on hover */
+        color: white; /* Fallback */
+    }
+</style>
+</head>
+
+<body>
+<div class="header">
+    <a href="/" class="home-link">
+        <i class="fas fa-home mr-2"></i>
+        ㅤHome
+    </a>
+    <a href="/settings" class="home-link">
+        <i class="fas fa-cog"></i>
+        ㅤSettings
+    </a>
+</div>
+
+<div class="search-container">
+    <input type="text" class="search-bar" placeholder="Search for games...">
+    <button class="search-enter"><i class="fas fa-search"></i></button>
+</div>
+
+<main>
+    <div id="games">
+        <!-- Regular Games Section -->
+        <div class="section-header">Games</div>
+        
+        <div class="game" onclick="window.location.href='https://forms.gle/Eem3anMqHHpLSLPz7'">
+            <div class="game-title">Requests/Suggestions</div>
+        </div>
+
+        <div class="game" onclick="window.location.href='8ball'">
+            <div class="game-title">8 Ball</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='60sburgerrun'">
+            <div class="game-title">60s Burger Run</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='2048'">
+            <div class="game-title">2048</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='a-dark-room'">
+            <div class="game-title">A Dark Room</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='adventure-cap'">
+            <div class="game-title">Adventure Cap</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='badicecream'">
+            <div class="game-title">Bad Ice Cream</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='badicecream2'">
+            <div class="game-title">Bad Ice Cream 2</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='badicecream3'">
+            <div class="game-title">Bad Ice Cream 3</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='basket-random'">
+            <div class="game-title">Basket Random</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='basketball-star'">
+            <div class="game-title">Basketball Stars</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='bitlife'">
+            <div class="game-title">Bitlife</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='black-hole-squ'">
+            <div class="game-title">Black Hole Square</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='bounce-back'">
+            <div class="game-title">Bounce Back</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='boxing-random'">
+            <div class="game-title">Boxing Random</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='btts'">
+            <div class="game-title">BTTS</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='cell-machine'">
+            <div class="game-title">Cell Machine</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='chess'">
+            <div class="game-title">Chess</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='choppyorc'">
+            <div class="game-title">Choppy Orc</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='chrome-dino'">
+            <div class="game-title">Chrome Dino</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='circloo'">
+            <div class="game-title">Circloo</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='clickerheroes'">
+            <div class="game-title">Clicker Heroes</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='cookie-clicker'">
+            <div class="game-title">Cookie Clicker</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='craftmine'">
+            <div class="game-title">Craftmine</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='ctr'">
+            <div class="game-title">CTR</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='ctr-holiday'">
+            <div class="game-title">CTR Holiday</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='ctr-tr'">
+            <div class="game-title">CTR TR</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='death-run-3d'">
+            <div class="game-title">Death Run 3D</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='doodle-jump'">
+            <div class="game-title">Doodle Jump</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='draw-the-hill'">
+            <div class="game-title">Draw The Hill</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='edgenotfound'">
+            <div class="game-title">Edge Not Found</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='evilglitch'">
+            <div class="game-title">Evil Glitch</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='factoryballs'">
+            <div class="game-title">Factory Balls</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='fbwg'">
+            <div class="game-title">FBWG</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='fbwg2'">
+            <div class="game-title">FBWG 2</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='fbwg3'">
+            <div class="game-title">FBWG 3</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='fbwg4'">
+            <div class="game-title">FBWG 4</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='flappybird'">
+            <div class="game-title">Flappy Bird</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='flappySquidward'">
+            <div class="game-title">Flappy Squidward</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='flash'">
+            <div class="game-title">Flash</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='friendlyfire'">
+            <div class="game-title">Friendly Fire</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='full-screen-mario'">
+            <div class="game-title">Full Screen Mario</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='funnyshooter2'">
+            <div class="game-title">Funny Shooter 2</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='game-inside'">
+            <div class="game-title">Game Inside</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='gba'">
+            <div class="game-title">GBA Emulator</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='getaway-shootout'">
+            <div class="game-title">Getaway Shootout</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='google-snake'">
+            <div class="game-title">Google Snake</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='google-solitaire'">
+            <div class="game-title">Google Solitaire</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='idle-breakout'">
+            <div class="game-title">Idle Breakout</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='jelly-mario'">
+            <div class="game-title">Jelly Mario</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='madalin-cars-m'">
+            <div class="game-title">Madalin Cars</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='mc-classic'">
+            <div class="game-title">Minecraft Classic</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='mindustry'">
+            <div class="game-title">Mindustry</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='minekhan'">
+            <div class="game-title">Minekhan</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='motox3m'">
+            <div class="game-title">Moto X3M</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='motox3m-pool'">
+            <div class="game-title">Moto X3M Pool</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='motox3m-spooky'">
+            <div class="game-title">Moto X3M Spooky</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='motox3m-winter'">
+            <div class="game-title">Moto X3M Winter</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='pacman'">
+            <div class="game-title">Pacman</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='paperio2'">
+            <div class="game-title">Paper.io 2</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='pushback'">
+            <div class="game-title">Pushback</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='retro-bowl'">
+            <div class="game-title">Retro Bowl</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='rooftop-snipers'">
+            <div class="game-title">Rooftop Snipers</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='sand-game'">
+            <div class="game-title">Sand Game</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='sans-fight'">
+            <div class="game-title">Sans Fight</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='scrapmetal3'">
+            <div class="game-title">Scrap Metal 3</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='slope'">
+            <div class="game-title">Slope</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='sm64'">
+            <div class="game-title">Super Mario 64</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='soccer-random'">
+            <div class="game-title">Soccer Random</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='soldier-legend'">
+            <div class="game-title">Soldier Legend</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='sort-the-court'">
+            <div class="game-title">Sort the Court</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='stickslasher'">
+            <div class="game-title">Stick Slasher</div>
+        </div>
+        
+        <div class="game popular" onclick="window.location.href='subway-surfers'">
+            <div class="game-title">Subway Surfers</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='superhot'">
+            <div class="game-title">Superhot</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='swerve'">
+            <div class="game-title">Swerve</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='tank-trouble-2'">
+            <div class="game-title">Tank Trouble 2</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='tanuki-sunset'">
+            <div class="game-title">Tanuki Sunset</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='temple-run-2'">
+            <div class="game-title">Temple Run 2</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='tetra-legends'">
+            <div class="game-title">Tetra Legends</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='there-is-no-game'">
+            <div class="game-title">There Is No Game</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='tinyfishing'">
+            <div class="game-title">Tiny Fishing</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='townscaper'">
+            <div class="game-title">Townscaper</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='tube-jumpers'">
+            <div class="game-title">Tube Jumpers</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='tunnel-rush'">
+            <div class="game-title">Tunnel Rush</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='vex3'">
+            <div class="game-title">Vex 3</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='vex4'">
+            <div class="game-title">Vex 4</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='vex5'">
+            <div class="game-title">Vex 5</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='vex6'">
+            <div class="game-title">Vex 6</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='vex7'">
+            <div class="game-title">Vex 7</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='volley-random'">
+            <div class="game-title">Volley Random</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='winter-falling'">
+            <div class="game-title">Winter Falling</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='wordle'">
+            <div class="game-title">Wordle</div>
+        </div>
+        
+        <div class="game" onclick="window.location.href='worlds-hardest'">
+            <div class="game-title">World's Hardest Game</div>
+        </div>
+
+    </div>
+</main>
+
+<div id="particles-js"></div>
+
+<!-- Settings Modal -->
+<div id="settingsModal" class="settings-modal" style="display: none;">
+    <div class="settings-modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Settings</h2>
+        
+        <!-- Tab Cloaking Section -->
+        <div class="settings-section">
+            <h3>Tab Cloaking</h3>
+            <p>Change how this page appears in your browser</p>
+            
+            <div class="settings-options">
+                <div class="rename-options">
+                    <div class="rename-option active" data-type="gdocs" data-title="Untitled document - Google Docs" data-icon="https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico">
+                        <div class="rename-option-icon">📝</div>
+                        <div class="rename-option-details">
+                            <div class="rename-option-title">Google Docs</div>
+                            <div class="rename-option-subtitle">Document editor</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rename-option" data-type="gmail" data-title="Inbox - example@gmail.com - Gmail" data-icon="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico">
+                        <div class="rename-option-icon">📧</div>
+                        <div class="rename-option-details">
+                            <div class="rename-option-title">Gmail</div>
+                            <div class="rename-option-subtitle">Email service</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rename-option" data-type="gdrive" data-title="My Drive - Google Drive" data-icon="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png">
+                        <div class="rename-option-icon">📁</div>
+                        <div class="rename-option-details">
+                            <div class="rename-option-title">Google Drive</div>
+                            <div class="rename-option-subtitle">File storage</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rename-option" data-type="desmos" data-title="Desmos | Graphing Calculator" data-icon="https://www.desmos.com/assets/img/apps/graphing/favicon.ico">
+                        <div class="rename-option-icon">🔢</div>
+                        <div class="rename-option-details">
+                            <div class="rename-option-title">Desmos</div>
+                            <div class="rename-option-subtitle">Graphing calculator</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rename-option" data-type="gsheets" data-title="Untitled spreadsheet - Google Sheets" data-icon="https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico">
+                        <div class="rename-option-icon">📊</div>
+                        <div class="rename-option-details">
+                            <div class="rename-option-title">Google Sheets</div>
+                            <div class="rename-option-subtitle">Spreadsheet editor</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rename-option" data-type="gslides" data-title="Untitled presentation - Google Slides" data-icon="https://ssl.gstatic.com/docs/presentations/images/favicon5.ico">
+                        <div class="rename-option-icon">🖼️</div>
+                        <div class="rename-option-details">
+                            <div class="rename-option-title">Google Slides</div>
+                            <div class="rename-option-subtitle">Presentation editor</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Email Customization Section (hidden by default) -->
+            <div class="email-customization" id="emailCustomization" style="display: none;">
+                <div class="email-input-group">
+                    <input type="text" id="username" placeholder="username" class="email-input">
+                    <span>@</span>
+                    <input type="text" id="domain" placeholder="gmail.com" class="email-input">
+                    <button class="apply-email">Apply</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Security Settings Section -->
+        <div class="settings-section">
+            <h3>Security Settings</h3>
+            
+            <div class="settings-toggle">
+                <label class="toggle-label">
+                    <span>Require verification to close tab</span>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="verificationToggle">
+                        <span class="toggle-slider"></span>
+                    </div>
+                </label>
+                <div class="toggle-desc">Prevents tab from being closed without verification</div>
+            </div>
+            
+            <div class="settings-toggle">
+                <label class="toggle-label">
+                    <span>Panic Button</span>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="panicButtonToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </div>
+                </label>
+                <div class="toggle-desc">Instantly redirects to Google when pressed</div>
+            </div>
+            
+            <div class="panic-key-setting">
+                <label for="panicKeyInput">Panic Key:</label>
+                <input type="text" id="panicKeyInput" value="[" maxlength="1">
+                <div class="setting-note">Press this key to instantly redirect to Google</div>
+                <div class="setting-warning">⚠️ Use an uncommon key to avoid accidental activation</div>
+            </div>
+        </div>
+        
+        <button class="close-settings">Close</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // Initialize particles background
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 } },
+            opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
+            size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
+            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+            modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+        },
+        retina_detect: true
+    });
+
+    // Search functionality
+    document.querySelector('.search-bar').addEventListener('input', function() {
+        search();
+    });
+
+    document.querySelector('.search-enter').addEventListener('click', function() {
+        search();
+    });
+
+    function search() {
+        const searchTerm = document.querySelector('.search-bar').value.toLowerCase();
+        const games = document.querySelectorAll('.game');
+        const sections = document.querySelectorAll('.section-header');
+        const requestButton = document.querySelector('.request-button');
+
+        // Always show sections and request button during search
+        sections.forEach(section => {
+            section.style.display = 'block';
+        });
+        
+        if (requestButton) {
+            requestButton.style.display = 'flex';
+        }
+
+        games.forEach(function(game) {
+            const gameTitle = game.querySelector('.game-title').textContent.toLowerCase();
+            
+            if (searchTerm === '' || gameTitle.includes(searchTerm)) {
+                game.style.display = 'flex';
+            } else {
+                game.style.display = 'none';
+            }
+        });
+    }
+</script>
+</body>
+</html>
