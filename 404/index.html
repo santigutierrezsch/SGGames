@@ -51,6 +51,7 @@
             font-weight: bold;
             margin: 0;
             background: linear-gradient(90deg, #5644ff, #9f44ff);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1;
@@ -151,6 +152,34 @@
             background-color: var(--accent-color);
             transform: translateY(-3px) rotate(30deg);
         }
+        .button-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(86, 68, 255, 0.15);
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(86, 68, 255, 0.25);
+        }
     </style>
 </head>
 <body>
@@ -162,10 +191,11 @@
         <!-- Add this somewhere in your 404 page content -->
         <p>The page <strong id="error-path">/</strong> could not be found.</p>
         <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-        <p>You will be redirected to the homepage in <span id="countdown">5</span> seconds.</p>
-        <div class="loader"></div>
-        <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
-        <button id="cancel-btn">Cancel Redirect</button>
+        <p>If you'd like, you can go back to the homepage or report a bug about this missing page.</p>
+        <div class="button-row">
+            <a class="btn" id="home-btn" href="/">Go to Homepage</a>
+            <a class="btn" id="report-btn" href="/games/index.html#requests">Report a Bug</a>
+        </div>
     </div>
     
     <!-- Settings Icon (Floating) -->
@@ -199,33 +229,12 @@
         
         // Redirect countdown
         document.addEventListener('DOMContentLoaded', function() {
-            let countdownValue = 5;
-            const countdownElement = document.getElementById('countdown');
-            const cancelButton = document.getElementById('cancel-btn');
-            let countdownInterval;
-            
-            // Function to update countdown
-            function updateCountdown() {
-                countdownValue--;
-                countdownElement.textContent = countdownValue;
-                
-                if (countdownValue <= 0) {
-                    clearInterval(countdownInterval);
-                    window.location.href = '/';
-                }
-            }
-            
-            // Start countdown
-            countdownInterval = setInterval(updateCountdown, 1000);
-            
-            // Function to cancel the redirect
-            function cancelRedirect() {
-                clearInterval(countdownInterval);
-                countdownElement.textContent = 'Cancelled';
-            }
-            
-            // Add event listener to cancel button
-            cancelButton.addEventListener('click', cancelRedirect);
+            // No auto-redirect. Buttons provided for navigation.
+            const homeBtn = document.getElementById('home-btn');
+            const reportBtn = document.getElementById('report-btn');
+            // If JS is available, ensure links go to correct places (in case of SPA or routing needs)
+            if (homeBtn) homeBtn.addEventListener('click', function(e){ /* default anchor will navigate */ });
+            if (reportBtn) reportBtn.addEventListener('click', function(e){ /* default anchor will navigate */ });
         });
                 // In the main 404 page script section
                 // Add this to a script tag in your main 404 page in the /404/ directory
