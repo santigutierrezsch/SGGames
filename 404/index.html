@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
+    <script src="/js/mimicry.js"></script>
+    <style>
+        :root {
+            --primary-color: #0a0e17;
+            --secondary-color: #1a1f2c;
+            --accent-color: #5644ff;
+            --text-color: #ffffff;
+            --button-hover: #7366ff;
+            --highlight-color: #ff4656;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: var(--secondary-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            margin: 0;
+            background: linear-gradient(90deg, #5644ff, #9f44ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        
+        p {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        
+        .loader {
+            border: 8px solid var(--secondary-color);
+            border-top: 8px solid var(--accent-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #countdown {
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+        
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(86, 68, 255, 0.3);
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 1;
+        }
+        
+        /* Settings Icon Styles */
+        .settings-container {
+            text-align: center;
+            margin: 0;
+            padding: 1rem;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+        }
+        
+        .settings-button {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+        
+        .settings-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px) rotate(30deg);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <p class="error-code">404</p>
+        <h1>Page Not Found</h1>
+        <!-- Add this somewhere in your 404 page content -->
+        <p>The page <strong id="error-path">/</strong> could not be found.</p>
+        <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        <p>You will be redirected to the homepage in <span id="countdown">5</span> seconds.</p>
+        <div class="loader"></div>
+        <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+        <button id="cancel-btn">Cancel Redirect</button>
+    </div>
+    
+    <!-- Settings Icon (Floating) -->
+    <div class="settings-container">
+        <a href="/settings/" class="settings-button">
+            <i class="fas fa-cog"></i>
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 }, image: { src: 'img/github.svg', width: 100, height: 100 } },
+                opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
+                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
+                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+            },
+            retina_detect: true
+        });
+        
+        // Redirect countdown
+        document.addEventListener('DOMContentLoaded', function() {
+            let countdownValue = 5;
+            const countdownElement = document.getElementById('countdown');
+            const cancelButton = document.getElementById('cancel-btn');
+            let countdownInterval;
+            
+            // Function to update countdown
+            function updateCountdown() {
+                countdownValue--;
+                countdownElement.textContent = countdownValue;
+                
+                if (countdownValue <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = '/';
+                }
+            }
+            
+            // Start countdown
+            countdownInterval = setInterval(updateCountdown, 1000);
+            
+            // Function to cancel the redirect
+            function cancelRedirect() {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = 'Cancelled';
+            }
+            
+            // Add event listener to cancel button
+            cancelButton.addEventListener('click', cancelRedirect);
+        });
+                // In the main 404 page script section
+                // Add this to a script tag in your main 404 page in the /404/ directory
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if we have an error path stored
+            const errorPath = sessionStorage.getItem('errorPath');
+            const isCannotGet = sessionStorage.getItem('isCannotGet') === 'true';
+            
+            // Get elements to update
+            const errorPathElement = document.getElementById('error-path');
+            const errorTypeElement = document.getElementById('error-type');
+            
+            if (errorPathElement && errorPath) {
+                // Display the path that caused the error
+                errorPathElement.textContent = errorPath;
+            }
+            
+            if (errorTypeElement && isCannotGet) {
+                // Change the error type message for Cannot GET errors
+                errorTypeElement.textContent = 'Cannot GET this resource';
+            }
+            
+            // Clear the stored data
+            sessionStorage.removeItem('errorPath');
+            sessionStorage.removeItem('isCannotGet');
+        });
+
+        // Add a global error handler to capture Cannot GET errors
+        window.addEventListener('error', function(e) {
+            // Check if this is likely a routing error
+            if (e.message && e.message.includes('GET') && e.filename.includes(window.location.hostname)) {
+                // Store error info
+                sessionStorage.setItem('isCannotGet', 'true');
+                sessionStorage.setItem('errorPath', window.location.pathname);
+                
+                // Redirect to custom error page
+                if (!window.location.pathname.includes('/404/')) {
+                    window.location.href = '/404/';
+                }
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if we have an error path stored
+            const errorPath = sessionStorage.getItem('errorPath');
+            
+            // Display the path that caused the error if available
+            if (errorPath) {
+                // You can use this to display which URL caused the error
+                document.getElementById('error-path').textContent = errorPath;
+                
+                // Clear the stored path
+                sessionStorage.removeItem('errorPath');
+            }
+        });
+    </script>
+</body>
+</html>

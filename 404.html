@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
+    <link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
+    <script src="/js/mimicry.js"></script>
+    <script>
+        // Capture the current URL and any error message
+        (function() {
+            // Get the current path
+            var path = window.location.pathname;
+            
+            // Set a flag to detect Cannot GET errors
+            var isCannotGet = document.body && document.body.innerText && 
+                              document.body.innerText.includes("Cannot GET");
+            
+            // Store error info in sessionStorage
+            sessionStorage.setItem('errorPath', path);
+            sessionStorage.setItem('isCannotGet', isCannotGet);
+            
+            // Redirect to custom 404 page (unless we're already there)
+            if (!path.includes('/404/')) {
+                window.location.href = '/404/';
+            }
+        })();
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0a0e17;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>Redirecting to error page...</div>
+</body>
+</html>
