@@ -1,396 +1,10 @@
-<title>Games - SGGames</title>
-    <!-- Add mimicry.js to enable site-wide tab cloaking -->
-    <script src="/js/mimicry.js"></script>
-
-<script>
-    // Make sure the openSettings function is defined globally
-    function openSettings() {
-        console.log("Settings button clicked");
-        var modal = document.getElementById('settingsModal');
-        if (modal) {
-            modal.style.display = 'flex';
-            loadSavedSettings();
-        } else {
-            console.error("Settings modal not found");
-        }
-    }
-    
-    // Initialize particles background
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: '#ffffff' },
-            shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 } },
-            opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
-            size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
-            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-            move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
-        },
-        interactivity: {
-            detect_on: 'canvas',
-            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-            modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
-        },
-        retina_detect: true
-    });
-
-    // Search functionality
-    document.querySelector('.search-bar').addEventListener('input', function() {
-        search();
-    });
-
-    document.querySelector('.search-enter').addEventListener('click', function() {
-        search();
-    });
-
-    function search() {
-        const searchTerm = document.querySelector('.search-bar').value.toLowerCase();
-        const games = document.querySelectorAll('.game');
-        const sections = document.querySelectorAll('.section-header');
-        const requestButton = document.querySelector('.request-button');
-
-        // Always show sections and request button during search
-        sections.forEach(section => {
-            section.style.display = 'block';
-        });
-        
-        if (requestButton) {
-            requestButton.style.display = 'flex';
-        }
-
-        games.forEach(function(game) {
-            const gameTitle = game.querySelector('.game-title').textContent.toLowerCase();
-            
-            if (searchTerm === '' || gameTitle.includes(searchTerm)) {
-                game.style.display = 'flex';
-            } else {
-                game.style.display = 'none';
-            }
-        });
-    }
-    
-    // Settings Modal Functionality
-    // Add immediate self-executing function to set up event listeners right away
-    (function() {
-        // Get the settings button and modal
-        const settingsBtn = document.getElementById('settingsBtn');
-        const settingsModal = document.getElementById('settingsModal');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const closeSettingsBtn = document.querySelector('.close-settings');
-        
-        // Add event listener to settings button
-        if (settingsBtn) {
-            settingsBtn.addEventListener('click', function() {
-                console.log('Settings button clicked');
-                if (settingsModal) {
-                    settingsModal.style.display = 'flex';
-                    loadSavedSettings();
-                } else {
-                    console.error('Settings modal not found');
-                }
-            });
-        } else {
-            console.error('Settings button not found');
-        }
-        
-        // Close settings modal
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', function() {
-                settingsModal.style.display = 'none';
-            });
-        }
-        
-        // Save settings and close
-        if (closeSettingsBtn) {
-            closeSettingsBtn.addEventListener('click', function() {
-                saveAllSettings();
-                settingsModal.style.display = 'none';
-            });
-        }
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === settingsModal) {
-                settingsModal.style.display = 'none';
-            }
-        });
-        
-        // Apply any saved mimicry settings immediately
-        applySavedMimicry();
-    })();
-    
-    // Also keep the DOMContentLoaded event for other setup
-    document.addEventListener('DOMContentLoaded', function() {
-        // Setup rename options
-        const renameOptions = document.querySelectorAll('.rename-option');
-        renameOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                renameOptions.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Show/hide email customization for Gmail
-                const emailCustomization = document.getElementById('emailCustomization');
-                if (emailCustomization) {
-                    emailCustomization.style.display = this.dataset.type === 'gmail' ? 'block' : 'none';
-                }
-                
-                // Auto-save when option is selected
-                savePageStyle();
-            });
-        });
-        
-        // Setup email customization
-        const applyEmailBtn = document.querySelector('.apply-email');
-        if (applyEmailBtn) {
-            applyEmailBtn.addEventListener('click', function() {
-                applyCustomEmail();
-            });
-        }
-        
-        // Check if Gmail is selected on load
-        const activeOption = document.querySelector('.rename-option.active');
-        if (activeOption && activeOption.dataset.type === 'gmail') {
-            const emailCustomization = document.getElementById('emailCustomization');
-            if (emailCustomization) {
-                emailCustomization.style.display = 'block';
-            }
-        }
-    });
-    
-    function loadSavedSettings() {
-        // Tab cloaking settings
-        const savedType = localStorage.getItem('pageMimicType');
-        
-        if (savedType) {
-            const options = document.querySelectorAll('.rename-option');
-            options.forEach(opt => {
-                if (opt.dataset.type === savedType) {
-                    opt.classList.add('active');
-                } else {
-                    opt.classList.remove('active');
-                }
-            });
-            
-            // Show/hide email customization if Gmail is selected
-            const emailCustomization = document.getElementById('emailCustomization');
-            if (emailCustomization) {
-                emailCustomization.style.display = savedType === 'gmail' ? 'block' : 'none';
-            }
-        }
-        
-        // Security settings
-        const verificationToggle = document.getElementById('verificationToggle');
-        const panicButtonToggle = document.getElementById('panicButtonToggle');
-        const panicKeyInput = document.getElementById('panicKeyInput');
-        
-        if (verificationToggle) {
-            verificationToggle.checked = localStorage.getItem('verificationEnabled') === 'true';
-        }
-        
-        if (panicButtonToggle) {
-            panicButtonToggle.checked = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
-        }
-        
-        if (panicKeyInput) {
-            panicKeyInput.value = localStorage.getItem('panicKey') || '[';
-        }
-        
-        // Email customization settings
-        const usernameInput = document.getElementById('username');
-        const domainInput = document.getElementById('domain');
-        
-        if (usernameInput && domainInput) {
-            usernameInput.value = localStorage.getItem('emailUsername') || '';
-            domainInput.value = localStorage.getItem('emailDomain') || 'gmail.com';
-        }
-    }
-    
-    function savePageStyle() {
-        const selectedOption = document.querySelector('.rename-option.active');
-        if (selectedOption) {
-            const pageType = selectedOption.dataset.type;
-            let pageTitle = selectedOption.dataset.title;
-            const pageIcon = selectedOption.dataset.icon;
-            
-            // If this is a Gmail type and we have a custom email, use it
-            if (pageType === 'gmail') {
-                const username = localStorage.getItem('emailUsername');
-                const domain = localStorage.getItem('emailDomain');
-                
-                if (username && domain) {
-                    pageTitle = `Inbox - ${username}@${domain} - Gmail`;
-                }
-            }
-            
-            // Save preferences to localStorage
-            localStorage.setItem('pageMimicType', pageType);
-            localStorage.setItem('pageMimicTitle', pageTitle);
-            localStorage.setItem('pageMimicIcon', pageIcon);
-            
-            // Apply changes immediately
-            document.title = pageTitle;
-            const favicon = document.querySelector('link[rel="icon"]');
-            if (favicon) {
-                favicon.href = pageIcon;
-            } else {
-                // Create favicon if it doesn't exist
-                const newFavicon = document.createElement('link');
-                newFavicon.rel = 'icon';
-                newFavicon.href = pageIcon;
-                document.head.appendChild(newFavicon);
-            }
-        }
-    }
-    
-    function applyCustomEmail() {
-        const usernameInput = document.getElementById('username');
-        const domainInput = document.getElementById('domain');
-        
-        if (usernameInput && domainInput) {
-            const username = usernameInput.value.trim();
-            const domain = domainInput.value.trim() || 'gmail.com';
-            
-            // Save to localStorage
-            localStorage.setItem('emailUsername', username);
-            localStorage.setItem('emailDomain', domain);
-            
-            // If Gmail is currently selected, update the title immediately
-            const selectedOption = document.querySelector('.rename-option.active');
-            if (selectedOption && selectedOption.dataset.type === 'gmail') {
-                const newTitle = `Inbox - ${username}@${domain} - Gmail`;
-                document.title = newTitle;
-                localStorage.setItem('pageMimicTitle', newTitle);
-            }
-            
-            // Show brief feedback
-            const applyButton = document.querySelector('.apply-email');
-            if (applyButton) {
-                const originalText = applyButton.textContent;
-                applyButton.textContent = 'Saved!';
-                applyButton.style.backgroundColor = '#4CAF50'; // Green
-                
-                // Reset after a short delay
-                setTimeout(() => {
-                    applyButton.textContent = originalText;
-                    applyButton.style.backgroundColor = '';
-                }, 1500);
-            }
-        }
-    }
-    
-    function saveSecuritySettings() {
-        const verificationToggle = document.getElementById('verificationToggle');
-        const panicButtonToggle = document.getElementById('panicButtonToggle');
-        const panicKeyInput = document.getElementById('panicKeyInput');
-        
-        if (verificationToggle) {
-            localStorage.setItem('verificationEnabled', verificationToggle.checked);
-        }
-        
-        if (panicButtonToggle) {
-            localStorage.setItem('panicEnabled', panicButtonToggle.checked);
-        }
-        
-        if (panicKeyInput && panicKeyInput.value) {
-            localStorage.setItem('panicKey', panicKeyInput.value);
-        }
-        
-        // Reinitialize security features with new settings
-        initSecurityFeatures();
-    }
-    
-    function saveAllSettings() {
-        savePageStyle();
-        saveSecuritySettings();
-    }
-    
-    function applySavedMimicry() {
-        // Check if there's a saved style and apply it
-        const savedTitle = localStorage.getItem('pageMimicTitle');
-        const savedIcon = localStorage.getItem('pageMimicIcon');
-        
-        // Apply saved title if available
-        if (savedTitle) {
-            document.title = savedTitle;
-        }
-        
-        // Apply saved favicon if available
-        if (savedIcon) {
-            const favicon = document.querySelector('link[rel="icon"]');
-            if (favicon) {
-                favicon.href = savedIcon;
-            } else {
-                // Create favicon if it doesn't exist
-                const newFavicon = document.createElement('link');
-                newFavicon.rel = 'icon';
-                newFavicon.href = savedIcon;
-                document.head.appendChild(newFavicon);
-            }
-        }
-        
-        // Initialize security features
-        initSecurityFeatures();
-    }
-    
-    function initSecurityFeatures() {
-        // Initialize panic key
-        initPanicKey();
-        
-        // Initialize tab close prevention
-        initTabClosePrevention();
-    }
-    
-    function initPanicKey() {
-        // Remove any existing event listener to prevent duplicates
-        document.removeEventListener('keydown', handlePanicKey);
-        
-        // Only add listener if panic button is enabled
-        const panicEnabled = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
-        if (panicEnabled) {
-            document.addEventListener('keydown', handlePanicKey);
-        }
-    }
-    
-    function handlePanicKey(event) {
-        const panicKey = localStorage.getItem('panicKey') || '[';
-        if (event.key === panicKey) {
-            // Set a flag that this is a panic activation so verification can be bypassed
-            sessionStorage.setItem('panicActivation', 'true');
-            
-            // Redirect to Google immediately
-            window.location.href = 'https://www.google.com';
-        }
-    }
-    
-    function initTabClosePrevention() {
-        const verificationEnabled = localStorage.getItem('verificationEnabled') === 'true';
-        
-        // Remove any existing event listener
-        window.onbeforeunload = null;
-        
-        if (verificationEnabled) {
-            window.onbeforeunload = function(e) {
-                // Check if this is a panic button activation
-                const isPanicActivation = sessionStorage.getItem('panicActivation') === 'true';
-                if (isPanicActivation) {
-                    // Clear the flag and allow the navigation
-                    sessionStorage.removeItem('panicActivation');
-                    return undefined;
-                }
-                
-                // Otherwise show the confirmation dialog
-                return "Are you sure you want to leave this page?";
-            };
-        }
-    }
-</script>
-</body>
-</html><!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="CybriaTech">
+<title>Untitled Document - Google Docs</title>
 <meta name="keywords"
     content="games, unblocked games, video games, unity, webgl, swf, html5, cybriagames, cybriagames sequel, emulators, sggame">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -399,7 +13,6 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="mimicry.js"></script>
-<title>Untitled Document - Google Docs</title>
 <!-- Import Google fonts first, outside of the style tag -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -1540,6 +1153,389 @@
             }
         });
     });
+</script>
+
+<script>
+    // Make sure the openSettings function is defined globally
+    function openSettings() {
+        console.log("Settings button clicked");
+        var modal = document.getElementById('settingsModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            loadSavedSettings();
+        } else {
+            console.error("Settings modal not found");
+        }
+    }
+    
+    // Initialize particles background
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 } },
+            opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
+            size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
+            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+            modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+        },
+        retina_detect: true
+    });
+
+    // Search functionality
+    document.querySelector('.search-bar').addEventListener('input', function() {
+        search();
+    });
+
+    document.querySelector('.search-enter').addEventListener('click', function() {
+        search();
+    });
+
+    function search() {
+        const searchTerm = document.querySelector('.search-bar').value.toLowerCase();
+        const games = document.querySelectorAll('.game');
+        const sections = document.querySelectorAll('.section-header');
+        const requestButton = document.querySelector('.request-button');
+
+        // Always show sections and request button during search
+        sections.forEach(section => {
+            section.style.display = 'block';
+        });
+        
+        if (requestButton) {
+            requestButton.style.display = 'flex';
+        }
+
+        games.forEach(function(game) {
+            const gameTitle = game.querySelector('.game-title').textContent.toLowerCase();
+            
+            if (searchTerm === '' || gameTitle.includes(searchTerm)) {
+                game.style.display = 'flex';
+            } else {
+                game.style.display = 'none';
+            }
+        });
+    }
+    
+    // Settings Modal Functionality
+    // Add immediate self-executing function to set up event listeners right away
+    (function() {
+        // Get the settings button and modal
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsModal = document.getElementById('settingsModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const closeSettingsBtn = document.querySelector('.close-settings');
+        
+        // Add event listener to settings button
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', function() {
+                console.log('Settings button clicked');
+                if (settingsModal) {
+                    settingsModal.style.display = 'flex';
+                    loadSavedSettings();
+                } else {
+                    console.error('Settings modal not found');
+                }
+            });
+        } else {
+            console.error('Settings button not found');
+        }
+        
+        // Close settings modal
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', function() {
+                settingsModal.style.display = 'none';
+            });
+        }
+        
+        // Save settings and close
+        if (closeSettingsBtn) {
+            closeSettingsBtn.addEventListener('click', function() {
+                saveAllSettings();
+                settingsModal.style.display = 'none';
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === settingsModal) {
+                settingsModal.style.display = 'none';
+            }
+        });
+        
+        // Apply any saved mimicry settings immediately
+        applySavedMimicry();
+    })();
+    
+    // Also keep the DOMContentLoaded event for other setup
+    document.addEventListener('DOMContentLoaded', function() {
+        // Setup rename options
+        const renameOptions = document.querySelectorAll('.rename-option');
+        renameOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                renameOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show/hide email customization for Gmail
+                const emailCustomization = document.getElementById('emailCustomization');
+                if (emailCustomization) {
+                    emailCustomization.style.display = this.dataset.type === 'gmail' ? 'block' : 'none';
+                }
+                
+                // Auto-save when option is selected
+                savePageStyle();
+            });
+        });
+        
+        // Setup email customization
+        const applyEmailBtn = document.querySelector('.apply-email');
+        if (applyEmailBtn) {
+            applyEmailBtn.addEventListener('click', function() {
+                applyCustomEmail();
+            });
+        }
+        
+        // Check if Gmail is selected on load
+        const activeOption = document.querySelector('.rename-option.active');
+        if (activeOption && activeOption.dataset.type === 'gmail') {
+            const emailCustomization = document.getElementById('emailCustomization');
+            if (emailCustomization) {
+                emailCustomization.style.display = 'block';
+            }
+        }
+    });
+    
+    function loadSavedSettings() {
+        // Tab cloaking settings
+        const savedType = localStorage.getItem('pageMimicType');
+        
+        if (savedType) {
+            const options = document.querySelectorAll('.rename-option');
+            options.forEach(opt => {
+                if (opt.dataset.type === savedType) {
+                    opt.classList.add('active');
+                } else {
+                    opt.classList.remove('active');
+                }
+            });
+            
+            // Show/hide email customization if Gmail is selected
+            const emailCustomization = document.getElementById('emailCustomization');
+            if (emailCustomization) {
+                emailCustomization.style.display = savedType === 'gmail' ? 'block' : 'none';
+            }
+        }
+        
+        // Security settings
+        const verificationToggle = document.getElementById('verificationToggle');
+        const panicButtonToggle = document.getElementById('panicButtonToggle');
+        const panicKeyInput = document.getElementById('panicKeyInput');
+        
+        if (verificationToggle) {
+            verificationToggle.checked = localStorage.getItem('verificationEnabled') === 'true';
+        }
+        
+        if (panicButtonToggle) {
+            panicButtonToggle.checked = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
+        }
+        
+        if (panicKeyInput) {
+            panicKeyInput.value = localStorage.getItem('panicKey') || '[';
+        }
+        
+        // Email customization settings
+        const usernameInput = document.getElementById('username');
+        const domainInput = document.getElementById('domain');
+        
+        if (usernameInput && domainInput) {
+            usernameInput.value = localStorage.getItem('emailUsername') || '';
+            domainInput.value = localStorage.getItem('emailDomain') || 'gmail.com';
+        }
+    }
+    
+    function savePageStyle() {
+        const selectedOption = document.querySelector('.rename-option.active');
+        if (selectedOption) {
+            const pageType = selectedOption.dataset.type;
+            let pageTitle = selectedOption.dataset.title;
+            const pageIcon = selectedOption.dataset.icon;
+            
+            // If this is a Gmail type and we have a custom email, use it
+            if (pageType === 'gmail') {
+                const username = localStorage.getItem('emailUsername');
+                const domain = localStorage.getItem('emailDomain');
+                
+                if (username && domain) {
+                    pageTitle = `Inbox - ${username}@${domain} - Gmail`;
+                }
+            }
+            
+            // Save preferences to localStorage
+            localStorage.setItem('pageMimicType', pageType);
+            localStorage.setItem('pageMimicTitle', pageTitle);
+            localStorage.setItem('pageMimicIcon', pageIcon);
+            
+            // Apply changes immediately
+            document.title = pageTitle;
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = pageIcon;
+            } else {
+                // Create favicon if it doesn't exist
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.href = pageIcon;
+                document.head.appendChild(newFavicon);
+            }
+        }
+    }
+    
+    function applyCustomEmail() {
+        const usernameInput = document.getElementById('username');
+        const domainInput = document.getElementById('domain');
+        
+        if (usernameInput && domainInput) {
+            const username = usernameInput.value.trim();
+            const domain = domainInput.value.trim() || 'gmail.com';
+            
+            // Save to localStorage
+            localStorage.setItem('emailUsername', username);
+            localStorage.setItem('emailDomain', domain);
+            
+            // If Gmail is currently selected, update the title immediately
+            const selectedOption = document.querySelector('.rename-option.active');
+            if (selectedOption && selectedOption.dataset.type === 'gmail') {
+                const newTitle = `Inbox - ${username}@${domain} - Gmail`;
+                document.title = newTitle;
+                localStorage.setItem('pageMimicTitle', newTitle);
+            }
+            
+            // Show brief feedback
+            const applyButton = document.querySelector('.apply-email');
+            if (applyButton) {
+                const originalText = applyButton.textContent;
+                applyButton.textContent = 'Saved!';
+                applyButton.style.backgroundColor = '#4CAF50'; // Green
+                
+                // Reset after a short delay
+                setTimeout(() => {
+                    applyButton.textContent = originalText;
+                    applyButton.style.backgroundColor = '';
+                }, 1500);
+            }
+        }
+    }
+    
+    function saveSecuritySettings() {
+        const verificationToggle = document.getElementById('verificationToggle');
+        const panicButtonToggle = document.getElementById('panicButtonToggle');
+        const panicKeyInput = document.getElementById('panicKeyInput');
+        
+        if (verificationToggle) {
+            localStorage.setItem('verificationEnabled', verificationToggle.checked);
+        }
+        
+        if (panicButtonToggle) {
+            localStorage.setItem('panicEnabled', panicButtonToggle.checked);
+        }
+        
+        if (panicKeyInput && panicKeyInput.value) {
+            localStorage.setItem('panicKey', panicKeyInput.value);
+        }
+        
+        // Reinitialize security features with new settings
+        initSecurityFeatures();
+    }
+    
+    function saveAllSettings() {
+        savePageStyle();
+        saveSecuritySettings();
+    }
+    
+    function applySavedMimicry() {
+        // Check if there's a saved style and apply it
+        const savedTitle = localStorage.getItem('pageMimicTitle');
+        const savedIcon = localStorage.getItem('pageMimicIcon');
+        
+        // Apply saved title if available
+        if (savedTitle) {
+            document.title = savedTitle;
+        }
+        
+        // Apply saved favicon if available
+        if (savedIcon) {
+            const favicon = document.querySelector('link[rel="icon"]');
+            if (favicon) {
+                favicon.href = savedIcon;
+            } else {
+                // Create favicon if it doesn't exist
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'icon';
+                newFavicon.href = savedIcon;
+                document.head.appendChild(newFavicon);
+            }
+        }
+        
+        // Initialize security features
+        initSecurityFeatures();
+    }
+    
+    function initSecurityFeatures() {
+        // Initialize panic key
+        initPanicKey();
+        
+        // Initialize tab close prevention
+        initTabClosePrevention();
+    }
+    
+    function initPanicKey() {
+        // Remove any existing event listener to prevent duplicates
+        document.removeEventListener('keydown', handlePanicKey);
+        
+        // Only add listener if panic button is enabled
+        const panicEnabled = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
+        if (panicEnabled) {
+            document.addEventListener('keydown', handlePanicKey);
+        }
+    }
+    
+    function handlePanicKey(event) {
+        const panicKey = localStorage.getItem('panicKey') || '[';
+        if (event.key === panicKey) {
+            // Set a flag that this is a panic activation so verification can be bypassed
+            sessionStorage.setItem('panicActivation', 'true');
+            
+            // Redirect to Google immediately
+            window.location.href = 'https://www.google.com';
+        }
+    }
+    
+    function initTabClosePrevention() {
+        const verificationEnabled = localStorage.getItem('verificationEnabled') === 'true';
+        
+        // Remove any existing event listener
+        window.onbeforeunload = null;
+        
+        if (verificationEnabled) {
+            window.onbeforeunload = function(e) {
+                // Check if this is a panic button activation
+                const isPanicActivation = sessionStorage.getItem('panicActivation') === 'true';
+                if (isPanicActivation) {
+                    // Clear the flag and allow the navigation
+                    sessionStorage.removeItem('panicActivation');
+                    return undefined;
+                }
+                
+                // Otherwise show the confirmation dialog
+                return "Are you sure you want to leave this page?";
+            };
+        }
+    }
 </script>
 </body>
 </html>
