@@ -30,13 +30,22 @@
         --background-gray: #2a2a2a;
     }
     
+    * {
+        box-sizing: border-box;
+    }
+    
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
     body {
         font-family: 'Poppins', sans-serif;
         background-color: var(--background-gray);
         color: var(--text-color);
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
     
     /* Header Styling */
@@ -50,6 +59,7 @@
         position: sticky;
         top: 0;
         z-index: 1000;
+        flex-shrink: 0;
     }
     
     .nav-links {
@@ -88,9 +98,11 @@
     
     /* Main Content */
     main {
+        flex: 1;
         padding: 2rem;
         max-width: 1200px;
         margin: 0 auto;
+        width: 100%;
     }
     
     h1 {
@@ -177,11 +189,12 @@
     
     /* Footer */
     .footer {
-        margin-top: 4rem;
         padding: 2rem;
         text-align: center;
         background-color: var(--secondary-color);
         border-top: 2px solid var(--accent-color);
+        margin-top: auto;
+        flex-shrink: 0;
     }
     
     .footer p {
