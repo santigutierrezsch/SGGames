@@ -28,6 +28,7 @@
         --status-denied: #ff4656;
         --status-progress: #ff8c42;
         --status-added: #4caf50;
+        --status-bugfix: #2196f3;
         --background-gray: #2a2a2a;
     }
     
@@ -173,6 +174,11 @@
     
     .status.added {
         background-color: var(--status-added);
+        color: white;
+    }
+
+    .status.bug-fix {
+        background-color: var(--status-bugfix);
         color: white;
     }
     
@@ -344,11 +350,13 @@
             - denied (red)
             - in-progress (yellow-orange)  
             - added (green)
+            - bug-fix (blue)
             
             STATUS TEXT OPTIONS:
             - "Denied" for denied status
             - "In Progress" for in-progress status
             - "Added" for added status
+            - "Bug Fix" for bug-fix status
             -->
             
         </tbody>
