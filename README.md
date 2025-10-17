@@ -153,5 +153,3 @@ Please credit the original project if you use or remix this site ❤️
 ---
 
 **Happy gaming! 🎮**
-
-```
