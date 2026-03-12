@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="CybriaTech">
+    <meta name="keywords" content="about, SGGames">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
+    <link rel="apple-touch-icon" href="/images/logo/favi/apple-touch-icon.png" sizes="180x180">
+    <title>About SGGames | SGGames</title>
+    <script src="/js/mimicry.js"></script>
+    <style>
+        :root {
+            --primary-color: #0a0e17;
+            --secondary-color: #1a1f2c;
+            --accent-color: #5644ff;
+            --text-color: #ffffff;
+            --muted-text: rgba(255, 255, 255, 0.74);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            z-index: 100;
+        }
+        .navigation-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .home-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .home-link:hover,
+        .home-link.active {
+            color: var(--accent-color);
+        }
+        #particles-js {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .container {
+            width: min(960px, 92%);
+            margin: 2rem auto 4rem;
+            position: relative;
+            z-index: 10;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+        h1 {
+            font-size: clamp(2.4rem, 5vw, 3.5rem);
+            margin: 0 0 0.75rem;
+            background: linear-gradient(90deg, #5644ff, #9f44ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        .eyebrow {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            opacity: 0.85;
+        }
+        .panel {
+            background: rgba(26, 31, 44, 0.92);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(10px);
+        }
+        h2 {
+            font-size: 1.35rem;
+            margin: 2rem 0 0.75rem;
+            color: #c6c0ff;
+        }
+        p, li {
+            color: var(--muted-text);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+        p { margin: 0 0 1rem; }
+        ul { margin: 0 0 1rem; padding-left: 1.5rem; }
+        li + li { margin-top: 0.45rem; }
+        footer {
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 1.75rem 1.25rem 2rem;
+            text-align: center;
+            background: rgba(26, 31, 44, 0.92);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-company,
+        .footer-owner,
+        .footer-links {
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-company,
+        .footer-owner {
+            margin-top: 0;
+            margin-bottom: 0.45rem;
+            opacity: 0.9;
+        }
+
+        .footer-owner {
+            margin-bottom: 1rem;
+            opacity: 0.75;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.82;
+            transition: color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        .footer-separator {
+            opacity: 0.4;
+        }
+        .settings-container {
+            padding: 1rem;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+        }
+        .settings-button {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+        .settings-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px) rotate(30deg);
+        }
+        @media (max-width: 768px) {
+            .header { padding: 0.8rem 1rem; }
+            .panel { padding: 1.35rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="navigation-links">
+            <a href="/" class="home-link"><i class="fas fa-home"></i>Home</a>
+            <a href="/legal/" class="home-link active"><i class="fas fa-balance-scale"></i>Legal</a>
+        </div>
+    </div>
+    <div id="particles-js"></div>
+    <main class="container">
+        <section class="hero">
+            <p class="eyebrow">ABOUT</p>
+            <h1>About SGGames</h1>
+        </section>
+        <article class="panel">
+            <p>SGGames is a website dedicated to providing a collection of fun and accessible online games. The goal of the platform is to make it easy for users to discover and play games directly in their browser without needing to download anything.</p>
+
+            <h2>Our Mission</h2>
+            <p>Our mission is to create a simple and enjoyable gaming experience where players can quickly find entertaining games and spend time exploring new ones.</p>
+
+            <h2>What We Offer</h2>
+            <p>SGGames provides:</p>
+            <ul>
+                <li>Browser-based games</li>
+                <li>Easy access without downloads</li>
+                <li>A growing library of different game types</li>
+                <li>A simple and user-friendly interface</li>
+            </ul>
+
+            <h2>Our Vision</h2>
+            <p>We aim to keep improving SGGames by adding more games, improving the user experience, and building a platform that players enjoy returning to.</p>
+
+            <h2>Feedback</h2>
+            <p>We welcome feedback from users to help improve the website. If you have suggestions or ideas, please contact us through the contact page.</p>
+        </article>
+    </main>
+    <footer>
+        <p class="footer-company">&copy; 2026 SGGames. All rights reserved.</p>
+        <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
+        <nav class="footer-links" aria-label="Footer">
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/terms-and-conditions/">Terms</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/cookies/">Cookies</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/about/">About</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/contact/">Contact</a>
+        </nav>
+    </footer>
+    <div class="settings-container">
+        <a href="/settings/" class="settings-button"><i class="fas fa-cog"></i></a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>

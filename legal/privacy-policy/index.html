@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="CybriaTech">
+    <meta name="keywords" content="privacy policy, legal, SGGames">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
+    <link rel="apple-touch-icon" href="/images/logo/favi/apple-touch-icon.png" sizes="180x180">
+    <title>Privacy Policy | SGGames</title>
+    <script src="/js/mimicry.js"></script>
+    <style>
+        :root {
+            --primary-color: #0a0e17;
+            --secondary-color: #1a1f2c;
+            --accent-color: #5644ff;
+            --text-color: #ffffff;
+            --muted-text: rgba(255, 255, 255, 0.74);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            z-index: 100;
+        }
+        .navigation-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .home-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .home-link:hover,
+        .home-link.active {
+            color: var(--accent-color);
+        }
+        #particles-js {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .container {
+            width: min(960px, 92%);
+            margin: 2rem auto 4rem;
+            position: relative;
+            z-index: 10;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+        h1 {
+            font-size: clamp(2.4rem, 5vw, 3.5rem);
+            margin: 0 0 0.75rem;
+            background: linear-gradient(90deg, #5644ff, #9f44ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        .eyebrow {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            opacity: 0.85;
+        }
+        .panel {
+            background: rgba(26, 31, 44, 0.92);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(10px);
+        }
+        .updated {
+            color: var(--muted-text);
+            margin: 0 0 1.5rem;
+            font-size: 0.98rem;
+        }
+        h2, h3 {
+            color: #c6c0ff;
+        }
+        h2 {
+            font-size: 1.35rem;
+            margin: 2rem 0 0.75rem;
+        }
+        h3 {
+            font-size: 1.05rem;
+            margin: 1.25rem 0 0.5rem;
+        }
+        p, li {
+            color: var(--muted-text);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+        p { margin: 0 0 1rem; }
+        ul { margin: 0 0 1rem; padding-left: 1.5rem; }
+        li + li { margin-top: 0.45rem; }
+        footer {
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 1.75rem 1.25rem 2rem;
+            text-align: center;
+            background: rgba(26, 31, 44, 0.92);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-company,
+        .footer-owner,
+        .footer-links {
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-company,
+        .footer-owner {
+            margin-top: 0;
+            margin-bottom: 0.45rem;
+            opacity: 0.9;
+        }
+
+        .footer-owner {
+            margin-bottom: 1rem;
+            opacity: 0.75;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.82;
+            transition: color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        .footer-separator {
+            opacity: 0.4;
+        }
+        .settings-container {
+            padding: 1rem;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+        }
+        .settings-button {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+        .settings-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px) rotate(30deg);
+        }
+        @media (max-width: 768px) {
+            .header { padding: 0.8rem 1rem; }
+            .panel { padding: 1.35rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="navigation-links">
+            <a href="/" class="home-link"><i class="fas fa-home"></i>Home</a>
+            <a href="/legal/" class="home-link active"><i class="fas fa-balance-scale"></i>Legal</a>
+        </div>
+    </div>
+    <div id="particles-js"></div>
+    <main class="container">
+        <section class="hero">
+            <p class="eyebrow">LEGAL</p>
+            <h1>Privacy Policy</h1>
+        </section>
+        <article class="panel">
+            <p class="updated"><strong>Last Updated:</strong> March 11, 2026</p>
+
+            <h2>1. Introduction</h2>
+            <p>Welcome to SGGames. Your privacy is important to us. This Privacy Policy explains how information may be collected, used, and protected when you visit or use our website.</p>
+            <p>By using SGGames, you agree to the collection and use of information in accordance with this policy.</p>
+
+            <h2>2. Information We Collect</h2>
+            <h3>Information You Provide</h3>
+            <p>If SGGames offers accounts or forms, we may collect information such as:</p>
+            <ul>
+                <li>Username</li>
+                <li>Email address</li>
+                <li>Any information you choose to submit</li>
+            </ul>
+            <h3>Automatically Collected Information</h3>
+            <p>When you visit the website, certain information may automatically be collected, including:</p>
+            <ul>
+                <li>IP address</li>
+                <li>Browser type</li>
+                <li>Device information</li>
+                <li>Pages visited</li>
+                <li>Time spent on pages</li>
+            </ul>
+            <p>This information helps improve the performance and usability of the website.</p>
+
+            <h2>3. Cookies and Tracking Technologies</h2>
+            <p>SGGames may use cookies or similar technologies to:</p>
+            <ul>
+                <li>Improve website functionality</li>
+                <li>Understand how users interact with the site</li>
+                <li>Support advertising services</li>
+            </ul>
+            <p>Cookies are small data files stored on your device. You can disable cookies through your browser settings if you prefer.</p>
+
+            <h2>4. Third-Party Services</h2>
+            <p>SGGames may use third-party services that collect information to help operate the website.</p>
+            <p>These may include:</p>
+            <ul>
+                <li>Analytics services</li>
+                <li>Advertising networks</li>
+                <li>Embedded game providers</li>
+            </ul>
+            <p>These third parties may use cookies or similar technologies according to their own privacy policies.</p>
+
+            <h2>5. Advertising</h2>
+            <p>SGGames may display advertisements provided by third-party advertising networks. These services may use cookies or identifiers to show relevant ads and measure ad performance.</p>
+
+            <h2>6. How We Use Information</h2>
+            <p>Information collected may be used to:</p>
+            <ul>
+                <li>Operate and maintain the website</li>
+                <li>Improve site performance and features</li>
+                <li>Monitor usage and prevent abuse</li>
+                <li>Support advertising services</li>
+            </ul>
+
+            <h2>7. Data Security</h2>
+            <p>We take reasonable measures to protect information from unauthorized access or misuse. However, no method of transmission over the internet is completely secure.</p>
+
+            <h2>8. Children's Privacy</h2>
+            <p>SGGames does not knowingly collect personal information from children under the age of 13. If you believe a child has provided personal information, please contact us so it can be removed.</p>
+
+            <h2>9. Links to Other Websites</h2>
+            <p>Our website may contain links to third-party websites or embedded content. We are not responsible for the privacy practices of those websites.</p>
+
+            <h2>10. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+
+            <h2>11. Contact</h2>
+            <p>If you have any questions about this Privacy Policy, you can contact us through the website.</p>
+        </article>
+    </main>
+    <footer>
+        <p class="footer-company">&copy; 2026 SGGames. All rights reserved.</p>
+        <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
+        <nav class="footer-links" aria-label="Footer">
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/terms-and-conditions/">Terms</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/cookies/">Cookies</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/about/">About</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/contact/">Contact</a>
+        </nav>
+    </footer>
+    <div class="settings-container">
+        <a href="/settings/" class="settings-button"><i class="fas fa-cog"></i></a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>

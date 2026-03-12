@@ -237,11 +237,74 @@ hello huzz
         
         footer {
             margin-top: auto;
-            padding: 1rem;
-            text-align: center;
-            opacity: 0.7;
-            font-size: 0.9rem;
             width: 100%;
+            box-sizing: border-box;
+            padding: 1.75rem 1.25rem 2rem;
+            text-align: center;
+            background: rgba(26, 31, 44, 0.92);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-company,
+        .footer-owner,
+        .footer-links {
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-company,
+        .footer-owner {
+            margin-top: 0;
+            margin-bottom: 0.45rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .footer-owner {
+            margin-bottom: 1rem;
+            opacity: 0.75;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.82;
+            transition: color 0.2s ease, opacity 0.2s ease;
+            pointer-events: auto;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            opacity: 1;
+        }
+
+        .footer-separator {
+            font-size: 0.95rem;
+            opacity: 0.4;
+        }
+
+        @media (max-width: 640px) {
+            footer {
+                padding: 1.5rem 1rem 1.75rem;
+            }
+
+            .footer-links {
+                gap: 0.45rem;
+            }
         }
         
         #particles-js {
@@ -250,6 +313,7 @@ hello huzz
             height: 100%;
             background-color: transparent;
             z-index: 1;
+            pointer-events: none;
         }
         
         /* Settings Icon Styles */
@@ -502,6 +566,19 @@ hello huzz
     </div>
     
     <footer>
+        <p class="footer-company">&copy; 2026 SGGames. All rights reserved.</p>
+        <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
+        <nav class="footer-links" aria-label="Footer">
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/terms-and-conditions/">Terms</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/cookies/">Cookies</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/about/">About</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/contact/">Contact</a>
+        </nav>
         © 2026 Santiago Gutierrez
     </footer>
 

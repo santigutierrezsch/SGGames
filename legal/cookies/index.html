@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="CybriaTech">
-    <meta name="keywords" content="legal, privacy policy, cookie policy, terms and conditions, contact, about, SGGames">
+    <meta name="keywords" content="cookie policy, legal, SGGames">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
     <link rel="apple-touch-icon" href="/images/logo/favi/apple-touch-icon.png" sizes="180x180">
-    <title>Legal | SGGames</title>
+    <title>Cookie Policy | SGGames</title>
     <script src="/js/mimicry.js"></script>
     <style>
         :root {
@@ -16,8 +16,8 @@
             --secondary-color: #1a1f2c;
             --accent-color: #5644ff;
             --text-color: #ffffff;
-            --button-hover: #7366ff;
             --muted-text: rgba(255, 255, 255, 0.74);
+            --card-border: rgba(255, 255, 255, 0.08);
         }
         * { box-sizing: border-box; }
         body {
@@ -65,73 +65,62 @@
             pointer-events: none;
         }
         .container {
-            width: min(1080px, 92%);
+            width: min(960px, 92%);
             margin: 2rem auto 4rem;
-            text-align: center;
             position: relative;
             z-index: 10;
         }
+        .hero {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
         h1 {
-            font-size: clamp(2.5rem, 5vw, 3.8rem);
-            margin-bottom: 0.5rem;
+            font-size: clamp(2.4rem, 5vw, 3.5rem);
+            margin: 0 0 0.75rem;
             background: linear-gradient(90deg, #5644ff, #9f44ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: bold;
             letter-spacing: 1px;
         }
-        .intro {
-            font-size: 1.08rem;
-            color: var(--muted-text);
-            max-width: 760px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-        }
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.25rem;
-        }
-        .card {
-            background-color: var(--secondary-color);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 1.4rem 1.2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-color);
-            text-align: left;
-            min-height: 180px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            background-color: var(--button-hover);
-            box-shadow: 0 12px 24px rgba(86, 68, 255, 0.28);
-        }
-        .card-icon {
-            width: 58px;
-            height: 58px;
-            border-radius: 14px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            background: rgba(255, 255, 255, 0.08);
-        }
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        .card-desc {
-            color: var(--muted-text);
-            line-height: 1.6;
+        .eyebrow {
+            margin: 0;
             font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            opacity: 0.85;
         }
+        .panel {
+            background: rgba(26, 31, 44, 0.92);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(10px);
+        }
+        .updated {
+            color: var(--muted-text);
+            margin: 0 0 1.5rem;
+            font-size: 0.98rem;
+        }
+        h2, h3 {
+            color: #c6c0ff;
+        }
+        h2 {
+            font-size: 1.35rem;
+            margin: 2rem 0 0.75rem;
+        }
+        h3 {
+            font-size: 1.05rem;
+            margin: 1.25rem 0 0.5rem;
+        }
+        p, li {
+            color: var(--muted-text);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+        p { margin: 0 0 1rem; }
+        ul { margin: 0 0 1rem; padding-left: 1.5rem; }
+        li + li { margin-top: 0.45rem; }
         footer {
             margin-top: auto;
             width: 100%;
@@ -216,6 +205,7 @@
         }
         @media (max-width: 768px) {
             .header { padding: 0.8rem 1rem; }
+            .panel { padding: 1.35rem; }
         }
     </style>
 </head>
@@ -228,36 +218,46 @@
     </div>
     <div id="particles-js"></div>
     <main class="container">
-        <h1>Legal</h1>
-        <p class="intro">Review the policies, terms, and contact information for SGGames. This section collects the core site information in one place and uses the same visual theme as the rest of the site.</p>
-
-        <section class="card-grid">
-            <a class="card" href="/legal/terms-and-conditions/">
-                <span class="card-icon"><i class="fas fa-file-contract"></i></span>
-                <span class="card-title">Terms and Conditions</span>
-                <span class="card-desc">Rules for using SGGames, account responsibilities, and content restrictions.</span>
-            </a>
-            <a class="card" href="/legal/privacy-policy/">
-                <span class="card-icon"><i class="fas fa-user-shield"></i></span>
-                <span class="card-title">Privacy Policy</span>
-                <span class="card-desc">How information may be collected, used, protected, and shared on the site.</span>
-            </a>
-            <a class="card" href="/legal/cookies/">
-                <span class="card-icon"><i class="fas fa-cookie-bite"></i></span>
-                <span class="card-title">Cookie Policy</span>
-                <span class="card-desc">Details on cookies, tracking technologies, and browser-level controls.</span>
-            </a>
-            <a class="card" href="/legal/contact/">
-                <span class="card-icon"><i class="fas fa-envelope"></i></span>
-                <span class="card-title">Contact</span>
-                <span class="card-desc">Support, technical issue reporting, and business or legal inquiry channels.</span>
-            </a>
-            <a class="card" href="/legal/about/">
-                <span class="card-icon"><i class="fas fa-gamepad"></i></span>
-                <span class="card-title">About SGGames</span>
-                <span class="card-desc">The site mission, focus, and what SGGames is aiming to provide for players.</span>
-            </a>
+        <section class="hero">
+            <p class="eyebrow">LEGAL</p>
+            <h1>Cookie Policy</h1>
         </section>
+        <article class="panel">
+            <p class="updated"><strong>Last Updated:</strong> March 11, 2026</p>
+
+            <h2>1. What Are Cookies</h2>
+            <p>Cookies are small text files that are stored on your device when you visit a website. They help websites remember information about your visit, such as preferences and settings.</p>
+
+            <h2>2. How SGGames Uses Cookies</h2>
+            <p>SGGames may use cookies to:</p>
+            <ul>
+                <li>Ensure the website functions properly</li>
+                <li>Improve performance and user experience</li>
+                <li>Remember user preferences</li>
+                <li>Analyze website traffic and usage</li>
+                <li>Support advertising services</li>
+            </ul>
+
+            <h2>3. Types of Cookies We May Use</h2>
+            <h3>Essential Cookies</h3>
+            <p>These cookies are required for the basic operation of the website. Without them, certain features may not function properly.</p>
+            <h3>Performance and Analytics Cookies</h3>
+            <p>These cookies help us understand how visitors interact with the website, such as which pages are visited most often.</p>
+            <h3>Advertising Cookies</h3>
+            <p>Third-party advertising networks may use cookies to show relevant advertisements and measure the effectiveness of ads.</p>
+
+            <h2>4. Third-Party Cookies</h2>
+            <p>Some cookies may be placed by third-party services used on the website, such as analytics providers, embedded games, or advertising partners. These services have their own privacy policies governing their use of data.</p>
+
+            <h2>5. Managing Cookies</h2>
+            <p>Most web browsers allow you to control or disable cookies through their settings. You can choose to block or delete cookies at any time, but doing so may affect how the website functions.</p>
+
+            <h2>6. Changes to This Cookie Policy</h2>
+            <p>We may update this Cookie Policy from time to time. Updates will be posted on this page with the revised date.</p>
+
+            <h2>7. Contact</h2>
+            <p>If you have any questions about our use of cookies, you may contact us through the contact page on this website.</p>
+        </article>
     </main>
     <footer>
         <p class="footer-company">&copy; 2026 SGGames. All rights reserved.</p>
