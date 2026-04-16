@@ -604,6 +604,93 @@
         -webkit-text-fill-color: white; /* Plain white text on hover */
         color: white; /* Fallback */
     }
+
+    /* Domain change popup */
+    .update-popup-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 14, 23, 0.78);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1200;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+
+    .update-popup-overlay.visible {
+        display: flex;
+    }
+
+    .update-popup {
+        width: 100%;
+        max-width: 520px;
+        background: linear-gradient(160deg, #1a1f2c 0%, #22293a 100%);
+        border: 2px solid var(--accent-color);
+        border-radius: 14px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+        color: var(--text-color);
+        overflow: hidden;
+    }
+
+    .update-popup-header {
+        background: linear-gradient(90deg, #5644ff, #9f44ff);
+        color: #fff;
+        padding: 0.9rem 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .update-popup-close {
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-size: 1.4rem;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .update-popup-content {
+        padding: 1.2rem 1rem 1rem;
+        text-align: left;
+    }
+
+    .update-popup-subtitle {
+        margin: 0 0 0.7rem 0;
+        opacity: 0.9;
+        font-weight: 600;
+    }
+
+    .update-popup-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.4rem;
+    }
+
+    .update-popup-list li {
+        font-size: 1rem;
+    }
+
+    .update-popup-actions {
+        padding: 0 1rem 1rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .update-popup-btn {
+        background: var(--highlight-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
 </style>
 <script src="/js/mimicry.js"></script>
 </head>
@@ -2752,7 +2839,68 @@
             renderStarredCards();
         });
     })();
+
+    const DOMAIN_CHANGE_POPUP_STORAGE_KEY = 'sggamesSeenDomainChangePopupGames';
+
+    document.addEventListener('DOMContentLoaded', function setupDomainChangePopup() {
+        const overlay = document.getElementById('domainChangePopupOverlay');
+        const closeX = document.getElementById('domainChangePopupCloseX');
+        const closeBtn = document.getElementById('domainChangePopupCloseBtn');
+        if (!overlay) {
+            return;
+        }
+
+        function showPopup() {
+            overlay.classList.add('visible');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        if (localStorage.getItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY) !== 'true') {
+            showPopup();
+        }
+
+        function closePopupAndRemember() {
+            localStorage.setItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY, 'true');
+            overlay.classList.remove('visible');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        if (closeX) {
+            closeX.addEventListener('click', closePopupAndRemember);
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closePopupAndRemember);
+        }
+
+        overlay.addEventListener('click', function(event) {
+            if (event.target === overlay) {
+                closePopupAndRemember();
+            }
+        });
+    });
 </script>
+
+    <div id="domainChangePopupOverlay" class="update-popup-overlay" aria-hidden="true">
+        <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="domainChangePopupTitle">
+            <div class="update-popup-header">
+                <span id="domainChangePopupTitle">Important: Domain Change</span>
+                <button id="domainChangePopupCloseX" class="update-popup-close" type="button" aria-label="Close domain change popup">&times;</button>
+            </div>
+            <div class="update-popup-content">
+                <p class="update-popup-subtitle">Notice:</p>
+                <ul class="update-popup-list">
+                    <li>Our current domain <strong>googledocs1234.github.io</strong> is being blocked.</li>
+                    <li>Please visit our new domain: <strong>googledocs123456.github.io</strong></li>
+                    <li>All games and features are available at the new site.</li>
+                </ul>
+            </div>
+            <div class="update-popup-actions">
+                <button id="domainChangePopupCloseBtn" class="update-popup-btn" type="button">Got it</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 

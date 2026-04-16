@@ -589,31 +589,29 @@ hello huzz
         </a>
     </div>
 
-    <div id="updatePopupOverlay" class="update-popup-overlay" aria-hidden="true">
-        <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="updatePopupTitle">
+    <div id="domainChangePopupOverlay" class="update-popup-overlay" aria-hidden="true">
+        <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="domainChangePopupTitle">
             <div class="update-popup-header">
-                <span id="updatePopupTitle">SGGames V2.0 Out Now!</span>
-                <button id="updatePopupCloseX" class="update-popup-close" type="button" aria-label="Close update popup">&times;</button>
+                <span id="domainChangePopupTitle">Important: Domain Change</span>
+                <button id="domainChangePopupCloseX" class="update-popup-close" type="button" aria-label="Close domain change popup">&times;</button>
             </div>
             <div class="update-popup-content">
-                <p class="update-popup-subtitle">Updates:</p>
+                <p class="update-popup-subtitle">Notice:</p>
                 <ul class="update-popup-list">
-                    <li><span class="update-plus">+</span>Over 300 Games</li>
-                    <li><span class="update-plus">+</span>Favoriting feature</li>
-                    <li><span class="update-plus">+</span>Custom Panic Key Redirection</li>
-                    <li><span class="update-plus">+</span>Sponsorships</li>
-                    <li><span class="update-minus">-</span>Request Status page</li>
+                    <li>Our current domain <strong>googledocs1234.github.io</strong> is being blocked.</li>
+                    <li>Please visit our new domain: <strong>googledocs123456.github.io</strong></li>
+                    <li>All games and features are available at the new site.</li>
                 </ul>
             </div>
             <div class="update-popup-actions">
-                <button id="updatePopupCloseBtn" class="update-popup-btn" type="button">Got it</button>
+                <button id="domainChangePopupCloseBtn" class="update-popup-btn" type="button">Got it</button>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        const UPDATE_POPUP_STORAGE_KEY = 'sggamesSeenV2Popup';
+        const DOMAIN_CHANGE_POPUP_STORAGE_KEY = 'sggamesSeenDomainChangePopupHome';
 
         function getFormattedDate() {
             const options = { weekday: 'long', month: 'long', day: 'numeric' };
@@ -643,10 +641,10 @@ hello huzz
             retina_detect: true
         });
 
-        (function setupUpdatePopup() {
-            const overlay = document.getElementById('updatePopupOverlay');
-            const closeX = document.getElementById('updatePopupCloseX');
-            const closeBtn = document.getElementById('updatePopupCloseBtn');
+        (function setupDomainChangePopup() {
+            const overlay = document.getElementById('domainChangePopupOverlay');
+            const closeX = document.getElementById('domainChangePopupCloseX');
+            const closeBtn = document.getElementById('domainChangePopupCloseBtn');
             const showPopupBtn = document.getElementById('showUpdatePopupBtn');
             if (!overlay) {
                 return;
@@ -657,13 +655,12 @@ hello huzz
                 overlay.setAttribute('aria-hidden', 'false');
             }
 
-            const hasSeenPopup = localStorage.getItem(UPDATE_POPUP_STORAGE_KEY) === 'true';
-            if (!hasSeenPopup) {
+            if (localStorage.getItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY) !== 'true') {
                 showPopup();
             }
 
             function closePopupAndRemember() {
-                localStorage.setItem(UPDATE_POPUP_STORAGE_KEY, 'true');
+                localStorage.setItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY, 'true');
                 overlay.classList.remove('visible');
                 overlay.setAttribute('aria-hidden', 'true');
             }
