@@ -690,6 +690,9 @@
         padding: 0.6rem 1rem;
         font-weight: bold;
         cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
     }
 </style>
 <script src="/js/mimicry.js"></script>
@@ -2840,7 +2843,37 @@
         });
     })();
 
+    const SURVEY_POPUP_STORAGE_KEY = 'sggamesSeenSurveyPopup';
     const DOMAIN_CHANGE_POPUP_STORAGE_KEY = 'sggamesSeenDomainChangePopupGames';
+
+    document.addEventListener('DOMContentLoaded', function setupSurveyPopup() {
+        const overlay = document.getElementById('surveyPopupOverlay');
+        const actionLink = document.getElementById('surveyPopupActionLink');
+        if (!overlay) {
+            return;
+        }
+
+        function showPopup() {
+            overlay.classList.add('visible');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        if (localStorage.getItem(SURVEY_POPUP_STORAGE_KEY) !== 'true') {
+            showPopup();
+        }
+
+        function closePopupAndRemember() {
+            overlay.classList.remove('visible');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        if (actionLink) {
+            actionLink.addEventListener('click', function() {
+                localStorage.setItem(SURVEY_POPUP_STORAGE_KEY, 'true');
+                closePopupAndRemember();
+            });
+        }
+    });
 
     document.addEventListener('DOMContentLoaded', function setupDomainChangePopup() {
         const overlay = document.getElementById('domainChangePopupOverlay');
@@ -2855,7 +2888,10 @@
             overlay.setAttribute('aria-hidden', 'false');
         }
 
-        if (localStorage.getItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY) !== 'true') {
+        if (
+            localStorage.getItem(SURVEY_POPUP_STORAGE_KEY) === 'true' &&
+            localStorage.getItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY) !== 'true'
+        ) {
             showPopup();
         }
 
@@ -2880,6 +2916,32 @@
         });
     });
 </script>
+
+    <div id="surveyPopupOverlay" class="update-popup-overlay" aria-hidden="true">
+        <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="surveyPopupTitle">
+            <div class="update-popup-header">
+                <span id="surveyPopupTitle">Quick Favor</span>
+            </div>
+            <div class="update-popup-content">
+                <p class="update-popup-subtitle">Would you mind filling out this short form?</p>
+                <ul class="update-popup-list">
+                    <li>I&apos;d really appreciate your feedback.</li>
+                    <li>It helps improve the site and the games page.</li>
+                </ul>
+            </div>
+            <div class="update-popup-actions">
+                <a
+                    id="surveyPopupActionLink"
+                    class="update-popup-btn"
+                    href="https://forms.gle/WttELRmPbpUzDWJ68"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open Survey
+                </a>
+            </div>
+        </div>
+    </div>
 
     <div id="domainChangePopupOverlay" class="update-popup-overlay" aria-hidden="true">
         <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="domainChangePopupTitle">
