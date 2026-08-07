@@ -5,26 +5,8 @@
  * Add this to all pages by including the script in the head section.
  */
 
-const GA_MEASUREMENT_ID = "G-KRH3X9QS3M";
-
 function initGoogleAnalytics() {
-    if (window.__sgGaLoaded) return;
-    window.__sgGaLoaded = true;
-
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    document.head.appendChild(script);
-
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-        window.dataLayer.push(arguments);
-    };
-
-    gtag("js", new Date());
-    gtag("config", GA_MEASUREMENT_ID, {
-        page_path: window.location.pathname
-    });
+    window.__sgGaLoaded = false;
 }
 
 function applySavedMimicry() {
@@ -297,6 +279,24 @@ function saveAllSettings() {
     saveSecuritySettings();
 }
 
+function showSavedFeedback() {
+    let feedbackEl = document.getElementById("savedFeedback");
+
+    if (!feedbackEl) {
+        feedbackEl = document.createElement("div");
+        feedbackEl.id = "savedFeedback";
+        feedbackEl.className = "sg-saved-feedback";
+        feedbackEl.textContent = "Settings saved!";
+        document.body.appendChild(feedbackEl);
+    }
+
+    feedbackEl.classList.add("visible");
+    window.clearTimeout(window.__sgSavedFeedbackTimer);
+    window.__sgSavedFeedbackTimer = window.setTimeout(() => {
+        feedbackEl.classList.remove("visible");
+    }, 1500);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     // Start analytics site-wide
     initGoogleAnalytics();
@@ -306,6 +306,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Set up the settings button and modal if they exist on this page
     setupSettingsModal();
+
+    // Set up the standalone /settings/ page if present
+    setupStandaloneSettingsPage();
 });
 
 function setupSettingsModal() {
@@ -418,4 +421,51 @@ function setupSettingsModal() {
             domainInput.value = localStorage.getItem("emailDomain") || "gmail.com";
         }
     }
+}
+
+function setupStandaloneSettingsPage() {
+    const settingsPage = document.querySelector("[data-sg-settings-page]");
+    if (!settingsPage) return;
+
+    loadSavedSettings();
+
+    const savedType = localStorage.getItem("pageMimicType") || "gdocs";
+    const emailCustomization = document.getElementById("emailCustomization");
+    if (emailCustomization) {
+        emailCustomization.style.display = savedType === "gmail" ? "block" : "none";
+    }
+
+    const renameOptions = document.querySelectorAll(".rename-option");
+    renameOptions.forEach((option) => {
+        option.addEventListener("click", function () {
+            renameOptions.forEach((opt) => opt.classList.remove("active"));
+            this.classList.add("active");
+
+            if (emailCustomization) {
+                emailCustomization.style.display = this.dataset.type === "gmail" ? "block" : "none";
+            }
+
+            savePageStyle();
+            showSavedFeedback();
+        });
+    });
+
+    document.querySelector(".apply-email")?.addEventListener("click", function () {
+        applyCustomEmail();
+        showSavedFeedback();
+    });
+
+    document.querySelectorAll(".toggle-switch input, .settings-toggle input").forEach((input) => {
+        input.addEventListener("change", function () {
+            saveSecuritySettings();
+            showSavedFeedback();
+        });
+    });
+
+    ["panicKeyInput", "panicRedirectInput"].forEach((id) => {
+        document.getElementById(id)?.addEventListener("change", function () {
+            saveSecuritySettings();
+            showSavedFeedback();
+        });
+    });
 }

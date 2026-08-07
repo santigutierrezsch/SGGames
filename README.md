@@ -1,25 +1,25 @@
-# 🎮 SGGames
+# 🎮 SG Games
 
 > The ultimate open-source HTML5 game hub — fork, host, and play instantly.
 
-**Quick Links:**  
-👉 [What is SGGames?](#-what-is-sggames)  
+**Quick Links:**
+👉 [What is SG Games?](#-what-is-SG Games)
 👉 [How to Host Your Own Version](#-how-to-host-your-own-version)
 
 ---
 
-## 🕹️ What is SGGames?
+## 🕹️ What is SG Games?
 
-**SGGames** is a free, open-source web platform that hosts hundreds of HTML5 and Flash-style games directly in your browser.  
-It’s built for speed, simplicity, and independence — no logins, no paywalls, no ads, just pure gaming fun.  
+**SG Games** is a free, open-source web platform that hosts hundreds of HTML5 and Flash-style games directly in your browser.
+It’s built for speed, simplicity, and independence — no logins, no paywalls, no ads, just pure gaming fun.
 
 ### 🌟 Key Features
 - test
-- 200+ classic and modern web games  
-- Works offline and on school networks (depending on host setup)  
-- Fully forkable and customizable  
-- Auto-updates from the original repo using GitHub Actions  
-- Deploys to GitHub Pages in minutes  
+- 200+ classic and modern web games
+- Works offline and on school networks (depending on host setup)
+- Fully forkable and customizable
+- Auto-updates from the original repo using GitHub Actions
+- Deploys to GitHub Pages in minutes
 
 **© 2025 Santiago Gutierrez** — Open source under the [MIT License](https://opensource.org/licenses/MIT).
 
@@ -27,32 +27,32 @@ It’s built for speed, simplicity, and independence — no logins, no paywalls,
 
 ## 🧠 How to Host Your Own Version
 
-This guide shows you how to **fork**, **sync**, and **host** your own SGGames website — perfect for anyone, even if you’ve never coded before!
+This guide shows you how to **fork**, **sync**, and **host** your own SG Games website — perfect for anyone, even if you’ve never coded before!
 
 ---
 
 ### 1️⃣ Fork the Repository
 
-1. Go to the original repo:  
-   👉 [https://github.com/SantiagoGutierrez/SGGames](https://github.com/santigutierrezsch/SGGames)  
-2. Click **“Fork”** (top-right corner).  
+1. Go to the original repo:
+   👉 [SG Games repository](https://github.com/santigutierrezsch)
+2. Click **“Fork”** (top-right corner).
 3. Wait for GitHub to make your own copy.
 
 ---
 
 ### 2️⃣ Enable GitHub Pages (from `main` branch)
 
-1. In your forked repo, go to **Settings → Pages**.  
+1. In your forked repo, go to **Settings → Pages**.
 2. Under **Source**, choose:
    - **Branch:** `main`
    - **Folder:** `/ (root)`
-3. Save.  
-4. After a few minutes, your site will appear at:  
-   `https://<your-username>.github.io/SGGames/`
+3. Save.
+4. After a few minutes, your site will appear at:
+   `https://<your-username>.github.io/`
 
-> 💡 If this is your only project on GitHub, rename your repository to  
-> `your-username.github.io` — then your site will appear at:  
-> `https://your-username.github.io/` (no `/SGGames/` at the end).
+> 💡 If this is your only project on GitHub, rename your repository to
+> `your-username.github.io` — then your site will appear at:
+> `https://your-username.github.io/` (no `/` at the end).
 
 > ⚠️ If your site ever gets blocked, you can create a new GitHub account with a school-related name (example: `googledocs1234`) and host again.
 
@@ -60,11 +60,11 @@ This guide shows you how to **fork**, **sync**, and **host** your own SGGames we
 
 ### 3️⃣ Set Up Auto Sync + Hosting (GitHub Actions)
 
-This step makes your site **automatically update** every day when the main SGGames repo gets new games or changes.
+This step makes your site **automatically update** every day when the main SG Games repo gets new games or changes.
 
-1. Go to your repo’s **Actions** tab.  
-2. Click **“New workflow” → “set up a workflow yourself.”**  
-3. Name it `sync.yml`.  
+1. Go to your repo’s **Actions** tab.
+2. Click **“New workflow” → “set up a workflow yourself.”**
+3. Name it `sync.yml`.
 4. Paste this code inside:
 
 ```yaml
@@ -83,10 +83,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Sync from the original SGGames repo
+      - name: Sync from the original SG Games repo
         uses: repo-sync/github-sync@v2
         with:
-          source_repo: SantiagoGutierrez/SGGames
+          source_repo: SantiagoGutierrez/SG Games
           source_branch: main
           destination_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -127,7 +127,7 @@ As long as Actions are enabled in your repo, everything will work automatically 
 
 Your fork will now:
 
-* Pull the newest version of SGGames **every day automatically**
+* Pull the newest version of SG Games **every day automatically**
 * Rebuild and redeploy your GitHub Pages site
 * Stay synced forever — no extra work needed
 

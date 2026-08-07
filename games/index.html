@@ -9,10 +9,6 @@
     content="games, unblocked games, video games, unity, webgl, swf, html5, cybriagames, cybriagames sequel, emulators, sggame">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script src="mimicry.js"></script>
 <!-- Import Google fonts first, outside of the style tag -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -20,9 +16,9 @@
     :root {
         --primary-color: #0a0e17;
         --secondary-color: #1a1f2c;
-        --accent-color: #5644ff;
+        --accent-color: #6653d6;
         --text-color: #ffffff;
-        --button-hover: #7366ff;
+        --button-hover: #7d6ceb;
         --highlight-color: #ff4656;
         --gray-dark: rgba(26, 31, 44, 0.8);
         --gray-light: rgba(56, 56, 56, 0.8);
@@ -356,7 +352,7 @@
     }
     
     .search-bar:focus {
-        box-shadow: 0 0 0 3px rgba(86, 68, 255, 0.3);
+        box-shadow: 0 0 0 3px rgba(102, 83, 214, 0.3);
     }
     
     .search-enter {
@@ -371,6 +367,169 @@
         cursor: pointer;
         padding: 0.5rem;
     }
+
+    .library-toolbar {
+        width: min(1100px, calc(100% - 2rem));
+        margin: 2rem auto 1.25rem;
+        position: relative;
+        z-index: 10;
+    }
+
+    .library-toolbar .search-container {
+        margin: 0 auto 1rem;
+    }
+
+    .library-controls {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 1rem;
+        background: rgba(26, 31, 44, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 0.85rem;
+    }
+
+    .library-actions {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 0.8rem;
+        background: rgba(26, 31, 44, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 0.85rem;
+    }
+
+    .quick-play-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 0.78rem;
+        font-weight: 700;
+    }
+
+    .quick-play-actions,
+    .quick-play-recent {
+        display: flex;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-panel {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        min-width: 0;
+    }
+
+    .filter-group {
+        display: grid;
+        gap: 0.45rem;
+    }
+
+    .filter-group-label {
+        color: var(--text-color);
+        font-size: 0.78rem;
+        font-weight: 700;
+        opacity: 0.72;
+    }
+
+    .filter-chips {
+        display: grid;
+        gap: 0.45rem;
+    }
+
+    .quick-filter-chips {
+        grid-template-columns: repeat(3, minmax(0, max-content));
+    }
+
+    .filter-chip,
+    .library-action,
+    .library-select {
+        background: var(--secondary-color);
+        color: var(--text-color);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        min-height: 40px;
+    }
+
+    .filter-chip {
+        padding: 0.45rem 0.7rem;
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .library-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        min-width: 0;
+        padding: 0.55rem 0.85rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .quick-play-recent-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        max-width: 190px;
+        padding: 0.4rem 0.7rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        background: rgba(10, 14, 23, 0.42);
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 0.86rem;
+        font-weight: 600;
+        overflow: hidden;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .quick-play-recent-link:hover {
+        background: var(--accent-color);
+        color: #fff;
+    }
+
+    .filter-chip:hover,
+    .filter-chip.active,
+    .library-action:hover {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        transform: translateY(-1px);
+    }
+
+    .sort-control {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        opacity: 0.92;
+        justify-self: end;
+    }
+
+    .select-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .library-select {
+        padding: 0.45rem 2rem 0.45rem 0.8rem;
+        cursor: pointer;
+        max-width: 190px;
+    }
     
     /* Games Grid */
     main {
@@ -379,7 +538,17 @@
         z-index: 2;
     }
     
-    #games {
+    .library-shell {
+        width: min(1100px, 100%);
+        margin: 0 auto;
+    }
+
+    .library-section {
+        margin-bottom: 1.5rem;
+    }
+
+    #games,
+    #starred-games-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 1.2rem;
@@ -387,8 +556,48 @@
         width: 100%;
         margin: 0 auto;
     }
-    
-    .game {
+
+    #no-results {
+        text-align: center;
+        opacity: 0.78;
+        padding: 1.4rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        background: rgba(26, 31, 44, 0.58);
+    }
+
+    #no-results {
+        display: none;
+        margin-top: 1rem;
+    }
+
+    #no-results.visible {
+        display: block;
+    }
+
+    .game-meta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+        margin-top: 0.45rem;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .game-tag {
+        max-width: 100%;
+        padding: 0.18rem 0.45rem;
+        border-radius: 999px;
+        background: rgba(102, 83, 214, 0.16);
+        color: rgba(255, 255, 255, 0.84);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+.game {
         background-color: var(--secondary-color);
         border-radius: 10px;
         overflow: hidden;
@@ -403,11 +612,13 @@
         min-height: 100px;
         position: relative;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: var(--text-color);
+        text-decoration: none;
     }
     
     .game:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(86, 68, 255, 0.3);
+        box-shadow: 0 10px 20px rgba(102, 83, 214, 0.3);
         background-color: var(--button-hover);
     }
     
@@ -434,14 +645,15 @@
     display: none; /* Hide the ribbon completely */
     }
     
-    /* Gradient Text Styling - Higher specificity */
     #games .game .game-title {
-        background: linear-gradient(90deg, #5644ff, #9f44ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent; /* Fallback */
+        background: none;
+        -webkit-text-fill-color: currentColor;
+        color: var(--text-color);
         font-weight: bold;
+    }
+
+    .game[hidden] {
+        display: none;
     }
     
     /* Section Headers */
@@ -457,18 +669,31 @@
         color: var(--text-color);
     }
 
+    .section-heading-row {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        border-bottom: 2px solid var(--accent-color);
+        margin: 2rem 0 1rem;
+    }
+
+    .section-heading-row .section-header {
+        border-bottom: none;
+        margin: 0;
+        text-align: left;
+    }
+
+    .result-count {
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+        opacity: 0.72;
+        font-weight: 600;
+    }
+
     /* Starred Games */
     #starred-games-section {
         margin-bottom: 1.5rem;
-    }
-
-    #starred-games-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1.2rem;
-        justify-content: center;
-        width: 100%;
-        margin: 0 auto;
     }
 
     #starred-games-empty {
@@ -505,15 +730,59 @@
     }
 
     @media (max-width: 768px) {
+        #games,
         #starred-games-grid {
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 1rem;
         }
+
+        .library-controls {
+            grid-template-columns: 1fr;
+        }
+
+        .sort-control {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .library-actions {
+            align-items: stretch;
+        }
+
+        .library-action {
+            flex: 1 1 180px;
+        }
+
+        .quick-play-actions,
+        .quick-play-recent {
+            width: 100%;
+        }
+
+        .select-controls {
+            justify-content: stretch;
+        }
+
+        .select-controls,
+        .sort-control,
+        .library-select {
+            width: 100%;
+        }
+
+        .library-select {
+            max-width: none;
+        }
     }
 
     @media (max-width: 480px) {
+        #games,
         #starred-games-grid {
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        }
+
+        .section-heading-row {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 0.25rem;
         }
     }
     
@@ -527,7 +796,7 @@
         padding: 1.2rem;
         font-size: 1.2rem;
         font-weight: 600;
-        background: linear-gradient(90deg, #5644ff, #9f44ff);
+        background: var(--accent-color);
         color: white;
         border: none;
         border-radius: 10px;
@@ -539,7 +808,7 @@
     
     .request-button:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(86, 68, 255, 0.3);
+        box-shadow: 0 10px 20px rgba(102, 83, 214, 0.3);
     }
     
     /* Particles Background */
@@ -588,114 +857,21 @@
         }
     }
     
-    /* Keep the existing gradient text in normal state */
     #games .game .game-title {
-        background: linear-gradient(90deg, #5644ff, #9f44ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent; /* Fallback */
+        background: none;
+        -webkit-text-fill-color: currentColor;
+        color: var(--text-color);
         font-weight: bold;
         transition: all 0.3s ease;
     }
 
-    /* Just change the text color on hover, but keep the gradient */
     #games .game:hover .game-title {
-        -webkit-text-fill-color: white; /* Plain white text on hover */
-        color: white; /* Fallback */
-    }
-
-    /* Domain change popup */
-    .update-popup-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(10, 14, 23, 0.78);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 1200;
-        padding: 1rem;
-        box-sizing: border-box;
-    }
-
-    .update-popup-overlay.visible {
-        display: flex;
-    }
-
-    .update-popup {
-        width: 100%;
-        max-width: 520px;
-        background: linear-gradient(160deg, #1a1f2c 0%, #22293a 100%);
-        border: 2px solid var(--accent-color);
-        border-radius: 14px;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-        color: var(--text-color);
-        overflow: hidden;
-    }
-
-    .update-popup-header {
-        background: linear-gradient(90deg, #5644ff, #9f44ff);
-        color: #fff;
-        padding: 0.9rem 1rem;
-        font-size: 1.2rem;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .update-popup-close {
-        background: transparent;
-        border: none;
-        color: #fff;
-        font-size: 1.4rem;
-        line-height: 1;
-        cursor: pointer;
-    }
-
-    .update-popup-content {
-        padding: 1.2rem 1rem 1rem;
-        text-align: left;
-    }
-
-    .update-popup-subtitle {
-        margin: 0 0 0.7rem 0;
-        opacity: 0.9;
-        font-weight: 600;
-    }
-
-    .update-popup-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 0.4rem;
-    }
-
-    .update-popup-list li {
-        font-size: 1rem;
-    }
-
-    .update-popup-actions {
-        padding: 0 1rem 1rem;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .update-popup-btn {
-        background: var(--highlight-color);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 0.6rem 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        text-decoration: none;
+        -webkit-text-fill-color: currentColor;
+        color: white;
     }
 </style>
-<script src="/js/mimicry.js"></script>
+<link rel="stylesheet" href="/css/master.css">
+<script src="/js/mimicry.js" defer></script>
 </head>
 
 <body>
@@ -710,1342 +886,731 @@
     </a>
 </div>
 
-<div class="search-container">
-    <input type="text" class="search-bar" placeholder="Search for games...">
-    <button class="search-enter"><i class="fas fa-search"></i></button>
-</div>
-
-<main>
-    <div id="games">
-        <!-- Regular Games Section -->
-        <div class="section-header">Games</div>
-        
-        <div class="game" onclick="window.location.href='https://forms.gle/H82qpse4WCmVJs7K8'">
-            <div class="game-title">Requests/Feedback</div>
-        </div>
-
-<div class="game" onclick="window.location.href='1on1soccer'">
-            <div class="game-title">1-on-1 Soccer</div>
-        </div>
-
-<div class="game" onclick="window.location.href='1v1lol'">
-            <div class="game-title">1v1.lol</div>
-        </div>
-
-<div class="game" onclick="window.location.href='1v1space'">
-            <div class="game-title">1v1 Space</div>
-        </div>
-
-
-<div class="game popular" onclick="window.location.href='2048'">
-            <div class="game-title">2048</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='2048-multitask'">
-            <div class="game-title">2048 Multitask</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='9007199254740992'">
-            <div class="game-title">9007199254740992</div>
-        </div>
-
-<div class="game" onclick="window.location.href='2drocketleague'">
-            <div class="game-title">2d Rocket League</div>
-        </div>
-
-<div class="game" onclick="window.location.href='60sburgerrun'">
-            <div class="game-title">60s Burger Run</div>
-        </div>
-
-<div class="game" onclick="window.location.href='8ball'">
-            <div class="game-title">8 Ball</div>
-        </div>
-
-<div class="game" onclick="window.location.href='achieveunlocked'">
-            <div class="game-title">Achievement Unlocked</div>
-        </div>
-
-<div class="game" onclick="window.location.href='achieveunlocked2'">
-            <div class="game-title">Achievement Unlocked 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='a-dance-of-fire-and-ice'">
-            <div class="game-title">A Dance of Fire and Ice</div>
-        </div>
-
-<div class="game" onclick="window.location.href='adarkroom'">
-            <div class="game-title">A Dark Room</div>
-        </div>
-
-<div class="game" onclick="window.location.href='adrenalinechallenge2'">
-            <div class="game-title">Adrenaline Challenge 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='adventure-capitalist'">
-            <div class="game-title">Adventure Capitalist</div>
-        </div>
-
-<div class="game" onclick="window.location.href='adventure-drivers'">
-            <div class="game-title">Adventure Drivers</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ageofwar'">
-            <div class="game-title">Age of War</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ages-of-conflict'">
-            <div class="game-title">Ages of Conflict</div>
-        </div>
-<div class="game" onclick="window.location.href='alienhominid'">
-            <div class="game-title">Alien Hominid</div>
-        </div>
-
-<div class="game" onclick="window.location.href='align-4'">
-            <div class="game-title">Align 4</div>
-        </div>
-
-<div class="game" onclick="window.location.href='amazing-rope-police'">
-            <div class="game-title">Amazing Rope Police</div>
-        </div>
-
-<div class="game" onclick="window.location.href='amidst-the-clouds'">
-            <div class="game-title">Amidst the Clouds</div>
-        </div>
-
-<div class="game" onclick="window.location.href='amongus'">
-            <div class="game-title">Among Us</div>
-        </div>
-
-<div class="game" onclick="window.location.href='angry-sharks'">
-            <div class="game-title">Angry Sharks</div>
-        </div>
-
-<div class="game" onclick="window.location.href='aquapark-slides'">
-            <div class="game-title">Aquapark Slides</div>
-        </div>
-
-<div class="game" onclick="window.location.href='astray'">
-            <div class="game-title">Astray</div>
-        </div>
-
-<div class="game" onclick="window.location.href='avalanche'">
-            <div class="game-title">Avalanche</div>
-        </div>
-
-<div class="game" onclick="window.location.href='awesometanks'">
-            <div class="game-title">Awesome Tanks</div>
-        </div>
-
-<div class="game" onclick="window.location.href='awesometanks2'">
-            <div class="game-title">Awesome Tanks 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='backrooms'">
-            <div class="game-title">Backrooms</div>
-        </div>
-
-<div class="game" onclick="window.location.href='badicecream'">
-            <div class="game-title">Bad Ice Cream</div>
-        </div>
-
-<div class="game" onclick="window.location.href='badicecream2'">
-            <div class="game-title">Bad Ice Cream 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='badicecream3'">
-            <div class="game-title">Bad Ice Cream 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='badpiggies'">
-            <div class="game-title">Bad Piggies</div>
-        </div>
-
-<div class="game" onclick="window.location.href='badtimesimulator'">
-            <div class="game-title">Bad Time Simulator</div>
-        </div>
-
-<div class="game" onclick="window.location.href='baldis-basics'">
-            <div class="game-title">Baldi's Basics</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ballisticchickens'">
-            <div class="game-title">Ballistic Chickens</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='basket-random'">
-            <div class="game-title">Basket Random</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='basketball-stars'">
-            <div class="game-title">Basketball Stars</div>
-        </div>
-
-<div class="game" onclick="window.location.href='basketbros'">
-            <div class="game-title">Basketbros</div>
-        </div>
-
-<div class="game" onclick="window.location.href='btts'">
-            <div class="game-title">Big Tower Tiny Square</div>
-        </div>
-
-<div class="game" onclick="window.location.href='big-ice-tower-tiny-square-2'">
-            <div class="game-title">Big Ice Tower Tiny Square 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='big-neon-tower'">
-            <div class="game-title">Big Neon Tower Tiny Square</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bit-planes'">
-            <div class="game-title">Bit Planes</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bitlife'">
-            <div class="game-title">Bitlife</div>
-        </div>
-
-<div class="game" onclick="window.location.href='black-hole-square'">
-            <div class="game-title">Black Hole Square</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bloodtournament'">
-            <div class="game-title">Blood Tournament</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bloxorz'">
-            <div class="game-title">Bloxorz</div>
-        </div>
-
-<div class="game" onclick="window.location.href='btd'">
-            <div class="game-title">Bloons Tower Defense</div>
-        </div>
-
-<div class="game" onclick="window.location.href='btd2'">
-            <div class="game-title">Bloons Tower Defense 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='btd3'">
-            <div class="game-title">Bloons Tower Defense 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='btd4'">
-            <div class="game-title">Bloons Tower Defense 4</div>
-        </div>
-
-<div class="game" onclick="window.location.href='btd5'">
-            <div class="game-title">Bloons Tower Defense 5</div>
-        </div>
-
-<div class="game" onclick="window.location.href='btd6'">
-            <div class="game-title">Bloons Tower Defense 6</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bobtherobber2'">
-            <div class="game-title">Bob The Robber 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bottle-flip-3d'">
-            <div class="game-title">Bottle Flip 3D</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bounce-back'">
-            <div class="game-title">Bounce Back</div>
-        </div>
-
-<div class="game" onclick="window.location.href='boxingphysics2'">
-            <div class="game-title">Boxing Physics 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='boxing-random'">
-            <div class="game-title">Boxing Random</div>
-        </div>
-
-<div class="game" onclick="window.location.href='breakingthebank'">
-            <div class="game-title">Breaking the Bank</div>
-        </div>
-
-<div class="game" onclick="window.location.href='browserkiller'">
-            <div class="game-title">Browser Killer</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bubbleshooter'">
-            <div class="game-title">Bubble Shooter</div>
-        </div>
-
-<div class="game" onclick="window.location.href='bubble-tower-3d'">
-            <div class="game-title">Bubble Tower 3D</div>
-        </div>
-
-<div class="game" onclick="window.location.href='burgerandfrights'">
-            <div class="game-title">Burger and Frights</div>
-        </div>
-
-<div class="game" onclick="window.location.href='burritobison'">
-            <div class="game-title">Burrito Bison</div>
-        </div>
-
-<div class="game" onclick="window.location.href='candy-crush'">
-            <div class="game-title">Candy Crush</div>
-        </div>
-
-<div class="game" onclick="window.location.href='celeste'">
-            <div class="game-title">Celeste</div>
-        </div>
-
-<div class="game" onclick="window.location.href='cell-machine'">
-            <div class="game-title">Cell Machine</div>
-        </div>
-
-<div class="game" onclick="window.location.href='championisland'">
-            <div class="game-title">Champion Island</div>
-        </div>
-
-<div class="game" onclick="window.location.href='chess'">
-            <div class="game-title">Chess</div>
-        </div>
-
-<div class="game" onclick="window.location.href='chibiknight'">
-            <div class="game-title">Chibi Knight</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='chrome-dino'">
-            <div class="game-title">Chrome Dino</div>
-        </div>
-
-<div class="game" onclick="window.location.href='circloo'">
-            <div class="game-title">Circloo</div>
-        </div>
-
-<div class="game" onclick="window.location.href='civiballs'">
-            <div class="game-title">Civiballs</div>
-        </div>
-
-<div class="game" onclick="window.location.href='civiballs-2'">
-            <div class="game-title">Civiballs 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='clickerheroes'">
-            <div class="game-title">Clicker Heroes</div>
-        </div>
-
-<div class="game" onclick="window.location.href='cluster-rush'">
-            <div class="game-title">Cluster Rush</div>
-        </div>
-
-<div class="game" onclick="window.location.href='colorswitch'">
-            <div class="game-title">Color Switch</div>
-        </div>
-
-<div class="game" onclick="window.location.href='commodoreclicker'">
-            <div class="game-title">Commodore Clicker</div>
-        </div>
-
-<div class="game" onclick="window.location.href='cookieclicker'">
-            <div class="game-title">Cookie Clicker</div>
-        </div>
-
-<div class="game" onclick="window.location.href='craftmine'">
-            <div class="game-title">Craftmine</div>
-        </div>
-
-<div class="game" onclick="window.location.href='crossyroad'">
-            <div class="game-title">Crossy Road</div>
-        </div>
-
-<div class="game" onclick="window.location.href='csgoclicker'">
-            <div class="game-title">CSGO Clicker</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ctr'">
-            <div class="game-title">CTR</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ctr-holiday'">
-            <div class="game-title">CTR Holiday</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ctr-tr'">
-            <div class="game-title">CTR Time Travel</div>
-        </div>
-
-<div class="game" onclick="window.location.href='cubefield'">
-            <div class="game-title">Cube Field</div>
-        </div>
-
-<div class="game" onclick="window.location.href='dadish'">
-            <div class="game-title">Dadish</div>
-        </div>
-
-<div class="game" onclick="window.location.href='dadish2'">
-            <div class="game-title">Dadish 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='dadish3'">
-            <div class="game-title">Dadish 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='dante'">
-            <div class="game-title">Dante</div>
-        </div>
-
-<div class="game" onclick="window.location.href='deal'">
-            <div class="game-title">Deal or No Deal</div>
-        </div>
-
-<div class="game" onclick="window.location.href='death-run-3d'">
-            <div class="game-title">Death Run 3D</div>
-        </div>
-
-<div class="game" onclick="window.location.href='dogeminer'">
-            <div class="game-title">Doge Miner</div>
-        </div>
-
-<div class="game" onclick="window.location.href='doodlejump'">
-            <div class="game-title">Doodle Jump</div>
-        </div>
-
-<div class="game" onclick="window.location.href='doom'">
-            <div class="game-title">Doom</div>
-        </div>
-
-<div class="game" onclick="window.location.href='dragonballdevolution'">
-            <div class="game-title">Dragonball Devolution</div>
-        </div>
-
-<div class="game" onclick="window.location.href='draw-the-hill'">
-            <div class="game-title">Draw The Hill</div>
-        </div>
-
-<div class="game" onclick="window.location.href='drift-boss'">
-            <div class="game-title">Drift Boss</div>
-        </div>
-
-<div class="game" onclick="window.location.href='drifthunters'">
-            <div class="game-title">Drift Hunters</div>
-        </div>
-
-<div class="game" onclick="window.location.href='drivemad'">
-            <div class="game-title">Drive Mad</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ducklife1'">
-            <div class="game-title">Duck Life 1</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ducklife2'">
-            <div class="game-title">Duck Life 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ducklife3'">
-            <div class="game-title">Duck Life 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ducklife4'">
-            <div class="game-title">Duck Life 4</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ducklife5'">
-            <div class="game-title">Duck Life 5</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ducklife6'">
-            <div class="game-title">Duck Life 6</div>
-        </div>
-
-<div class="game" onclick="window.location.href='edgenotfound'">
-            <div class="game-title">Edge Not Found</div>
-        </div>
-
-<div class="game" onclick="window.location.href='emulatorjs'">
-            <div class="game-title">Emulator JS</div>
-        </div>
-
-<div class="game" onclick="window.location.href='emulators'">
-            <div class="game-title">Emulators</div>
-        </div>
-
-<div class="game" onclick="window.location.href='escapingtheprison'">
-            <div class="game-title">Escaping the Prison</div>
-        </div>
-
-<div class="game" onclick="window.location.href='evilglitch'">
-            <div class="game-title">Evil Glitch</div>
-        </div>
-
-<div class="game" onclick="window.location.href='factoryballs'">
-            <div class="game-title">Factory Balls</div>
-        </div>
-
-<div class="game" onclick="window.location.href='factoryballsforever'">
-            <div class="game-title">Factory Balls Forever</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fancypantsadventures'">
-            <div class="game-title">Fancypants Adventures</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fancypantsadventures2'">
-            <div class="game-title">Fancypants Adventures 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fbwg'">
-            <div class="game-title">Fireboy and Watergirl</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fbwg2'">
-            <div class="game-title">Fireboy and Watergirl 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fbwg3'">
-            <div class="game-title">Fireboy and Watergirl 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fbwg4'">
-            <div class="game-title">Fireboy and Watergirl 4</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='flappybird'">
-            <div class="game-title">Flappy Bird</div>
-        </div>
-
-<div class="game" onclick="window.location.href='flappyplane'">
-            <div class="game-title">Flappy Plane</div>
-        </div>
-
-<div class="game" onclick="window.location.href='flappySquidward'">
-            <div class="game-title">Flappy Squidward</div>
-        </div>
-
-<div class="game" onclick="window.location.href='flash'">
-            <div class="game-title">Flash PLayer Emulator</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fleeingthecomplex'">
-            <div class="game-title">Fleeing the Complex</div>
-        </div>
-
-<div class="game" onclick="window.location.href='flippyfish'">
-            <div class="game-title">Flippy Fish</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fluidsim'">
-            <div class="game-title">Fluidsim</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fnaf'">
-            <div class="game-title">FNAF</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fnaf2'">
-            <div class="game-title">FNAF 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fnaf3'">
-            <div class="game-title">FNAF 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fnaf4'">
-            <div class="game-title">FNAF 4</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fivenightsatepsteins'">
-            <div class="game-title">Five Nights at Epstein's</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fridaynightfunkin'">
-            <div class="game-title">Friday Night Funkin</div>
-        </div>
-
-<div class="game" onclick="window.location.href='friendlyfire'">
-            <div class="game-title">Friendly Fire</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fruitninja'">
-            <div class="game-title">Fruit Ninja</div>
-        </div>
-
-<div class="game" onclick="window.location.href='full-screen-mario'">
-            <div class="game-title">Full Screen Mario</div>
-        </div>
-
-<div class="game" onclick="window.location.href='funnyballgame'">
-            <div class="game-title">Funny Ball Game</div>
-        </div>
-
-<div class="game" onclick="window.location.href='funnymadracing'">
-            <div class="game-title">Funny Mad Racing</div>
-        </div>
-
-<div class="game" onclick="window.location.href='funnyshooter'">
-            <div class="game-title">Funny Shooter</div>
-        </div>
-
-<div class="game" onclick="window.location.href='funnyshooter2'">
-            <div class="game-title">Funny Shooter 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='game-inside'">
-            <div class="game-title">Game Inside</div>
-        </div>
-
-<div class="game" onclick="window.location.href='gamemaker'">
-            <div class="game-title">Game Maker</div>
-        </div>
-
-<div class="game" onclick="window.location.href='gba'">
-            <div class="game-title">GBA Emulator</div>
-        </div>
-
-<div class="game" onclick="window.location.href='real-geometry-dash'">
-            <div class="game-title">Geometry Dash</div>
-        </div>
-
-
-<div class="game" onclick="window.location.href='geometrydash'">
-            <div class="game-title">Geometry Dash (Scratch)</div>
-        </div>
-
-<div class="game" onclick="window.location.href='geometryrash'">
-            <div class="game-title">Geometry Rash</div>
-        </div>
-
-<div class="game" onclick="window.location.href='getawayshooter'">
-            <div class="game-title">Getaway Shooter</div>
-        </div>
-
-<div class="game" onclick="window.location.href='getaway-shootout'">
-            <div class="game-title">Getaway Shootout</div>
-        </div>
-
-<div class="game" onclick="window.location.href='golddiggerfrvr'">
-            <div class="game-title">Gold Digger FRVR</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='google-snake'">
-            <div class="game-title">Google Snake</div>
-        </div>
-
-<div class="game" onclick="window.location.href='google-solitaire'">
-            <div class="game-title">Google Solitaire</div>
-        </div>
-
-<div class="game" onclick="window.location.href='guiltygear'">
-            <div class="game-title">Guilty Gear</div>
-        </div>
-
-<div class="game" onclick="window.location.href='gunmayhem'">
-            <div class="game-title">Gun Mayhem</div>
-        </div>
-
-<div class="game" onclick="window.location.href='gunmayhem2'">
-            <div class="game-title">Gun Mayhem 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='gunmayhemredux'">
-            <div class="game-title">Gun Mayhem Redux</div>
-        </div>
-
-<div class="game" onclick="window.location.href='halloween2016'">
-            <div class="game-title">Halloween 2016</div>
-        </div>
-
-<div class="game" onclick="window.location.href='happywheels'">
-            <div class="game-title">Happywheels</div>
-        </div>
-
-<div class="game" onclick="window.location.href='helixjump'">
-            <div class="game-title">Helix Jump</div>
-        </div>
-
-<div class="game" onclick="window.location.href='hexgl'">
-            <div class="game-title">Hex GL</div>
-        </div>
-
-<div class="game" onclick="window.location.href='hextris'">
-            <div class="game-title">Hextris</div>
-        </div>
-
-<div class="game" onclick="window.location.href='hillclimbracing2'">
-            <div class="game-title">Hill Climb Racing 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='holeio'">
-            <div class="game-title">Hole.io</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ice-dodo'">
-            <div class="game-title">Ice Dodo</div>
-        </div>
-
-<div class="game" onclick="window.location.href='icy-purple-head-2'">
-            <div class="game-title">Icy Purple Head 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='icy-purple-head-3'">
-            <div class="game-title">Icy Purple Head 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='iwbtc'">
-            <div class="game-title">I Wanna Be Thy Copy</div>
-        </div>
-
-<div class="game" onclick="window.location.href='idlebreakout'">
-            <div class="game-title">Idle Breakout</div>
-        </div>
-
-<div class="game" onclick="window.location.href='infiltratingtheairship'">
-            <div class="game-title">Infiltrating the Airship</div>
-        </div>
-
-<div class="game" onclick="window.location.href='jacksmith'">
-            <div class="game-title">Jacksmith</div>
-        </div>
-
-<div class="game" onclick="window.location.href='jetpackjoyride'">
-            <div class="game-title">Jetpack Joyride</div>
-        </div>
-
-<div class="game" onclick="window.location.href='justfalllol'">
-            <div class="game-title">JustFall.lol</div>
-        </div>
-
-<div class="game" onclick="window.location.href='knifehit'">
-            <div class="game-title">Knife Hit</div>
-        </div>
-
-<div class="game" onclick="window.location.href='lasthorizon'">
-            <div class="game-title">Last Horizon</div>
-        </div>
-
-<div class="game" onclick="window.location.href='lazyjump3d'">
-            <div class="game-title">Lazy Jump 3D</div>
-        </div>
-
-<div class="game" onclick="window.location.href='learntofly'">
-            <div class="game-title">Learn to Fly</div>
-        </div>
-
-<div class="game" onclick="window.location.href='learntofly2'">
-            <div class="game-title">Learn to Fly 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='learntoflyidle'">
-            <div class="game-title">Learn to Fly Idle</div>
-        </div>
-
-<div class="game" onclick="window.location.href='linerider'">
-            <div class="game-title">Line Rider</div>
-        </div>
-
-<div class="game" onclick="window.location.href='littlealchemy'">
-            <div class="game-title">Little Alchemy</div>
-        </div>
-
-<div class="game" onclick="window.location.href='lowsadventures2'">
-            <div class="game-title">Lows Adventures 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='madalincars'">
-            <div class="game-title">Madalin Stunt Cars</div>
-        </div>
-
-<div class="game" onclick="window.location.href='mario'">
-            <div class="game-title">Mario</div>
-        </div>
-
-<div class="game" onclick="window.location.href='mindustry'">
-            <div class="game-title">Mindustry</div>
-        </div>
-
-<div class="game" onclick="window.location.href='minecraft'">
-            <div class="game-title">Minecraft</div>
-        </div>
-
-<div class="game" onclick="window.location.href='mc-classic'">
-            <div class="game-title">Minecraft Classic</div>
-        </div>
-
-<div class="game" onclick="window.location.href='minecraft-tower-defence-2'">
-            <div class="game-title">Minecraft Tower Defense 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='minekhan'">
-            <div class="game-title">Minekhan</div>
-        </div>
-
-<div class="game" onclick="window.location.href='minesweeper'">
-            <div class="game-title">Minesweeper</div>
-        </div>
-
-<div class="game" onclick="window.location.href='monkey-mart'">
-            <div class="game-title">Monkey Mart</div>
-        </div>
-
-<div class="game" onclick="window.location.href='monstertracks'">
-            <div class="game-title">Monster Tracks</div>
-        </div>
-
-<div class="game" onclick="window.location.href='motox3m'">
-            <div class="game-title">Moto X3M</div>
-        </div>
-
-<div class="game" onclick="window.location.href='motox3m-pool'">
-            <div class="game-title">Moto X3M Pool</div>
-        </div>
-
-<div class="game" onclick="window.location.href='motox3m-spooky'">
-            <div class="game-title">Moto X3M Spooky</div>
-        </div>
-
-<div class="game" onclick="window.location.href='motox3m-winter'">
-            <div class="game-title">Moto X3M Winter</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ngon'">
-            <div class="game-title">Ngon</div>
-        </div>
-
-<div class="game" onclick="window.location.href='nutsim'">
-            <div class="game-title">Nut Simulator</div>
-        </div>
-
-<div class="game" onclick="window.location.href='offlineparadise'">
-            <div class="game-title">Offline Paradise</div>
-        </div>
-
-<div class="game" onclick="window.location.href='osu'">
-            <div class="game-title">Osu</div>
-        </div>
-
-<div class="game" onclick="window.location.href='osumania'">
-            <div class="game-title">Osu Mania</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ovo'">
-            <div class="game-title">Ovo</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pacman'">
-            <div class="game-title">Pacman</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pandemic'">
-            <div class="game-title">Pandemic</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pandemic2'">
-            <div class="game-title">Pandemic 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='papa-louie-2'">
-            <div class="game-title">Papa Louie 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='papa-louie-3'">
-            <div class="game-title">Papa Louie 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='papasburgeria'">
-            <div class="game-title">Papas Burgeria</div>
-        </div>
-
-<div class="game" onclick="window.location.href='papasfreezeria'">
-            <div class="game-title">Papas Freezeria</div>
-        </div>
-
-<div class="game" onclick="window.location.href='papaspizzeria'">
-            <div class="game-title">Papas Pizzeria</div>
-        </div>
-
-<div class="game" onclick="window.location.href='papas-wingeria'">
-            <div class="game-title">Papas Wingeria</div>
-        </div>
-
-<div class="game" onclick="window.location.href='paperio'">
-            <div class="game-title">Paper.io</div>
-        </div>
-
-<div class="game" onclick="window.location.href='paperio2'">
-            <div class="game-title">Paper.io 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='parking-fury'">
-            <div class="game-title">Parking Fury</div>
-        </div>
-
-<div class="game" onclick="window.location.href='parking-fury-2'">
-            <div class="game-title">Parking Fury 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='parking-fury-3-main'">
-            <div class="game-title">Parking Fury 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='perfect-circle'">
-            <div class="game-title">Perfect Circle</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pizzatower'">
-            <div class="game-title">Pizza Tower</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pokemon-emerald'">
-            <div class="game-title">Pokemon Emerald</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pokemon-fire'">
-            <div class="game-title">Pokemon Fire</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pokemon-leaf'">
-            <div class="game-title">Pokemon Leaf</div>
-        </div>
-
-<div class="game" onclick="window.location.href='polytrack'">
-            <div class="game-title">Polytrack</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pool'">
-            <div class="game-title">Pool</div>
-        </div>
-
-<div class="game" onclick="window.location.href='poom'">
-            <div class="game-title">Poom</div>
-        </div>
-
-<div class="game" onclick="window.location.href='pushback'">
-            <div class="game-title">Pushback</div>
-        </div>
-
-<div class="game" onclick="window.location.href='redball3'">
-            <div class="game-title">Redball 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='redball4'">
-            <div class="game-title">Redball 4</div>
-        </div>
-
-<div class="game" onclick="window.location.href='redball4vol2'">
-            <div class="game-title">Redball 4 Vol 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='redball4vol3'">
-            <div class="game-title">Redball 4 Vol 3</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='retro-bowl'">
-            <div class="game-title">Retro Bowl</div>
-        </div>
-
-<div class="game" onclick="window.location.href='retro-bowl-exploit'">
-            <div class="game-title">Retro Bowl Exploit</div>
-        </div>
-
-
-<div class="game" onclick="window.location.href='retrobowlcollege'">
-            <div class="game-title">Retrobowl College</div>
-        </div>
-
-<div class="game" onclick="window.location.href='riddleschool'">
-            <div class="game-title">Riddleschool</div>
-        </div>
-
-<div class="game" onclick="window.location.href='riddleschool2'">
-            <div class="game-title">Riddleschool 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='riddleschool3'">
-            <div class="game-title">Riddleschool 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='riddleschool4'">
-            <div class="game-title">Riddleschool 4</div>
-        </div>
-
-<div class="game" onclick="window.location.href='riddleschool5'">
-            <div class="game-title">Riddleschool 5</div>
-        </div>
-
-<div class="game" onclick="window.location.href='riddleschooltransfer'">
-            <div class="game-title">Riddleschool Transfer</div>
-        </div>
-
-<div class="game" onclick="window.location.href='riddleschooltransfer2'">
-            <div class="game-title">Riddleschool Transfer 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='risehigher'">
-            <div class="game-title">Rise Higher</div>
-        </div>
-
-<div class="game" onclick="window.location.href='rocketleague'">
-            <div class="game-title">Rocket League</div>
-        </div>
-
-<div class="game" onclick="window.location.href='rooftop-snipers'">
-            <div class="game-title">Rooftop Snipers</div>
-        </div>
-
-<div class="game" onclick="window.location.href='rooftopsnipers2'">
-            <div class="game-title">Rooftop Snipers 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='ruffle'">
-            <div class="game-title">Ruffle Emulator</div>
-        </div>
-
-<div class="game" onclick="window.location.href='run'">
-            <div class="game-title">Run</div>
-        </div>
-
-<div class="game" onclick="window.location.href='run2'">
-            <div class="game-title">Run 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='run3'">
-            <div class="game-title">Run 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='russiancardriver'">
-            <div class="game-title">Russian Car Driver</div>
-        </div>
-
-<div class="game" onclick="window.location.href='sand'">
-            <div class="game-title">Sand</div>
-        </div>
-
-<div class="game" onclick="window.location.href='sand-game'">
-            <div class="game-title">Sand Game</div>
-        </div>
-
-<div class="game" onclick="window.location.href='sandtrix'">
-            <div class="game-title">Sandtrix</div>
-        </div>
-
-<div class="game" onclick="window.location.href='sans-fight'">
-            <div class="game-title">Sans Fight</div>
-        </div>
-
-<div class="game" onclick="window.location.href='scrapmetal3'">
-            <div class="game-title">Scrap Metal 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='skibiditoilet'">
-            <div class="game-title">Skibidi Toilet</div>
-        </div>
-
-<div class="game" onclick="window.location.href='skibiditoiletattack'">
-            <div class="game-title">Skibidi Toilet Attack</div>
-        </div>
-
-<div class="game" onclick="window.location.href='skills'">
-            <div class="game-title">Skills</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='slope'">
-            <div class="game-title">Slope</div>
-        </div>
-
-<div class="game" onclick="window.location.href='slope2'">
-            <div class="game-title">Slope 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='slope-ball'">
-            <div class="game-title">Slope Ball</div>
-        </div>
-
-<div class="game" onclick="window.location.href='snake'">
-            <div class="game-title">Snake</div>
-        </div>
-
-<div class="game" onclick="window.location.href='snow'">
-            <div class="game-title">Snow</div>
-        </div>
-
-<div class="game" onclick="window.location.href='snowrider3d'">
-            <div class="game-title">Snow Rider 3D</div>
-        </div>
-
-<div class="game" onclick="window.location.href='soccer-random'">
-            <div class="game-title">Soccer Random</div>
-        </div>
-
-<div class="game" onclick="window.location.href='soldier-legend'">
-            <div class="game-title">Soldier Legend</div>
-        </div>
-
-<div class="game" onclick="window.location.href='solitaire'">
-            <div class="game-title">Solitaire</div>
-        </div>
-
-<div class="game" onclick="window.location.href='fancy-solitaire'">
-            <div class="game-title">Solitaire (Fancy)</div>
-        </div>
-
-<div class="game" onclick="window.location.href='sort-the-court'">
-            <div class="game-title">Sort the Court</div>
-        </div>
-
-<div class="game" onclick="window.location.href='soundboard'">
-            <div class="game-title">Soundboard</div>
-        </div>
-
-<div class="game" onclick="window.location.href='space'">
-            <div class="game-title">Space</div>
-        </div>
-
-<div class="game" onclick="window.location.href='spankthemonkey'">
-            <div class="game-title">Spank The Monkey</div>
-        </div>
-
-<div class="game" onclick="window.location.href='sprinter'">
-            <div class="game-title">Sprinter</div>
-        </div>
-
-<div class="game" onclick="window.location.href='stack'">
-            <div class="game-title">Stack</div>
-        </div>
-
-<div class="game" onclick="window.location.href='stealingthediamond'">
-            <div class="game-title">Stealing The Diamond</div>
-        </div>
-
-<div class="game" onclick="window.location.href='stickslasher'">
-            <div class="game-title">Stick Slasher</div>
-        </div>
-
-<div class="game" onclick="window.location.href='stickmanboost'">
-            <div class="game-title">Stickman Boost</div>
-        </div>
-
-<div class="game" onclick="window.location.href='stickmanclimb'">
-            <div class="game-title">Stickman Climb</div>
-        </div>
-
-<div class="game" onclick="window.location.href='stickmangolf'">
-            <div class="game-title">Stickman Golf</div>
-        </div>
-
-<div class="game" onclick="window.location.href='stickman-hook'">
-            <div class="game-title">Stickman Hook</div>
-        </div>
-
-<div class="game popular" onclick="window.location.href='subway-surfers'">
-            <div class="game-title">Subway Surfers</div>
-        </div>
-
-<div class="game" onclick="window.location.href='subway-surfers-ny'">
-            <div class="game-title">Subway Surfers New York</div>
-        </div>
-
-<div class="game" onclick="window.location.href='supermario64'">
-            <div class="game-title">Super Mario 64</div>
-        </div>
-
-<div class="game" onclick="window.location.href='supermeatboy'">
-            <div class="game-title">Super Meat Boy</div>
-        </div>
-
-<div class="game" onclick="window.location.href='supersmashbros'">
-            <div class="game-title">Super Smash Bros</div>
-        </div>
-
-<div class="game" onclick="window.location.href='supersmashflash'">
-            <div class="game-title">Super Smash Flash</div>
-        </div>
-
-<div class="game" onclick="window.location.href='superhot'">
-            <div class="game-title">Superhot</div>
-        </div>
-
-<div class="game" onclick="window.location.href='swerve'">
-            <div class="game-title">Swerve</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tabs'">
-            <div class="game-title">TABS</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tank-trouble-2'">
-            <div class="game-title">Tank Trouble 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tanuki-sunset'">
-            <div class="game-title">Tanuki Sunset</div>
-        </div>
-
-<div class="game" onclick="window.location.href='templerun2'">
-            <div class="game-title">Temple Run 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='territorial.io'">
-            <div class="game-title">Territorial.io</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tetra-legends'">
-            <div class="game-title">Tetra Legends</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tetris'">
-            <div class="game-title">Tetris</div>
-        </div>
-
-<div class="game" onclick="window.location.href='thefinalearth2'">
-            <div class="game-title">The Final Earth 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='theimpossiblegame'">
-            <div class="game-title">The Impossible Game</div>
-        </div>
-
-<div class="game" onclick="window.location.href='theimpossiblequiz'">
-            <div class="game-title">The Impossible Quiz</div>
-        </div>
-
-<div class="game" onclick="window.location.href='there-is-no-game'">
-            <div class="game-title">There Is No Game</div>
-        </div>
-
-<div class="game" onclick="window.location.href='thirtydollarwebsite'">
-            <div class="game-title">Thirty Dollar Website</div>
-        </div>
-
-<div class="game" onclick="window.location.href='thisistheonlylevel'">
-            <div class="game-title">This Is The Only Level</div>
-        </div>
-
-<div class="game" onclick="window.location.href='thisistheonlylevel2'">
-            <div class="game-title">This Is The Only Level 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='timeshooter1'">
-            <div class="game-title">Time Shooter 1</div>
-        </div>
-
-<div class="game" onclick="window.location.href='timeshooter2'">
-            <div class="game-title">Time Shooter 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='timeshooter3'">
-            <div class="game-title">Time Shooter 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tinyfishing'">
-            <div class="game-title">Tiny Fishing</div>
-        </div>
-
-<div class="game" onclick="window.location.href='townscaper'">
-            <div class="game-title">Townscaper</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tron'">
-            <div class="game-title">Tron</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tu46'">
-            <div class="game-title">TU-46</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tu95'">
-            <div class="game-title">TU-95</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tube-jumpers'">
-            <div class="game-title">Tube Jumpers</div>
-        </div>
-
-<div class="game" onclick="window.location.href='tunnelrush'">
-            <div class="game-title">Tunnel Rush</div>
-        </div>
-
-<div class="game" onclick="window.location.href='universal-paperclips'">
-            <div class="game-title">Universal Paperclips</div>
-        </div>
-
-<div class="game" onclick="window.location.href='vex'">
-            <div class="game-title">Vex</div>
-        </div>
-
-<div class="game" onclick="window.location.href='vex2'">
-            <div class="game-title">Vex 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='vex3'">
-            <div class="game-title">Vex 3</div>
-        </div>
-
-<div class="game" onclick="window.location.href='vex4'">
-            <div class="game-title">Vex 4</div>
-        </div>
-
-<div class="game" onclick="window.location.href='vex5'">
-            <div class="game-title">Vex 5</div>
-        </div>
-
-<div class="game" onclick="window.location.href='vex6'">
-            <div class="game-title">Vex 6</div>
-        </div>
-
-<div class="game" onclick="window.location.href='vex7'">
-            <div class="game-title">Vex 7</div>
-        </div>
-
-<div class="game" onclick="window.location.href='volley-random'">
-            <div class="game-title">Volley Random</div>
-        </div>
-
-<div class="game" onclick="window.location.href='wallsmash'">
-            <div class="game-title">Wall Smash</div>
-        </div>
-
-<div class="game" onclick="window.location.href='watermelongame'">
-            <div class="game-title">Watermelon Game</div>
-        </div>
-
-<div class="game" onclick="window.location.href='wbwwb'">
-            <div class="game-title">We Become What We Behold</div>
-        </div>
-
-<div class="game" onclick="window.location.href='weavesilk'">
-            <div class="game-title">Weavesilk</div>
-        </div>
-
-<div class="game" onclick="window.location.href='win11'">
-            <div class="game-title">Windows 11 Simulator</div>
-        </div>
-
-<div class="game" onclick="window.location.href='xp'">
-            <div class="game-title">Windows XP Simulator</div>
-        </div>
-
-<div class="game" onclick="window.location.href='winter-falling'">
-            <div class="game-title">Winter Falling</div>
-        </div>
-
-<div class="game" onclick="window.location.href='wordle'">
-            <div class="game-title">Wordle</div>
-        </div>
-
-<div class="game" onclick="window.location.href='wordlebot'">
-            <div class="game-title">Wordle Bot</div>
-        </div>
-
-<div class="game" onclick="window.location.href='worlds-hardest-game'">
-            <div class="game-title">World's Hardest Game</div>
-        </div>
-
-<div class="game" onclick="window.location.href='worldhardestgame2'">
-            <div class="game-title">World's Hardest Game 2</div>
-        </div>
-
-<div class="game" onclick="window.location.href='xx142-b2.exe'">
-            <div class="game-title">xx142-b2.exe</div>
-        </div>
-
-<div class="game" onclick="window.location.href='zombocalypse'">
-            <div class="game-title">Zombocalypse</div>
+<section class="library-toolbar" aria-label="Game library controls">
+    <div class="search-container">
+        <input type="search" class="search-bar" placeholder="Search for games..." aria-label="Search games" autocomplete="off">
+        <button class="search-enter" type="button" aria-label="Search games"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="library-controls">
+        <div class="filter-panel" aria-label="Filter games">
+            <div class="filter-group">
+                <div class="filter-group-label">View</div>
+                <div class="filter-chips quick-filter-chips">
+                    <button class="filter-chip active" type="button" data-filter="all">All</button>
+                    <button class="filter-chip" type="button" data-filter="favorites">Favorites</button>
+                    <button class="filter-chip" type="button" data-filter="popular">Popular</button>
+                </div>
+            </div>
+        </div>
+        <div class="select-controls">
+            <label class="sort-control">
+                <span>Category</span>
+                <select id="categoryFilter" class="library-select" aria-label="Filter by category">
+                    <option value="all">All categories</option>
+                </select>
+            </label>
+            <label class="sort-control">
+                <span>Sort</span>
+                <select id="gameSort" class="library-select" aria-label="Sort games">
+                    <option value="az">A-Z</option>
+                    <option value="popular">Popular</option>
+                </select>
+            </label>
         </div>
     </div>
+    <div class="library-actions" aria-label="Quick Play">
+        <div class="quick-play-heading">
+            <span>Quick Play</span>
+            <span id="quickPlayHint">Your shortcuts</span>
+        </div>
+        <div class="quick-play-actions">
+            <button id="continueGameBtn" class="library-action" type="button"><i class="fas fa-play" aria-hidden="true"></i> Continue</button>
+            <button id="randomGameBtn" class="library-action" type="button"><i class="fas fa-random" aria-hidden="true"></i> Random</button>
+            <button id="clearLibraryBtn" class="library-action" type="button"><i class="fas fa-times" aria-hidden="true"></i> Clear</button>
+        </div>
+        <div id="quickPlayRecent" class="quick-play-recent" aria-label="Quick Play game shortcuts"></div>
+    </div>
+</section>
+
+<main class="library-shell">
+    <section id="starred-games-section" class="library-section">
+        <div class="section-header">Favorites</div>
+        <div id="starred-games-grid"></div>
+        <div id="starred-games-empty">Star games to keep your favorites here.</div>
+    </section>
+    <section class="library-section all-games-section">
+        <div class="section-heading-row">
+            <div class="section-header">All Games</div>
+            <div id="resultCount" class="result-count" aria-live="polite"></div>
+        </div>
+        <div id="games">
+
+<a class="game" href="1on1soccer"><span class="game-title">1-on-1 Soccer</span></a>
+
+<a class="game" href="1v1lol"><span class="game-title">1v1.lol</span></a>
+
+<a class="game" href="1v1space"><span class="game-title">1v1 Space</span></a>
+
+
+<a class="game popular" href="2048"><span class="game-title">2048</span></a>
+
+<a class="game popular" href="2048-multitask"><span class="game-title">2048 Multitask</span></a>
+
+<a class="game popular" href="9007199254740992"><span class="game-title">9007199254740992</span></a>
+
+<a class="game" href="2drocketleague"><span class="game-title">2d Rocket League</span></a>
+
+<a class="game" href="60sburgerrun"><span class="game-title">60s Burger Run</span></a>
+
+<a class="game" href="8ball"><span class="game-title">8 Ball</span></a>
+
+<a class="game" href="achieveunlocked"><span class="game-title">Achievement Unlocked</span></a>
+
+<a class="game" href="achieveunlocked2"><span class="game-title">Achievement Unlocked 2</span></a>
+
+<a class="game" href="a-dance-of-fire-and-ice"><span class="game-title">A Dance of Fire and Ice</span></a>
+
+<a class="game" href="adarkroom"><span class="game-title">A Dark Room</span></a>
+
+<a class="game" href="adrenalinechallenge2"><span class="game-title">Adrenaline Challenge 2</span></a>
+
+<a class="game" href="adventure-capitalist"><span class="game-title">Adventure Capitalist</span></a>
+
+<a class="game" href="adventure-drivers"><span class="game-title">Adventure Drivers</span></a>
+
+<a class="game" href="ageofwar"><span class="game-title">Age of War</span></a>
+
+<a class="game" href="ages-of-conflict"><span class="game-title">Ages of Conflict</span></a>
+<a class="game" href="alienhominid"><span class="game-title">Alien Hominid</span></a>
+
+<a class="game" href="align-4"><span class="game-title">Align 4</span></a>
+
+<a class="game" href="amazing-rope-police"><span class="game-title">Amazing Rope Police</span></a>
+
+<a class="game" href="amidst-the-clouds"><span class="game-title">Amidst the Clouds</span></a>
+
+<a class="game" href="amongus"><span class="game-title">Among Us</span></a>
+
+<a class="game" href="angry-sharks"><span class="game-title">Angry Sharks</span></a>
+
+<a class="game" href="aquapark-slides"><span class="game-title">Aquapark Slides</span></a>
+
+<a class="game" href="astray"><span class="game-title">Astray</span></a>
+
+<a class="game" href="avalanche"><span class="game-title">Avalanche</span></a>
+
+<a class="game" href="awesometanks"><span class="game-title">Awesome Tanks</span></a>
+
+<a class="game" href="awesometanks2"><span class="game-title">Awesome Tanks 2</span></a>
+
+<a class="game" href="backrooms"><span class="game-title">Backrooms</span></a>
+
+<a class="game" href="badicecream"><span class="game-title">Bad Ice Cream</span></a>
+
+<a class="game" href="badicecream2"><span class="game-title">Bad Ice Cream 2</span></a>
+
+<a class="game" href="badicecream3"><span class="game-title">Bad Ice Cream 3</span></a>
+
+<a class="game" href="badpiggies"><span class="game-title">Bad Piggies</span></a>
+
+<a class="game" href="badtimesimulator"><span class="game-title">Bad Time Simulator</span></a>
+
+<a class="game" href="baldis-basics"><span class="game-title">Baldi's Basics</span></a>
+
+<a class="game" href="ballisticchickens"><span class="game-title">Ballistic Chickens</span></a>
+
+<a class="game popular" href="basket-random"><span class="game-title">Basket Random</span></a>
+
+<a class="game popular" href="basketball-stars"><span class="game-title">Basketball Stars</span></a>
+
+<a class="game" href="basketbros"><span class="game-title">Basketbros</span></a>
+
+<a class="game" href="btts"><span class="game-title">Big Tower Tiny Square</span></a>
+
+<a class="game" href="big-ice-tower-tiny-square-2"><span class="game-title">Big Ice Tower Tiny Square 2</span></a>
+
+<a class="game" href="big-neon-tower"><span class="game-title">Big Neon Tower Tiny Square</span></a>
+
+<a class="game" href="bit-planes"><span class="game-title">Bit Planes</span></a>
+
+<a class="game" href="bitlife"><span class="game-title">Bitlife</span></a>
+
+<a class="game" href="black-hole-square"><span class="game-title">Black Hole Square</span></a>
+
+<a class="game" href="bloodtournament"><span class="game-title">Blood Tournament</span></a>
+
+<a class="game" href="bloxorz"><span class="game-title">Bloxorz</span></a>
+
+<a class="game" href="btd"><span class="game-title">Bloons Tower Defense</span></a>
+
+<a class="game" href="btd2"><span class="game-title">Bloons Tower Defense 2</span></a>
+
+<a class="game" href="btd3"><span class="game-title">Bloons Tower Defense 3</span></a>
+
+<a class="game" href="btd4"><span class="game-title">Bloons Tower Defense 4</span></a>
+
+<a class="game" href="btd5"><span class="game-title">Bloons Tower Defense 5</span></a>
+
+<a class="game" href="btd6"><span class="game-title">Bloons Tower Defense 6</span></a>
+
+<a class="game" href="bobtherobber2"><span class="game-title">Bob The Robber 2</span></a>
+
+<a class="game" href="bottle-flip-3d"><span class="game-title">Bottle Flip 3D</span></a>
+
+<a class="game" href="bounce-back"><span class="game-title">Bounce Back</span></a>
+
+<a class="game" href="boxingphysics2"><span class="game-title">Boxing Physics 2</span></a>
+
+<a class="game" href="boxing-random"><span class="game-title">Boxing Random</span></a>
+
+<a class="game" href="breakingthebank"><span class="game-title">Breaking the Bank</span></a>
+
+<a class="game" href="browserkiller"><span class="game-title">Browser Killer</span></a>
+
+<a class="game" href="bubbleshooter"><span class="game-title">Bubble Shooter</span></a>
+
+<a class="game" href="bubble-tower-3d"><span class="game-title">Bubble Tower 3D</span></a>
+
+<a class="game" href="burgerandfrights"><span class="game-title">Burger and Frights</span></a>
+
+<a class="game" href="burritobison"><span class="game-title">Burrito Bison</span></a>
+
+<a class="game" href="candy-crush"><span class="game-title">Candy Crush</span></a>
+
+<a class="game" href="celeste"><span class="game-title">Celeste</span></a>
+
+<a class="game" href="cell-machine"><span class="game-title">Cell Machine</span></a>
+
+<a class="game" href="championisland"><span class="game-title">Champion Island</span></a>
+
+<a class="game" href="chess"><span class="game-title">Chess</span></a>
+
+<a class="game" href="chibiknight"><span class="game-title">Chibi Knight</span></a>
+
+<a class="game popular" href="chrome-dino"><span class="game-title">Chrome Dino</span></a>
+
+<a class="game" href="circloo"><span class="game-title">Circloo</span></a>
+
+<a class="game" href="civiballs"><span class="game-title">Civiballs</span></a>
+
+<a class="game" href="civiballs-2"><span class="game-title">Civiballs 2</span></a>
+
+<a class="game" href="clickerheroes"><span class="game-title">Clicker Heroes</span></a>
+
+<a class="game" href="cluster-rush"><span class="game-title">Cluster Rush</span></a>
+
+<a class="game" href="colorswitch"><span class="game-title">Color Switch</span></a>
+
+<a class="game" href="commodoreclicker"><span class="game-title">Commodore Clicker</span></a>
+
+<a class="game" href="cookieclicker"><span class="game-title">Cookie Clicker</span></a>
+
+<a class="game" href="craftmine"><span class="game-title">Craftmine</span></a>
+
+<a class="game" href="crossyroad"><span class="game-title">Crossy Road</span></a>
+
+<a class="game" href="csgoclicker"><span class="game-title">CSGO Clicker</span></a>
+
+<a class="game" href="ctr"><span class="game-title">CTR</span></a>
+
+<a class="game" href="ctr-holiday"><span class="game-title">CTR Holiday</span></a>
+
+<a class="game" href="ctr-tr"><span class="game-title">CTR Time Travel</span></a>
+
+<a class="game" href="cubefield"><span class="game-title">Cube Field</span></a>
+
+<a class="game" href="dadish"><span class="game-title">Dadish</span></a>
+
+<a class="game" href="dadish2"><span class="game-title">Dadish 2</span></a>
+
+<a class="game" href="dadish3"><span class="game-title">Dadish 3</span></a>
+
+<a class="game" href="dante"><span class="game-title">Dante</span></a>
+
+<a class="game" href="deal"><span class="game-title">Deal or No Deal</span></a>
+
+<a class="game" href="death-run-3d"><span class="game-title">Death Run 3D</span></a>
+
+<a class="game" href="dogeminer"><span class="game-title">Doge Miner</span></a>
+
+<a class="game" href="doodlejump"><span class="game-title">Doodle Jump</span></a>
+
+<a class="game" href="doom"><span class="game-title">Doom</span></a>
+
+<a class="game" href="dragonballdevolution"><span class="game-title">Dragonball Devolution</span></a>
+
+<a class="game" href="draw-the-hill"><span class="game-title">Draw The Hill</span></a>
+
+<a class="game" href="drift-boss"><span class="game-title">Drift Boss</span></a>
+
+<a class="game" href="drifthunters"><span class="game-title">Drift Hunters</span></a>
+
+<a class="game" href="drivemad"><span class="game-title">Drive Mad</span></a>
+
+<a class="game" href="ducklife1"><span class="game-title">Duck Life 1</span></a>
+
+<a class="game" href="ducklife2"><span class="game-title">Duck Life 2</span></a>
+
+<a class="game" href="ducklife3"><span class="game-title">Duck Life 3</span></a>
+
+<a class="game" href="ducklife4"><span class="game-title">Duck Life 4</span></a>
+
+<a class="game" href="ducklife5"><span class="game-title">Duck Life 5</span></a>
+
+<a class="game" href="ducklife6"><span class="game-title">Duck Life 6</span></a>
+
+<a class="game" href="edgenotfound"><span class="game-title">Edge Not Found</span></a>
+
+<a class="game" href="emulatorjs"><span class="game-title">Emulator JS</span></a>
+
+<a class="game" href="emulators"><span class="game-title">Emulators</span></a>
+
+<a class="game" href="escapingtheprison"><span class="game-title">Escaping the Prison</span></a>
+
+<a class="game" href="evilglitch"><span class="game-title">Evil Glitch</span></a>
+
+<a class="game" href="factoryballs"><span class="game-title">Factory Balls</span></a>
+
+<a class="game" href="factoryballsforever"><span class="game-title">Factory Balls Forever</span></a>
+
+<a class="game" href="fancypantsadventures"><span class="game-title">Fancypants Adventures</span></a>
+
+<a class="game" href="fancypantsadventures2"><span class="game-title">Fancypants Adventures 2</span></a>
+
+<a class="game" href="fbwg"><span class="game-title">Fireboy and Watergirl</span></a>
+
+<a class="game" href="fbwg2"><span class="game-title">Fireboy and Watergirl 2</span></a>
+
+<a class="game" href="fbwg3"><span class="game-title">Fireboy and Watergirl 3</span></a>
+
+<a class="game" href="fbwg4"><span class="game-title">Fireboy and Watergirl 4</span></a>
+
+<a class="game popular" href="flappybird"><span class="game-title">Flappy Bird</span></a>
+
+<a class="game" href="flappyplane"><span class="game-title">Flappy Plane</span></a>
+
+<a class="game" href="flappySquidward"><span class="game-title">Flappy Squidward</span></a>
+
+<a class="game" href="flash"><span class="game-title">Flash PLayer Emulator</span></a>
+
+<a class="game" href="fleeingthecomplex"><span class="game-title">Fleeing the Complex</span></a>
+
+<a class="game" href="flippyfish"><span class="game-title">Flippy Fish</span></a>
+
+<a class="game" href="fluidsim"><span class="game-title">Fluidsim</span></a>
+
+<a class="game" href="fnaf"><span class="game-title">FNAF</span></a>
+
+<a class="game" href="fnaf2"><span class="game-title">FNAF 2</span></a>
+
+<a class="game" href="fnaf3"><span class="game-title">FNAF 3</span></a>
+
+<a class="game" href="fnaf4"><span class="game-title">FNAF 4</span></a>
+
+<a class="game" href="fivenightsatepsteins"><span class="game-title">Five Nights at Epstein's</span></a>
+
+<a class="game" href="fridaynightfunkin"><span class="game-title">Friday Night Funkin</span></a>
+
+<a class="game" href="friendlyfire"><span class="game-title">Friendly Fire</span></a>
+
+<a class="game" href="fruitninja"><span class="game-title">Fruit Ninja</span></a>
+
+<a class="game" href="full-screen-mario"><span class="game-title">Full Screen Mario</span></a>
+
+<a class="game" href="funnyballgame"><span class="game-title">Funny Ball Game</span></a>
+
+<a class="game" href="funnymadracing"><span class="game-title">Funny Mad Racing</span></a>
+
+<a class="game" href="funnyshooter"><span class="game-title">Funny Shooter</span></a>
+
+<a class="game" href="funnyshooter2"><span class="game-title">Funny Shooter 2</span></a>
+
+<a class="game" href="game-inside"><span class="game-title">Game Inside</span></a>
+
+<a class="game" href="gamemaker"><span class="game-title">Game Maker</span></a>
+
+<a class="game" href="gba"><span class="game-title">GBA Emulator</span></a>
+
+<a class="game" href="real-geometry-dash"><span class="game-title">Geometry Dash</span></a>
+
+
+<a class="game" href="geometrydash"><span class="game-title">Geometry Dash (Scratch)</span></a>
+
+<a class="game" href="geometryrash"><span class="game-title">Geometry Rash</span></a>
+
+<a class="game" href="getawayshooter"><span class="game-title">Getaway Shooter</span></a>
+
+<a class="game" href="getaway-shootout"><span class="game-title">Getaway Shootout</span></a>
+
+<a class="game" href="golddiggerfrvr"><span class="game-title">Gold Digger FRVR</span></a>
+
+<a class="game popular" href="google-snake"><span class="game-title">Google Snake</span></a>
+
+<a class="game" href="google-solitaire"><span class="game-title">Google Solitaire</span></a>
+
+<a class="game" href="guiltygear"><span class="game-title">Guilty Gear</span></a>
+
+<a class="game" href="gunmayhem"><span class="game-title">Gun Mayhem</span></a>
+
+<a class="game" href="gunmayhem2"><span class="game-title">Gun Mayhem 2</span></a>
+
+<a class="game" href="gunmayhemredux"><span class="game-title">Gun Mayhem Redux</span></a>
+
+<a class="game" href="halloween2016"><span class="game-title">Halloween 2016</span></a>
+
+<a class="game" href="happywheels"><span class="game-title">Happywheels</span></a>
+
+<a class="game" href="helixjump"><span class="game-title">Helix Jump</span></a>
+
+<a class="game" href="hexgl"><span class="game-title">Hex GL</span></a>
+
+<a class="game" href="hextris"><span class="game-title">Hextris</span></a>
+
+<a class="game" href="hillclimbracing2"><span class="game-title">Hill Climb Racing 2</span></a>
+
+<a class="game" href="holeio"><span class="game-title">Hole.io</span></a>
+
+<a class="game" href="ice-dodo"><span class="game-title">Ice Dodo</span></a>
+
+<a class="game" href="icy-purple-head-2"><span class="game-title">Icy Purple Head 2</span></a>
+
+<a class="game" href="icy-purple-head-3"><span class="game-title">Icy Purple Head 3</span></a>
+
+<a class="game" href="iwbtc"><span class="game-title">I Wanna Be Thy Copy</span></a>
+
+<a class="game" href="idlebreakout"><span class="game-title">Idle Breakout</span></a>
+
+<a class="game" href="infiltratingtheairship"><span class="game-title">Infiltrating the Airship</span></a>
+
+<a class="game" href="jacksmith"><span class="game-title">Jacksmith</span></a>
+
+<a class="game" href="jetpackjoyride"><span class="game-title">Jetpack Joyride</span></a>
+
+<a class="game" href="justfalllol"><span class="game-title">JustFall.lol</span></a>
+
+<a class="game" href="knifehit"><span class="game-title">Knife Hit</span></a>
+
+<a class="game" href="lasthorizon"><span class="game-title">Last Horizon</span></a>
+
+<a class="game" href="lazyjump3d"><span class="game-title">Lazy Jump 3D</span></a>
+
+<a class="game" href="learntofly"><span class="game-title">Learn to Fly</span></a>
+
+<a class="game" href="learntofly2"><span class="game-title">Learn to Fly 2</span></a>
+
+<a class="game" href="learntoflyidle"><span class="game-title">Learn to Fly Idle</span></a>
+
+<a class="game" href="linerider"><span class="game-title">Line Rider</span></a>
+
+<a class="game" href="littlealchemy"><span class="game-title">Little Alchemy</span></a>
+
+<a class="game" href="lowsadventures2"><span class="game-title">Lows Adventures 2</span></a>
+
+<a class="game" href="madalincars"><span class="game-title">Madalin Stunt Cars</span></a>
+
+<a class="game" href="mario"><span class="game-title">Mario</span></a>
+
+<a class="game" href="mindustry"><span class="game-title">Mindustry</span></a>
+
+<a class="game" href="minecraft"><span class="game-title">Minecraft</span></a>
+
+<a class="game" href="mc-classic"><span class="game-title">Minecraft Classic</span></a>
+
+<a class="game" href="minecraft-tower-defence-2"><span class="game-title">Minecraft Tower Defense 2</span></a>
+
+<a class="game" href="minekhan"><span class="game-title">Minekhan</span></a>
+
+<a class="game" href="minesweeper"><span class="game-title">Minesweeper</span></a>
+
+<a class="game" href="monkey-mart"><span class="game-title">Monkey Mart</span></a>
+
+<a class="game" href="monstertracks"><span class="game-title">Monster Tracks</span></a>
+
+<a class="game" href="motox3m"><span class="game-title">Moto X3M</span></a>
+
+<a class="game" href="motox3m-pool"><span class="game-title">Moto X3M Pool</span></a>
+
+<a class="game" href="motox3m-spooky"><span class="game-title">Moto X3M Spooky</span></a>
+
+<a class="game" href="motox3m-winter"><span class="game-title">Moto X3M Winter</span></a>
+
+<a class="game" href="ngon"><span class="game-title">Ngon</span></a>
+
+<a class="game" href="nutsim"><span class="game-title">Nut Simulator</span></a>
+
+<a class="game" href="offlineparadise"><span class="game-title">Offline Paradise</span></a>
+
+<a class="game" href="osu"><span class="game-title">Osu</span></a>
+
+<a class="game" href="osumania"><span class="game-title">Osu Mania</span></a>
+
+<a class="game" href="ovo"><span class="game-title">Ovo</span></a>
+
+<a class="game" href="pacman"><span class="game-title">Pacman</span></a>
+
+<a class="game" href="pandemic"><span class="game-title">Pandemic</span></a>
+
+<a class="game" href="pandemic2"><span class="game-title">Pandemic 2</span></a>
+
+<a class="game" href="papa-louie-2"><span class="game-title">Papa Louie 2</span></a>
+
+<a class="game" href="papa-louie-3"><span class="game-title">Papa Louie 3</span></a>
+
+<a class="game" href="papasburgeria"><span class="game-title">Papas Burgeria</span></a>
+
+<a class="game" href="papasfreezeria"><span class="game-title">Papas Freezeria</span></a>
+
+<a class="game" href="papaspizzeria"><span class="game-title">Papas Pizzeria</span></a>
+
+<a class="game" href="papas-wingeria"><span class="game-title">Papas Wingeria</span></a>
+
+<a class="game" href="paperio"><span class="game-title">Paper.io</span></a>
+
+<a class="game" href="paperio2"><span class="game-title">Paper.io 2</span></a>
+
+<a class="game" href="parking-fury"><span class="game-title">Parking Fury</span></a>
+
+<a class="game" href="parking-fury-2"><span class="game-title">Parking Fury 2</span></a>
+
+<a class="game" href="parking-fury-3-main"><span class="game-title">Parking Fury 3</span></a>
+
+<a class="game" href="perfect-circle"><span class="game-title">Perfect Circle</span></a>
+
+<a class="game" href="pizzatower"><span class="game-title">Pizza Tower</span></a>
+
+<a class="game" href="pokemon-emerald"><span class="game-title">Pokemon Emerald</span></a>
+
+<a class="game" href="pokemon-fire"><span class="game-title">Pokemon Fire</span></a>
+
+<a class="game" href="pokemon-leaf"><span class="game-title">Pokemon Leaf</span></a>
+
+<a class="game" href="polytrack"><span class="game-title">Polytrack</span></a>
+
+<a class="game" href="pool"><span class="game-title">Pool</span></a>
+
+<a class="game" href="poom"><span class="game-title">Poom</span></a>
+
+<a class="game" href="pushback"><span class="game-title">Pushback</span></a>
+
+<a class="game" href="redball3"><span class="game-title">Redball 3</span></a>
+
+<a class="game" href="redball4"><span class="game-title">Redball 4</span></a>
+
+<a class="game" href="redball4vol2"><span class="game-title">Redball 4 Vol 2</span></a>
+
+<a class="game" href="redball4vol3"><span class="game-title">Redball 4 Vol 3</span></a>
+
+<a class="game popular" href="retro-bowl"><span class="game-title">Retro Bowl</span></a>
+
+<a class="game" href="retro-bowl-exploit"><span class="game-title">Retro Bowl Exploit</span></a>
+
+
+<a class="game" href="retrobowlcollege"><span class="game-title">Retrobowl College</span></a>
+
+<a class="game" href="riddleschool"><span class="game-title">Riddleschool</span></a>
+
+<a class="game" href="riddleschool2"><span class="game-title">Riddleschool 2</span></a>
+
+<a class="game" href="riddleschool3"><span class="game-title">Riddleschool 3</span></a>
+
+<a class="game" href="riddleschool4"><span class="game-title">Riddleschool 4</span></a>
+
+<a class="game" href="riddleschool5"><span class="game-title">Riddleschool 5</span></a>
+
+<a class="game" href="riddleschooltransfer"><span class="game-title">Riddleschool Transfer</span></a>
+
+<a class="game" href="riddleschooltransfer2"><span class="game-title">Riddleschool Transfer 2</span></a>
+
+<a class="game" href="risehigher"><span class="game-title">Rise Higher</span></a>
+
+<a class="game" href="rocketleague"><span class="game-title">Rocket League</span></a>
+
+<a class="game" href="rooftop-snipers"><span class="game-title">Rooftop Snipers</span></a>
+
+<a class="game" href="rooftopsnipers2"><span class="game-title">Rooftop Snipers 2</span></a>
+
+<a class="game" href="ruffle"><span class="game-title">Ruffle Emulator</span></a>
+
+<a class="game" href="run"><span class="game-title">Run</span></a>
+
+<a class="game" href="run2"><span class="game-title">Run 2</span></a>
+
+<a class="game" href="run3"><span class="game-title">Run 3</span></a>
+
+<a class="game" href="russiancardriver"><span class="game-title">Russian Car Driver</span></a>
+
+<a class="game" href="sand"><span class="game-title">Sand</span></a>
+
+<a class="game" href="sand-game"><span class="game-title">Sand Game</span></a>
+
+<a class="game" href="sandtrix"><span class="game-title">Sandtrix</span></a>
+
+<a class="game" href="sans-fight"><span class="game-title">Sans Fight</span></a>
+
+<a class="game" href="scrapmetal3"><span class="game-title">Scrap Metal 3</span></a>
+
+<a class="game" href="skibiditoilet"><span class="game-title">Skibidi Toilet</span></a>
+
+<a class="game" href="skibiditoiletattack"><span class="game-title">Skibidi Toilet Attack</span></a>
+
+<a class="game" href="skills"><span class="game-title">Skills</span></a>
+
+<a class="game popular" href="slope"><span class="game-title">Slope</span></a>
+
+<a class="game" href="slope2"><span class="game-title">Slope 2</span></a>
+
+<a class="game" href="slope-ball"><span class="game-title">Slope Ball</span></a>
+
+<a class="game" href="snake"><span class="game-title">Snake</span></a>
+
+<a class="game" href="snow"><span class="game-title">Snow</span></a>
+
+<a class="game" href="snowrider3d"><span class="game-title">Snow Rider 3D</span></a>
+
+<a class="game" href="soccer-random"><span class="game-title">Soccer Random</span></a>
+
+<a class="game" href="soldier-legend"><span class="game-title">Soldier Legend</span></a>
+
+<a class="game" href="solitaire"><span class="game-title">Solitaire</span></a>
+
+<a class="game" href="fancy-solitaire"><span class="game-title">Solitaire (Fancy)</span></a>
+
+<a class="game" href="sort-the-court"><span class="game-title">Sort the Court</span></a>
+
+<a class="game" href="soundboard"><span class="game-title">Soundboard</span></a>
+
+<a class="game" href="space"><span class="game-title">Space</span></a>
+
+<a class="game" href="spankthemonkey"><span class="game-title">Spank The Monkey</span></a>
+
+<a class="game" href="sprinter"><span class="game-title">Sprinter</span></a>
+
+<a class="game" href="stack"><span class="game-title">Stack</span></a>
+
+<a class="game" href="stealingthediamond"><span class="game-title">Stealing The Diamond</span></a>
+
+<a class="game" href="stickslasher"><span class="game-title">Stick Slasher</span></a>
+
+<a class="game" href="stickmanboost"><span class="game-title">Stickman Boost</span></a>
+
+<a class="game" href="stickmanclimb"><span class="game-title">Stickman Climb</span></a>
+
+<a class="game" href="stickmangolf"><span class="game-title">Stickman Golf</span></a>
+
+<a class="game" href="stickman-hook"><span class="game-title">Stickman Hook</span></a>
+
+<a class="game popular" href="subway-surfers"><span class="game-title">Subway Surfers</span></a>
+
+<a class="game" href="subway-surfers-ny"><span class="game-title">Subway Surfers New York</span></a>
+
+<a class="game" href="supermario64"><span class="game-title">Super Mario 64</span></a>
+
+<a class="game" href="supermeatboy"><span class="game-title">Super Meat Boy</span></a>
+
+<a class="game" href="supersmashbros"><span class="game-title">Super Smash Bros</span></a>
+
+<a class="game" href="supersmashflash"><span class="game-title">Super Smash Flash</span></a>
+
+<a class="game" href="superhot"><span class="game-title">Superhot</span></a>
+
+<a class="game" href="swerve"><span class="game-title">Swerve</span></a>
+
+<a class="game" href="tabs"><span class="game-title">TABS</span></a>
+
+<a class="game" href="tank-trouble-2"><span class="game-title">Tank Trouble 2</span></a>
+
+<a class="game" href="tanuki-sunset"><span class="game-title">Tanuki Sunset</span></a>
+
+<a class="game" href="templerun2"><span class="game-title">Temple Run 2</span></a>
+
+<a class="game" href="territorial.io"><span class="game-title">Territorial.io</span></a>
+
+<a class="game" href="tetra-legends"><span class="game-title">Tetra Legends</span></a>
+
+<a class="game" href="tetris"><span class="game-title">Tetris</span></a>
+
+<a class="game" href="thefinalearth2"><span class="game-title">The Final Earth 2</span></a>
+
+<a class="game" href="theimpossiblegame"><span class="game-title">The Impossible Game</span></a>
+
+<a class="game" href="theimpossiblequiz"><span class="game-title">The Impossible Quiz</span></a>
+
+<a class="game" href="there-is-no-game"><span class="game-title">There Is No Game</span></a>
+
+<a class="game" href="thirtydollarwebsite"><span class="game-title">Thirty Dollar Website</span></a>
+
+<a class="game" href="thisistheonlylevel"><span class="game-title">This Is The Only Level</span></a>
+
+<a class="game" href="thisistheonlylevel2"><span class="game-title">This Is The Only Level 2</span></a>
+
+<a class="game" href="timeshooter1"><span class="game-title">Time Shooter 1</span></a>
+
+<a class="game" href="timeshooter2"><span class="game-title">Time Shooter 2</span></a>
+
+<a class="game" href="timeshooter3"><span class="game-title">Time Shooter 3</span></a>
+
+<a class="game" href="tinyfishing"><span class="game-title">Tiny Fishing</span></a>
+
+<a class="game" href="townscaper"><span class="game-title">Townscaper</span></a>
+
+<a class="game" href="tron"><span class="game-title">Tron</span></a>
+
+<a class="game" href="tu46"><span class="game-title">TU-46</span></a>
+
+<a class="game" href="tu95"><span class="game-title">TU-95</span></a>
+
+<a class="game" href="tube-jumpers"><span class="game-title">Tube Jumpers</span></a>
+
+<a class="game" href="tunnelrush"><span class="game-title">Tunnel Rush</span></a>
+
+<a class="game" href="universal-paperclips"><span class="game-title">Universal Paperclips</span></a>
+
+<a class="game" href="vex"><span class="game-title">Vex</span></a>
+
+<a class="game" href="vex2"><span class="game-title">Vex 2</span></a>
+
+<a class="game" href="vex3"><span class="game-title">Vex 3</span></a>
+
+<a class="game" href="vex4"><span class="game-title">Vex 4</span></a>
+
+<a class="game" href="vex5"><span class="game-title">Vex 5</span></a>
+
+<a class="game" href="vex6"><span class="game-title">Vex 6</span></a>
+
+<a class="game" href="vex7"><span class="game-title">Vex 7</span></a>
+
+<a class="game" href="volley-random"><span class="game-title">Volley Random</span></a>
+
+<a class="game" href="wallsmash"><span class="game-title">Wall Smash</span></a>
+
+<a class="game" href="watermelongame"><span class="game-title">Watermelon Game</span></a>
+
+<a class="game" href="wbwwb"><span class="game-title">We Become What We Behold</span></a>
+
+<a class="game" href="weavesilk"><span class="game-title">Weavesilk</span></a>
+
+<a class="game" href="win11"><span class="game-title">Windows 11 Simulator</span></a>
+
+<a class="game" href="xp"><span class="game-title">Windows XP Simulator</span></a>
+
+<a class="game" href="winter-falling"><span class="game-title">Winter Falling</span></a>
+
+<a class="game" href="wordle"><span class="game-title">Wordle</span></a>
+
+<a class="game" href="wordlebot"><span class="game-title">Wordle Bot</span></a>
+
+<a class="game" href="worlds-hardest-game"><span class="game-title">World's Hardest Game</span></a>
+
+<a class="game" href="worldhardestgame2"><span class="game-title">World's Hardest Game 2</span></a>
+
+<a class="game" href="xx142-b2.exe"><span class="game-title">xx142-b2.exe</span></a>
+
+<a class="game" href="zombocalypse"><span class="game-title">Zombocalypse</span></a>
+    </div>
+        <div id="no-results" aria-live="polite">
+            No games match that search yet. Try a shorter search, clear filters, or jump into a random game.
+        </div>
+    </section>
 </main>
 
 <div id="particles-js"></div>
@@ -2162,808 +1727,454 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="/js/main.js" defer></script>
 <script>
-    // Initialize particles background
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: '#ffffff' },
-            shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 } },
-            opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
-            size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
-            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-            move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
-        },
-        interactivity: {
-            detect_on: 'canvas',
-            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-            modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
-        },
-        retina_detect: true
-    });
+(function () {
+    const STARRED_STORAGE_KEY = 'SG GamesStarredGames';
+    const RECENT_STORAGE_KEY = 'SG GamesRecentlyPlayed';
+    const LAST_PLAYED_STORAGE_KEY = 'SG GamesLastPlayed';
+    const CATEGORY_CSV_URL = '/game_categories.csv';
+    const POPULARITY_CSV_URL = '/games%20popularity%20ranking%20-%20Pages_and_screens_Page_path_and_screen_class.csv';
+    const SPECIAL_FILTERS = [
+        { key: 'all', label: 'All' },
+        { key: 'favorites', label: 'Favorites' },
+        { key: 'popular', label: 'Popular' }
+    ];
+    const state = { filter: 'all', sort: 'az', query: '' };
 
-    // Search functionality
-    document.querySelector('.search-bar').addEventListener('input', function() {
-        search();
-    });
-
-    document.querySelector('.search-enter').addEventListener('click', function() {
-        search();
-    });
-
-    function search() {
-        const searchTerm = document.querySelector('.search-bar').value.toLowerCase();
-        const games = document.querySelectorAll('.game');
-        const sections = document.querySelectorAll('.section-header');
-        const requestButton = document.querySelector('.request-button');
-
-        // Always show sections and request button during search
-        sections.forEach(section => {
-            section.style.display = 'block';
-        });
-        
-        if (requestButton) {
-            requestButton.style.display = 'flex';
-        }
-
-        games.forEach(function(game) {
-            const gameTitle = game.querySelector('.game-title').textContent.toLowerCase();
-            
-            if (searchTerm === '' || gameTitle.includes(searchTerm)) {
-                game.style.display = 'flex';
-            } else {
-                game.style.display = 'none';
-            }
-        });
+    function normalizeSearchText(value) {
+        return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
     }
-</script>
-<script>
-    // Normalize legacy onclick game links to new structure.
-    // Converts relative hrefs like "1/8ball" or "4/cookie-clicker" to "8ball" or "cookie-clicker"
-    // Leaves absolute URLs and root-relative paths unchanged.
-    document.addEventListener('DOMContentLoaded', function () {
-        const games = document.querySelectorAll('#games .game');
-        games.forEach(game => {
-            const onclick = game.getAttribute('onclick');
-            if (!onclick) return;
 
-            const match = onclick.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
-            if (!match) return;
-            let url = match[1];
-
-            // Preserve absolute, protocol-relative, root-relative, and anchor URLs
-            if (/^(https?:)?\/\//i.test(url) || url.startsWith('/') || url.startsWith('#')) return;
-
-            // Strip a leading numeric folder (e.g., '1/8ball' -> '8ball')
-            const normalized = url.replace(/^[0-9]+\/(.+)$/, '$1');
-            if (normalized !== url) {
-                const newOnclick = onclick.replace(url, normalized);
-                game.setAttribute('onclick', newOnclick);
-            }
-
-            // Also normalize any anchor inside the game tile
-            const anchor = game.querySelector('a');
-            if (anchor && anchor.getAttribute('href')) {
-                const ahref = anchor.getAttribute('href');
-                if (!/^(https?:)?\/\//i.test(ahref) && !ahref.startsWith('/') && !ahref.startsWith('#')) {
-                    const newHref = ahref.replace(/^[0-9]+\/(.+)$/, '$1');
-                    if (newHref !== ahref) anchor.setAttribute('href', newHref);
-                }
-            }
-        });
-    });
-</script>
-
-<script>
-    // Make sure the openSettings function is defined globally
-    function openSettings() {
-        console.log("Settings button clicked");
-        var modal = document.getElementById('settingsModal');
-        if (modal) {
-            modal.style.display = 'flex';
-            loadSavedSettings();
+    function ready(callback) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', callback, { once: true });
         } else {
-            console.error("Settings modal not found");
+            callback();
         }
     }
-    
-    // Initialize particles background
-    particlesJS('particles-js', {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: '#ffffff' },
-            shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 } },
-            opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
-            size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
-            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-            move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
-        },
-        interactivity: {
-            detect_on: 'canvas',
-            events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-            modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
-        },
-        retina_detect: true
-    });
 
-    // Search functionality
-    document.querySelector('.search-bar').addEventListener('input', function() {
-        search();
-    });
+    function parseCsv(text) {
+        const rows = [];
+        let row = [];
+        let value = '';
+        let inQuotes = false;
 
-    document.querySelector('.search-enter').addEventListener('click', function() {
-        search();
-    });
+        for (let i = 0; i < text.length; i += 1) {
+            const char = text[i];
+            const next = text[i + 1];
 
-    function search() {
-        const searchTerm = document.querySelector('.search-bar').value.toLowerCase();
-        const games = document.querySelectorAll('.game');
-        const sections = document.querySelectorAll('.section-header');
-        const requestButton = document.querySelector('.request-button');
-
-        // Always show sections and request button during search
-        sections.forEach(section => {
-            section.style.display = 'block';
-        });
-        
-        if (requestButton) {
-            requestButton.style.display = 'flex';
-        }
-
-        games.forEach(function(game) {
-            const gameTitle = game.querySelector('.game-title').textContent.toLowerCase();
-            
-            if (searchTerm === '' || gameTitle.includes(searchTerm)) {
-                game.style.display = 'flex';
-            } else {
-                game.style.display = 'none';
-            }
-        });
-    }
-    
-    // Settings Modal Functionality
-    // Add immediate self-executing function to set up event listeners right away
-    (function() {
-        // Get the settings button and modal
-        const settingsBtn = document.getElementById('settingsBtn');
-        const settingsModal = document.getElementById('settingsModal');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const closeSettingsBtn = document.querySelector('.close-settings');
-        
-        // Add event listener to settings button
-        if (settingsBtn) {
-            settingsBtn.addEventListener('click', function() {
-                console.log('Settings button clicked');
-                if (settingsModal) {
-                    settingsModal.style.display = 'flex';
-                    loadSavedSettings();
+            if (char === '"') {
+                if (inQuotes && next === '"') {
+                    value += '"';
+                    i += 1;
                 } else {
-                    console.error('Settings modal not found');
+                    inQuotes = !inQuotes;
                 }
-            });
-        } else {
-            console.error('Settings button not found');
-        }
-        
-        // Close settings modal
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', function() {
-                settingsModal.style.display = 'none';
-            });
-        }
-        
-        // Save settings and close
-        if (closeSettingsBtn) {
-            closeSettingsBtn.addEventListener('click', function() {
-                saveAllSettings();
-                settingsModal.style.display = 'none';
-            });
-        }
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target === settingsModal) {
-                settingsModal.style.display = 'none';
-            }
-        });
-        
-        // Apply any saved mimicry settings immediately
-        applySavedMimicry();
-    })();
-    
-    // Also keep the DOMContentLoaded event for other setup
-    document.addEventListener('DOMContentLoaded', function() {
-        // Setup rename options
-        const renameOptions = document.querySelectorAll('.rename-option');
-        renameOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                renameOptions.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Show/hide email customization for Gmail
-                const emailCustomization = document.getElementById('emailCustomization');
-                if (emailCustomization) {
-                    emailCustomization.style.display = this.dataset.type === 'gmail' ? 'block' : 'none';
-                }
-                
-                // Auto-save when option is selected
-                savePageStyle();
-            });
-        });
-        
-        // Setup email customization
-        const applyEmailBtn = document.querySelector('.apply-email');
-        if (applyEmailBtn) {
-            applyEmailBtn.addEventListener('click', function() {
-                applyCustomEmail();
-            });
-        }
-        
-        // Check if Gmail is selected on load
-        const activeOption = document.querySelector('.rename-option.active');
-        if (activeOption && activeOption.dataset.type === 'gmail') {
-            const emailCustomization = document.getElementById('emailCustomization');
-            if (emailCustomization) {
-                emailCustomization.style.display = 'block';
-            }
-        }
-    });
-    
-    function loadSavedSettings() {
-        // Tab cloaking settings
-        const savedType = localStorage.getItem('pageMimicType');
-        
-        if (savedType) {
-            const options = document.querySelectorAll('.rename-option');
-            options.forEach(opt => {
-                if (opt.dataset.type === savedType) {
-                    opt.classList.add('active');
-                } else {
-                    opt.classList.remove('active');
-                }
-            });
-            
-            // Show/hide email customization if Gmail is selected
-            const emailCustomization = document.getElementById('emailCustomization');
-            if (emailCustomization) {
-                emailCustomization.style.display = savedType === 'gmail' ? 'block' : 'none';
-            }
-        }
-        
-        // Security settings
-        const verificationToggle = document.getElementById('verificationToggle');
-        const panicButtonToggle = document.getElementById('panicButtonToggle');
-        const panicKeyInput = document.getElementById('panicKeyInput');
-        
-        if (verificationToggle) {
-            verificationToggle.checked = localStorage.getItem('verificationEnabled') === 'true';
-        }
-        
-        if (panicButtonToggle) {
-            panicButtonToggle.checked = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
-        }
-        
-        if (panicKeyInput) {
-            panicKeyInput.value = localStorage.getItem('panicKey') || '[';
-        }
-        
-        // Email customization settings
-        const usernameInput = document.getElementById('username');
-        const domainInput = document.getElementById('domain');
-        
-        if (usernameInput && domainInput) {
-            usernameInput.value = localStorage.getItem('emailUsername') || '';
-            domainInput.value = localStorage.getItem('emailDomain') || 'gmail.com';
-        }
-    }
-    
-    function savePageStyle() {
-        const selectedOption = document.querySelector('.rename-option.active');
-        if (selectedOption) {
-            const pageType = selectedOption.dataset.type;
-            let pageTitle = selectedOption.dataset.title;
-            const pageIcon = selectedOption.dataset.icon;
-            
-            // If this is a Gmail type and we have a custom email, use it
-            if (pageType === 'gmail') {
-                const username = localStorage.getItem('emailUsername');
-                const domain = localStorage.getItem('emailDomain');
-                
-                if (username && domain) {
-                    pageTitle = `Inbox - ${username}@${domain} - Gmail`;
-                }
-            }
-            
-            // Save preferences to localStorage
-            localStorage.setItem('pageMimicType', pageType);
-            localStorage.setItem('pageMimicTitle', pageTitle);
-            localStorage.setItem('pageMimicIcon', pageIcon);
-            
-            // Apply changes immediately
-            document.title = pageTitle;
-            const favicon = document.querySelector('link[rel="icon"]');
-            if (favicon) {
-                favicon.href = pageIcon;
+            } else if (char === ',' && !inQuotes) {
+                row.push(value.trim());
+                value = '';
+            } else if ((char === '\n' || char === '\r') && !inQuotes) {
+                if (char === '\r' && next === '\n') i += 1;
+                row.push(value.trim());
+                if (row.some(Boolean)) rows.push(row);
+                row = [];
+                value = '';
             } else {
-                // Create favicon if it doesn't exist
-                const newFavicon = document.createElement('link');
-                newFavicon.rel = 'icon';
-                newFavicon.href = pageIcon;
-                document.head.appendChild(newFavicon);
-            }
-        }
-    }
-    
-    function applyCustomEmail() {
-        const usernameInput = document.getElementById('username');
-        const domainInput = document.getElementById('domain');
-        
-        if (usernameInput && domainInput) {
-            const username = usernameInput.value.trim();
-            const domain = domainInput.value.trim() || 'gmail.com';
-            
-            // Save to localStorage
-            localStorage.setItem('emailUsername', username);
-            localStorage.setItem('emailDomain', domain);
-            
-            // If Gmail is currently selected, update the title immediately
-            const selectedOption = document.querySelector('.rename-option.active');
-            if (selectedOption && selectedOption.dataset.type === 'gmail') {
-                const newTitle = `Inbox - ${username}@${domain} - Gmail`;
-                document.title = newTitle;
-                localStorage.setItem('pageMimicTitle', newTitle);
-            }
-            
-            // Show brief feedback
-            const applyButton = document.querySelector('.apply-email');
-            if (applyButton) {
-                const originalText = applyButton.textContent;
-                applyButton.textContent = 'Saved!';
-                applyButton.style.backgroundColor = '#4CAF50'; // Green
-                
-                // Reset after a short delay
-                setTimeout(() => {
-                    applyButton.textContent = originalText;
-                    applyButton.style.backgroundColor = '';
-                }, 1500);
-            }
-        }
-    }
-    
-    function saveSecuritySettings() {
-        const verificationToggle = document.getElementById('verificationToggle');
-        const panicButtonToggle = document.getElementById('panicButtonToggle');
-        const panicKeyInput = document.getElementById('panicKeyInput');
-        
-        if (verificationToggle) {
-            localStorage.setItem('verificationEnabled', verificationToggle.checked);
-        }
-        
-        if (panicButtonToggle) {
-            localStorage.setItem('panicEnabled', panicButtonToggle.checked);
-        }
-        
-        if (panicKeyInput && panicKeyInput.value) {
-            localStorage.setItem('panicKey', panicKeyInput.value);
-        }
-        
-        // Reinitialize security features with new settings
-        initSecurityFeatures();
-    }
-    
-    function saveAllSettings() {
-        savePageStyle();
-        saveSecuritySettings();
-    }
-    
-    function applySavedMimicry() {
-        // Check if there's a saved style and apply it
-        const savedTitle = localStorage.getItem('pageMimicTitle');
-        const savedIcon = localStorage.getItem('pageMimicIcon');
-        
-        // Apply saved title if available
-        if (savedTitle) {
-            document.title = savedTitle;
-        }
-        
-        // Apply saved favicon if available
-        if (savedIcon) {
-            const favicon = document.querySelector('link[rel="icon"]');
-            if (favicon) {
-                favicon.href = savedIcon;
-            } else {
-                // Create favicon if it doesn't exist
-                const newFavicon = document.createElement('link');
-                newFavicon.rel = 'icon';
-                newFavicon.href = savedIcon;
-                document.head.appendChild(newFavicon);
-            }
-        }
-        
-        // Initialize security features
-        initSecurityFeatures();
-    }
-    
-    function initSecurityFeatures() {
-        // Initialize panic key
-        initPanicKey();
-        
-        // Initialize tab close prevention
-        initTabClosePrevention();
-    }
-    
-    function initPanicKey() {
-        // Remove any existing event listener to prevent duplicates
-        document.removeEventListener('keydown', handlePanicKey);
-        
-        // Only add listener if panic button is enabled
-        const panicEnabled = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
-        if (panicEnabled) {
-            document.addEventListener('keydown', handlePanicKey);
-        }
-    }
-
-    function getPanicRedirectUrl() {
-        const savedRedirectUrl = (localStorage.getItem('panicRedirectUrl') || '').trim();
-        if (!savedRedirectUrl) {
-            return 'https://www.google.com';
-        }
-
-        if (/^https?:\/\//i.test(savedRedirectUrl)) {
-            return savedRedirectUrl;
-        }
-
-        return `https://${savedRedirectUrl}`;
-    }
-    
-    function handlePanicKey(event) {
-        const panicKey = localStorage.getItem('panicKey') || '[';
-        if (event.key === panicKey) {
-            // Set a flag that this is a panic activation so verification can be bypassed
-            sessionStorage.setItem('panicActivation', 'true');
-            
-            // Redirect to the configured panic URL immediately
-            window.location.href = getPanicRedirectUrl();
-        }
-    }
-    
-    function initTabClosePrevention() {
-        const verificationEnabled = localStorage.getItem('verificationEnabled') === 'true';
-        
-        // Remove any existing event listener
-        window.onbeforeunload = null;
-        
-        if (verificationEnabled) {
-            window.onbeforeunload = function(e) {
-                // Check if this is a panic button activation
-                const isPanicActivation = sessionStorage.getItem('panicActivation') === 'true';
-                if (isPanicActivation) {
-                    // Clear the flag and allow the navigation
-                    sessionStorage.removeItem('panicActivation');
-                    return undefined;
-                }
-                
-                // Otherwise show the confirmation dialog
-                return "Are you sure you want to leave this page?";
-            };
-        }
-    }
-</script>
-<script>
-    (function() {
-        const STARRED_STORAGE_KEY = 'sggamesStarredGames';
-
-        function safeParseStarredGames() {
-            try {
-                const raw = localStorage.getItem(STARRED_STORAGE_KEY);
-                const parsed = JSON.parse(raw || '[]');
-                return new Set(Array.isArray(parsed) ? parsed : []);
-            } catch (error) {
-                return new Set();
+                value += char;
             }
         }
 
-        function saveStarredGames(starredSet) {
-            localStorage.setItem(STARRED_STORAGE_KEY, JSON.stringify(Array.from(starredSet)));
+        if (value || row.length) {
+            row.push(value.trim());
+            if (row.some(Boolean)) rows.push(row);
         }
 
-        function extractGameHref(gameCard) {
-            const onclick = gameCard.getAttribute('onclick') || '';
-            const onclickMatch = onclick.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
-            if (onclickMatch && onclickMatch[1]) {
-                return onclickMatch[1];
-            }
+        return rows;
+    }
 
-            const anchor = gameCard.querySelector('a[href]');
-            if (anchor) {
-                return anchor.getAttribute('href');
-            }
+    function normalizePath(path) {
+        return (path || '')
+            .trim()
+            .replace(/^https?:\/\/[^/]+/i, '')
+            .replace(/^\/games\//i, '')
+            .replace(/^\.\//, '')
+            .replace(/^\/+|\/+$/g, '')
+            .replace(/^[0-9]+\/(.+)$/, '$1');
+    }
 
-            return '';
-        }
+    async function loadText(url) {
+        const response = await fetch(url, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+        return response.text();
+    }
 
-        function getGameTitle(gameCard) {
-            const titleElement = gameCard.querySelector('.game-title');
-            return titleElement ? titleElement.textContent.trim() : '';
-        }
+    async function loadCategoryData() {
+        try {
+            const rows = parseCsv(await loadText(CATEGORY_CSV_URL)).slice(1);
+            const categoriesByPath = new Map();
+            const categoryLabels = new Set();
 
-        function getGameKey(gameCard) {
-            const href = extractGameHref(gameCard);
-            if (href) {
-                return `href:${href}`;
-            }
-            return `title:${getGameTitle(gameCard).toLowerCase()}`;
-        }
-
-        function updateStarButton(button, isStarred) {
-            button.classList.toggle('filled', isStarred);
-            button.innerHTML = isStarred
-                ? '<i class="fas fa-star" aria-hidden="true"></i>'
-                : '<i class="far fa-star" aria-hidden="true"></i>';
-            button.setAttribute('aria-pressed', isStarred ? 'true' : 'false');
-            button.setAttribute('title', isStarred ? 'Unstar game' : 'Star game');
-        }
-
-        function applyStarStateToCards(gameKey, isStarred) {
-            document.querySelectorAll('.game[data-game-key]').forEach(card => {
-                if (card.dataset.gameKey === gameKey) {
-                    const button = card.querySelector('.game-star-btn');
-                    if (button) {
-                        updateStarButton(button, isStarred);
-                    }
-                }
+            rows.forEach(([path, ...categoryParts]) => {
+                const key = normalizePath(path);
+                const categories = categoryParts.join(',').split(',').map((item) => item.trim()).filter(Boolean);
+                if (!key || !categories.length) return;
+                categoriesByPath.set(key, categories);
+                categories.forEach((category) => categoryLabels.add(category));
             });
-        }
 
-        function createStarButton(gameKey, starredSet, onToggle) {
+            return { categoriesByPath, categoryLabels: Array.from(categoryLabels).sort((a, b) => a.localeCompare(b)) };
+        } catch (error) {
+            console.warn('Could not load game_categories.csv', error);
+            return { categoriesByPath: new Map(), categoryLabels: [] };
+        }
+    }
+
+    async function loadPopularityData() {
+        try {
+            const rows = parseCsv(await loadText(POPULARITY_CSV_URL)).slice(1);
+            const viewsByPath = new Map();
+
+            rows.forEach(([path, views]) => {
+                if (!/^\/games\//i.test(path || '')) return;
+                const key = normalizePath(path);
+                if (!key) return;
+                const parsedViews = Number(String(views || '').replace(/[^0-9.]/g, ''));
+                viewsByPath.set(key, Number.isFinite(parsedViews) ? parsedViews : 0);
+            });
+
+            return viewsByPath;
+        } catch (error) {
+            console.warn('Could not load popularity CSV', error);
+            return new Map();
+        }
+    }
+
+    function safeParseStarredGames() {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(STARRED_STORAGE_KEY) || '[]');
+            return new Set(Array.isArray(parsed) ? parsed : []);
+        } catch (error) {
+            return new Set();
+        }
+    }
+
+    function safeParseRecentGames() {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(RECENT_STORAGE_KEY) || '[]');
+            return Array.isArray(parsed) ? parsed.filter(Boolean).slice(0, 12) : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveStarredGames(starredSet) {
+        localStorage.setItem(STARRED_STORAGE_KEY, JSON.stringify(Array.from(starredSet)));
+    }
+
+    function saveRecentGame(card) {
+        const recent = safeParseRecentGames().filter((key) => key !== card.dataset.gameKey);
+        recent.unshift(card.dataset.gameKey);
+        localStorage.setItem(RECENT_STORAGE_KEY, JSON.stringify(recent.slice(0, 12)));
+        localStorage.setItem(LAST_PLAYED_STORAGE_KEY, card.dataset.gameKey);
+    }
+
+    function getGameTitle(card) {
+        return card.querySelector('.game-title')?.textContent.trim() || '';
+    }
+
+    function getGameHref(card) {
+        const href = card.getAttribute('href');
+        if (href) return href;
+        const onclick = card.getAttribute('onclick') || '';
+        const match = onclick.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
+        return match?.[1] || '';
+    }
+
+    function makeGameKey(card) {
+        return `href:${normalizePath(getGameHref(card)) || getGameTitle(card).toLowerCase()}`;
+    }
+
+    function buildSearchIndex(title, path, categories) {
+        const categoryText = categories.join(' ');
+        return [
+            title,
+            path,
+            categoryText,
+            normalizeSearchText(title),
+            normalizeSearchText(path),
+            normalizeSearchText(categoryText)
+        ].join(' ').toLowerCase();
+    }
+
+    function addCardMetadata(card, categories) {
+        card.querySelector('.game-meta')?.remove();
+        const meta = document.createElement('span');
+        meta.className = 'game-meta';
+
+        categories.slice(0, 2).forEach((category) => {
+            const tag = document.createElement('span');
+            tag.className = 'game-tag';
+            tag.textContent = category;
+            meta.appendChild(tag);
+        });
+
+        if (meta.children.length) card.appendChild(meta);
+    }
+
+    function buildCategoryButtons(categoryLabels) {
+        const quickFilterContainer = document.querySelector('.quick-filter-chips');
+        const categorySelect = document.getElementById('categoryFilter');
+        if (!quickFilterContainer || !categorySelect) return;
+
+        quickFilterContainer.innerHTML = '';
+        SPECIAL_FILTERS.forEach((filter) => {
             const button = document.createElement('button');
+            button.className = 'filter-chip';
             button.type = 'button';
-            button.className = 'game-star-btn';
-            button.dataset.gameKey = gameKey;
-            button.setAttribute('aria-label', 'Toggle starred game');
-            updateStarButton(button, starredSet.has(gameKey));
+            button.dataset.filter = filter.key;
+            button.textContent = filter.label;
+            button.classList.toggle('active', filter.key === state.filter);
+            quickFilterContainer.appendChild(button);
+        });
 
-            button.addEventListener('click', function(event) {
+        categorySelect.innerHTML = '<option value="all">All categories</option>';
+        categoryLabels.forEach((label) => {
+            const option = document.createElement('option');
+            option.value = `category:${label.toLowerCase()}`;
+            option.textContent = label;
+            categorySelect.appendChild(option);
+        });
+        categorySelect.value = state.filter.startsWith('category:') ? state.filter : 'all';
+    }
+
+    function updateStarButton(button, isStarred) {
+        button.classList.toggle('filled', isStarred);
+        button.innerHTML = isStarred ? '<i class="fas fa-star" aria-hidden="true"></i>' : '<i class="far fa-star" aria-hidden="true"></i>';
+        button.setAttribute('aria-pressed', String(isStarred));
+        button.setAttribute('title', isStarred ? 'Unstar game' : 'Star game');
+    }
+
+    function createStarButton(card, starredSet, render) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'game-star-btn';
+        button.setAttribute('aria-label', `Toggle favorite for ${card.dataset.title}`);
+        updateStarButton(button, starredSet.has(card.dataset.gameKey));
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (starredSet.has(card.dataset.gameKey)) {
+                starredSet.delete(card.dataset.gameKey);
+            } else {
+                starredSet.add(card.dataset.gameKey);
+            }
+            saveStarredGames(starredSet);
+            render();
+        });
+        return button;
+    }
+
+    function cloneCard(card, starredSet, render) {
+        const clone = card.cloneNode(true);
+        clone.querySelector('.game-star-btn')?.remove();
+        clone.appendChild(createStarButton(card, starredSet, render));
+        return clone;
+    }
+
+    function sortCards(cards) {
+        const sorted = [...cards];
+        if (state.sort === 'popular') {
+            sorted.sort((a, b) => Number(b.dataset.views) - Number(a.dataset.views) || a.dataset.title.localeCompare(b.dataset.title));
+        } else {
+            sorted.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
+        }
+        return sorted;
+    }
+
+    ready(async () => {
+        const gamesGrid = document.getElementById('games');
+        const favoritesGrid = document.getElementById('starred-games-grid');
+        const favoritesEmpty = document.getElementById('starred-games-empty');
+        const favoritesSection = document.getElementById('starred-games-section');
+        const quickPlayRecent = document.getElementById('quickPlayRecent');
+        const quickPlayHint = document.getElementById('quickPlayHint');
+        const noResults = document.getElementById('no-results');
+        const resultCount = document.getElementById('resultCount');
+        const searchInput = document.querySelector('.search-bar');
+        const searchButton = document.querySelector('.search-enter');
+        const sortSelect = document.getElementById('gameSort');
+        const categorySelect = document.getElementById('categoryFilter');
+        const continueButton = document.getElementById('continueGameBtn');
+        const randomButton = document.getElementById('randomGameBtn');
+        const clearButton = document.getElementById('clearLibraryBtn');
+        if (!gamesGrid) return;
+
+        const [{ categoriesByPath, categoryLabels }, viewsByPath] = await Promise.all([loadCategoryData(), loadPopularityData()]);
+        buildCategoryButtons(categoryLabels);
+        if (sortSelect) sortSelect.value = state.sort;
+
+        let starredSet = safeParseStarredGames();
+        const cardsByKey = new Map();
+        const cards = Array.from(gamesGrid.querySelectorAll('.game')).filter((card, index) => {
+            const href = getGameHref(card);
+            const path = normalizePath(href);
+            if (!path || /^https?:\/\//i.test(href)) {
+                card.remove();
+                return false;
+            }
+            const title = getGameTitle(card);
+            const categories = categoriesByPath.get(path) || [];
+            const views = viewsByPath.get(path) || 0;
+            card.dataset.title = title;
+            card.dataset.href = path;
+            card.dataset.index = String(index);
+            card.dataset.gameKey = makeGameKey(card);
+            card.dataset.views = String(views);
+            card.dataset.categoryList = categories.map((category) => category.toLowerCase()).join('|');
+            card.dataset.searchIndex = buildSearchIndex(title, path, categories);
+            card.classList.toggle('popular', views > 0);
+            addCardMetadata(card, categories);
+            card.querySelector('.game-star-btn')?.remove();
+            card.appendChild(createStarButton(card, starredSet, render));
+            card.addEventListener('click', () => saveRecentGame(card));
+            cardsByKey.set(card.dataset.gameKey, card);
+            return true;
+        });
+
+        function matchesState(card) {
+            const compactQuery = normalizeSearchText(state.query);
+            const queryMatch = !state.query
+                || card.dataset.searchIndex.includes(state.query)
+                || (compactQuery && card.dataset.searchIndex.includes(compactQuery));
+            const filterMatch = state.filter === 'all'
+                || (state.filter === 'popular' && Number(card.dataset.views) > 0)
+                || (state.filter === 'favorites' && starredSet.has(card.dataset.gameKey))
+                || (state.filter.startsWith('category:') && card.dataset.categoryList.split('|').includes(state.filter.replace('category:', '')));
+            return queryMatch && filterMatch;
+        }
+
+        function renderCollection(target, sourceCards) {
+            if (!target) return;
+            target.innerHTML = '';
+            sourceCards.forEach((card) => target.appendChild(cloneCard(card, starredSet, render)));
+        }
+
+        function renderQuickPlayRecent(sourceCards) {
+            if (!quickPlayRecent) return;
+            quickPlayRecent.innerHTML = '';
+            sourceCards.slice(0, 6).forEach((card) => {
+                const link = document.createElement('a');
+                link.className = 'quick-play-recent-link';
+                link.href = card.getAttribute('href');
+                link.textContent = card.dataset.title;
+                link.title = card.dataset.title;
+                link.addEventListener('click', () => saveRecentGame(card));
+                quickPlayRecent.appendChild(link);
+            });
+            quickPlayRecent.hidden = sourceCards.length === 0;
+            if (quickPlayHint) quickPlayHint.textContent = 'Your shortcuts';
+        }
+
+        function render() {
+            starredSet = safeParseStarredGames();
+            const recentKeys = safeParseRecentGames();
+            cards.forEach((card) => {
+                const button = card.querySelector('.game-star-btn');
+                if (button) updateStarButton(button, starredSet.has(card.dataset.gameKey));
+            });
+            const sortedCards = sortCards(cards);
+            sortedCards.forEach((card) => gamesGrid.appendChild(card));
+            const visibleCards = [];
+            let visibleCount = 0;
+            sortedCards.forEach((card) => {
+                const visible = matchesState(card);
+                card.hidden = !visible;
+                if (visible) {
+                    visibleCards.push(card);
+                    visibleCount += 1;
+                }
+            });
+            const favoriteCards = sortCards(cards.filter((card) => starredSet.has(card.dataset.gameKey)));
+            renderCollection(favoritesGrid, favoriteCards);
+            favoritesEmpty.hidden = favoriteCards.length > 0;
+            favoritesSection.hidden = state.filter === 'favorites' ? false : favoriteCards.length === 0;
+            const recentCards = recentKeys.map((key) => cardsByKey.get(key)).filter(Boolean);
+            renderQuickPlayRecent(recentCards);
+            noResults?.classList.toggle('visible', visibleCount === 0);
+            resultCount.textContent = `${visibleCount} game${visibleCount === 1 ? '' : 's'}`;
+            if (continueButton) continueButton.disabled = !localStorage.getItem(LAST_PLAYED_STORAGE_KEY);
+            if (randomButton) randomButton.dataset.visibleKeys = JSON.stringify(visibleCards.map((card) => card.dataset.gameKey));
+        }
+
+        searchInput?.addEventListener('input', () => {
+            state.query = searchInput.value.trim().toLowerCase();
+            render();
+        });
+        searchButton?.addEventListener('click', () => {
+            state.query = searchInput?.value.trim().toLowerCase() || '';
+            render();
+        });
+        sortSelect?.addEventListener('change', () => {
+            state.sort = sortSelect.value;
+            render();
+        });
+        categorySelect?.addEventListener('change', () => {
+            state.filter = categorySelect.value;
+            document.querySelectorAll('.filter-chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.filter === state.filter));
+            render();
+        });
+        document.querySelector('.filter-panel')?.addEventListener('click', (event) => {
+            const button = event.target.closest('.filter-chip');
+            if (!button) return;
+            state.filter = button.dataset.filter || 'all';
+            if (categorySelect) categorySelect.value = 'all';
+            if (state.filter === 'popular' && sortSelect) {
+                state.sort = 'popular';
+                sortSelect.value = state.sort;
+            }
+            document.querySelectorAll('.filter-chip').forEach((chip) => chip.classList.toggle('active', chip === button));
+            render();
+        });
+        continueButton?.addEventListener('click', () => {
+            const card = cardsByKey.get(localStorage.getItem(LAST_PLAYED_STORAGE_KEY));
+            if (card) window.location.href = card.getAttribute('href');
+        });
+        randomButton?.addEventListener('click', () => {
+            const visibleKeys = JSON.parse(randomButton.dataset.visibleKeys || '[]');
+            const pool = (visibleKeys.length ? visibleKeys : cards.map((card) => card.dataset.gameKey))
+                .map((key) => cardsByKey.get(key))
+                .filter(Boolean);
+            const card = pool[Math.floor(Math.random() * pool.length)];
+            if (card) window.location.href = card.getAttribute('href');
+        });
+        clearButton?.addEventListener('click', () => {
+            state.filter = 'all';
+            state.sort = 'az';
+            state.query = '';
+            localStorage.removeItem(RECENT_STORAGE_KEY);
+            localStorage.removeItem(LAST_PLAYED_STORAGE_KEY);
+            if (searchInput) searchInput.value = '';
+            if (sortSelect) sortSelect.value = state.sort;
+            if (categorySelect) categorySelect.value = 'all';
+            document.querySelectorAll('.filter-chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.filter === 'all'));
+            render();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === '/' && document.activeElement !== searchInput && !/^(input|textarea|select)$/i.test(document.activeElement?.tagName || '')) {
                 event.preventDefault();
-                event.stopPropagation();
-                onToggle(gameKey);
-            });
-
-            return button;
-        }
-
-        function buildStarredSection() {
-            const main = document.querySelector('main');
-            const gamesGrid = document.getElementById('games');
-            if (!main || !gamesGrid) {
-                return null;
+                searchInput?.focus();
             }
-
-            let section = document.getElementById('starred-games-section');
-            if (section) {
-                return section;
-            }
-
-            section = document.createElement('div');
-            section.id = 'starred-games-section';
-            section.innerHTML = `
-                <div class="section-header">Starred Games</div>
-                <div id="starred-games-grid"></div>
-                <div id="starred-games-empty">Star games to keep your favorites here.</div>
-            `;
-            main.insertBefore(section, gamesGrid);
-            return section;
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const allMainGameCards = Array.from(document.querySelectorAll('#games > .game'));
-            if (!allMainGameCards.length) {
-                return;
-            }
-
-            const starredSet = safeParseStarredGames();
-            const gamesByKey = new Map();
-            const starredSection = buildStarredSection();
-            if (!starredSection) {
-                return;
-            }
-
-            const starredGrid = starredSection.querySelector('#starred-games-grid');
-            const emptyState = starredSection.querySelector('#starred-games-empty');
-
-            function renderStarredCards() {
-                starredGrid.innerHTML = '';
-
-                allMainGameCards.forEach(mainCard => {
-                    const gameKey = mainCard.dataset.gameKey;
-                    if (!gameKey || !starredSet.has(gameKey)) {
-                        return;
-                    }
-
-                    const sourceData = gamesByKey.get(gameKey);
-                    if (!sourceData) {
-                        return;
-                    }
-
-                    const starredCard = document.createElement('div');
-                    starredCard.className = 'game';
-                    starredCard.dataset.gameKey = gameKey;
-
-                    const onclick = sourceData.onclick;
-                    if (onclick) {
-                        starredCard.setAttribute('onclick', onclick);
-                    }
-
-                    const title = document.createElement('div');
-                    title.className = 'game-title';
-                    title.textContent = sourceData.title;
-                    starredCard.appendChild(title);
-
-                    const starButton = createStarButton(gameKey, starredSet, toggleGameStar);
-                    starredCard.appendChild(starButton);
-                    starredGrid.appendChild(starredCard);
-                });
-
-                const hasStarredGames = starredGrid.children.length > 0;
-                emptyState.style.display = hasStarredGames ? 'none' : 'block';
-            }
-
-            function toggleGameStar(gameKey) {
-                if (starredSet.has(gameKey)) {
-                    starredSet.delete(gameKey);
-                } else {
-                    starredSet.add(gameKey);
-                }
-
-                saveStarredGames(starredSet);
-                const isNowStarred = starredSet.has(gameKey);
-                applyStarStateToCards(gameKey, isNowStarred);
-                renderStarredCards();
-            }
-
-            allMainGameCards.forEach(card => {
-                const gameKey = getGameKey(card);
-                const title = getGameTitle(card);
-                const onclick = card.getAttribute('onclick') || '';
-
-                card.dataset.gameKey = gameKey;
-                gamesByKey.set(gameKey, { title: title, onclick: onclick });
-
-                const existingStar = card.querySelector('.game-star-btn');
-                if (existingStar) {
-                    existingStar.remove();
-                }
-
-                const starButton = createStarButton(gameKey, starredSet, toggleGameStar);
-                card.appendChild(starButton);
-            });
-
-            renderStarredCards();
-        });
-    })();
-
-    const SURVEY_POPUP_STORAGE_KEY = 'sggamesSeenSurveyPopup';
-    const DOMAIN_CHANGE_POPUP_STORAGE_KEY = 'sggamesSeenDomainChangePopupGames';
-
-    document.addEventListener('DOMContentLoaded', function setupSurveyPopup() {
-        const overlay = document.getElementById('surveyPopupOverlay');
-        const actionLink = document.getElementById('surveyPopupActionLink');
-        if (!overlay) {
-            return;
-        }
-
-        function showPopup() {
-            overlay.classList.add('visible');
-            overlay.setAttribute('aria-hidden', 'false');
-        }
-
-        if (localStorage.getItem(SURVEY_POPUP_STORAGE_KEY) !== 'true') {
-            showPopup();
-        }
-
-        function closePopupAndRemember() {
-            overlay.classList.remove('visible');
-            overlay.setAttribute('aria-hidden', 'true');
-        }
-
-        if (actionLink) {
-            actionLink.addEventListener('click', function() {
-                localStorage.setItem(SURVEY_POPUP_STORAGE_KEY, 'true');
-                closePopupAndRemember();
-            });
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', function setupDomainChangePopup() {
-        const overlay = document.getElementById('domainChangePopupOverlay');
-        const closeX = document.getElementById('domainChangePopupCloseX');
-        const closeBtn = document.getElementById('domainChangePopupCloseBtn');
-        if (!overlay) {
-            return;
-        }
-
-        function showPopup() {
-            overlay.classList.add('visible');
-            overlay.setAttribute('aria-hidden', 'false');
-        }
-
-        if (
-            localStorage.getItem(SURVEY_POPUP_STORAGE_KEY) === 'true' &&
-            localStorage.getItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY) !== 'true'
-        ) {
-            showPopup();
-        }
-
-        function closePopupAndRemember() {
-            localStorage.setItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY, 'true');
-            overlay.classList.remove('visible');
-            overlay.setAttribute('aria-hidden', 'true');
-        }
-
-        if (closeX) {
-            closeX.addEventListener('click', closePopupAndRemember);
-        }
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closePopupAndRemember);
-        }
-
-        overlay.addEventListener('click', function(event) {
-            if (event.target === overlay) {
-                closePopupAndRemember();
+            if (event.key === 'Escape' && document.activeElement === searchInput) {
+                searchInput.value = '';
+                state.query = '';
+                render();
             }
         });
+        render();
     });
+})();
 </script>
-
-    <div id="surveyPopupOverlay" class="update-popup-overlay" aria-hidden="true">
-        <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="surveyPopupTitle">
-            <div class="update-popup-header">
-                <span id="surveyPopupTitle">Quick Favor</span>
-            </div>
-            <div class="update-popup-content">
-                <p class="update-popup-subtitle">Would you mind filling out this short form?</p>
-                <ul class="update-popup-list">
-                    <li>I&apos;d really appreciate your feedback.</li>
-                    <li>It helps improve the site and the games page.</li>
-                </ul>
-            </div>
-            <div class="update-popup-actions">
-                <a
-                    id="surveyPopupActionLink"
-                    class="update-popup-btn"
-                    href="https://forms.gle/WttELRmPbpUzDWJ68"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Open Survey
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div id="domainChangePopupOverlay" class="update-popup-overlay" aria-hidden="true">
-        <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="domainChangePopupTitle">
-            <div class="update-popup-header">
-                <span id="domainChangePopupTitle">Important: Domain Change</span>
-                <button id="domainChangePopupCloseX" class="update-popup-close" type="button" aria-label="Close domain change popup">&times;</button>
-            </div>
-            <div class="update-popup-content">
-                <p class="update-popup-subtitle">Notice:</p>
-                <ul class="update-popup-list">
-                    <li>Our current domain <strong>googledocs1234.github.io</strong> is being blocked.</li>
-                    <li>Please visit our new domain: <strong>googledocs123456.github.io</strong></li>
-                    <li>All games and features are available at the new site.</li>
-                </ul>
-            </div>
-            <div class="update-popup-actions">
-                <button id="domainChangePopupCloseBtn" class="update-popup-btn" type="button">Got it</button>
-            </div>
-        </div>
-    </div>
-
 </body>
 </html>
-
 

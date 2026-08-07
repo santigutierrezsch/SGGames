@@ -3,292 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found</title>
+    <meta name="description" content="SG Games 404 page with game search, popular games, and quick links back into the site.">
+    <title>404 - SG Games</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
-    <script src="/js/mimicry.js"></script>
+    <link rel="stylesheet" href="/css/master.css">
+    <script src="/js/mimicry.js" defer></script>
     <style>
-        :root {
-            --primary-color: #0a0e17;
-            --secondary-color: #1a1f2c;
-            --accent-color: #5644ff;
-            --text-color: #ffffff;
-            --button-hover: #7366ff;
-            --highlight-color: #ff4656;
-        }
-        
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--primary-color);
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top left, rgba(102, 83, 214, 0.22), transparent 34%), var(--primary-color);
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        .container {
-            text-align: center;
-            max-width: 600px;
-            padding: 30px;
-            border-radius: 10px;
-            background-color: var(--secondary-color);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-            position: relative;
-        }
-        
-        h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-            color: var(--accent-color);
-        }
-        
-        .error-code {
-            font-size: 120px;
-            font-weight: bold;
-            margin: 0;
-            background: linear-gradient(90deg, #5644ff, #9f44ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-        
-        p {
-            font-size: 18px;
-            margin: 15px 0;
-        }
-        
-        .loader {
-            border: 8px solid var(--secondary-color);
-            border-top: 8px solid var(--accent-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        #countdown {
-            font-weight: bold;
-            font-size: 24px;
-            color: var(--accent-color);
-        }
-        
-        button {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-        
-        button:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(86, 68, 255, 0.3);
-        }
-        
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: transparent;
-            z-index: 1;
-        }
-        
-        /* Settings Icon Styles */
-        .settings-container {
-            text-align: center;
-            margin: 0;
-            padding: 1rem;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-        }
-        
-        .settings-button {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-        }
-        
-        .settings-button:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-3px) rotate(30deg);
-        }
-        .button-row {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 20px;
         }
 
-        .btn {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 8px;
+        .error-shell {
+            width: min(1040px, calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 2rem 0 3rem;
+        }
+
+        .error-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .brand-link,
+        .error-action,
+        .game-result {
+            color: var(--text-color);
             text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
+        }
+
+        .brand-link {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(86, 68, 255, 0.15);
+            gap: 0.55rem;
+            font-weight: 800;
+            font-size: 1.1rem;
         }
 
-        .btn:hover {
-            background-color: var(--button-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(86, 68, 255, 0.25);
+        .error-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+            gap: 1.25rem;
+            align-items: stretch;
+        }
+
+        .error-panel,
+        .help-panel {
+            background: rgba(26, 31, 44, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+        }
+
+        .error-code {
+            margin: 0;
+            font-size: clamp(4rem, 16vw, 8.5rem);
+            line-height: 0.9;
+            font-weight: 900;
+            color: var(--accent-color);
+        }
+
+        h1 {
+            margin: 0.65rem 0;
+            font-size: clamp(2rem, 6vw, 3.4rem);
+            line-height: 1;
+        }
+
+        .error-copy {
+            max-width: 62ch;
+            margin: 0 0 1rem;
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.6;
+        }
+
+        .missing-path {
+            display: inline-flex;
+            max-width: 100%;
+            margin-bottom: 1.15rem;
+            padding: 0.45rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.86);
+            overflow-wrap: anywhere;
+        }
+
+        .search-row {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .search-row input {
+            width: 100%;
+            min-height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            padding: 0 3rem 0 1rem;
+            background: #111827;
+            color: #fff;
+            outline: none;
+        }
+
+        .search-row button {
+            position: absolute;
+            right: 0.35rem;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            transform: translateY(-50%);
+            border: 0;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .action-grid,
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .error-action,
+        .game-result {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-height: 46px;
+            padding: 0.7rem 0.85rem;
+            border-radius: 10px;
+            background: var(--secondary-color);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .error-action:hover,
+        .game-result:hover {
+            background: var(--accent-color);
+        }
+
+        .help-panel h2 {
+            margin: 0 0 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .result-grid {
+            margin-top: 0.75rem;
+        }
+
+        .empty-results {
+            margin: 0.75rem 0 0;
+            color: rgba(255, 255, 255, 0.66);
+        }
+
+        @media (max-width: 760px) {
+            .error-nav,
+            .error-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .error-nav {
+                align-items: flex-start;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    
-    <div class="container">
-        <p class="error-code">404</p>
-        <h1>Page Not Found</h1>
-        <!-- Add this somewhere in your 404 page content -->
-        <p>The page <strong id="error-path">/</strong> could not be found.</p>
-        <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-        <p>If you'd like, you can go back to the homepage or report a bug about this missing page.</p>
-        <div class="button-row">
-            <a class="btn" id="home-btn" href="/">Go to Homepage</a>
-            <a class="btn" id="report-btn" href='https://forms.gle/H82qpse4WCmVJs7K8'>Report a Bug</a>
-        </div>
-    </div>
-    
-    <!-- Settings Icon (Floating) -->
-    <div class="settings-container">
-        <a href="/settings/" class="settings-button">
-            <i class="fas fa-cog"></i>
-        </a>
-    </div>
+    <main class="error-shell">
+        <nav class="error-nav" aria-label="404 navigation">
+            <a class="brand-link" href="/"><i class="fas fa-gamepad" aria-hidden="true"></i> <span class="brand-title"><span class="brand-mark">SG</span> Games</span></a>
+            <a class="error-action" href="/settings/"><i class="fas fa-cog" aria-hidden="true"></i> Settings</a>
+        </nav>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+        <section class="error-hero">
+            <div class="error-panel">
+                <p class="error-code">404</p>
+                <h1>That page is not here.</h1>
+                <p class="error-copy">The page may have moved, been renamed, or never existed. Search the games library or jump back into the site.</p>
+                <span class="missing-path" id="errorPath">/</span>
+                <div class="search-row">
+                    <input id="errorSearch" type="search" placeholder="Search games..." aria-label="Search games">
+                    <button id="errorSearchButton" type="button" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                <div class="action-grid">
+                    <a class="error-action" href="/"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+                    <a class="error-action" href="/games/"><i class="fas fa-th-large" aria-hidden="true"></i> Games</a>
+                    <button class="error-action" id="randomGameButton" type="button"><i class="fas fa-random" aria-hidden="true"></i> Random Game</button>
+                    <a class="error-action" href="/backup-domains/"><i class="fas fa-globe" aria-hidden="true"></i> Backup Domains</a>
+                </div>
+            </div>
+
+            <aside class="help-panel" aria-label="Game suggestions">
+                <h2 id="resultTitle">Popular Games</h2>
+                <div class="result-grid" id="gameResults"></div>
+                <p class="empty-results" id="emptyResults" hidden>No matches. Try a shorter search.</p>
+            </aside>
+        </section>
+    </main>
+
     <script>
-        // Particles.js configuration
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#ffffff' },
-                shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 }, image: { src: 'img/github.svg', width: 100, height: 100 } },
-                opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
-                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
-                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
-            },
-            retina_detect: true
-        });
-        
-        // Redirect countdown
-        document.addEventListener('DOMContentLoaded', function() {
-            // No auto-redirect. Buttons provided for navigation.
-            const homeBtn = document.getElementById('home-btn');
-            const reportBtn = document.getElementById('report-btn');
-            // If JS is available, ensure links go to correct places (in case of SPA or routing needs)
-            if (homeBtn) homeBtn.addEventListener('click', function(e){ /* default anchor will navigate */ });
-            if (reportBtn) reportBtn.addEventListener('click', function(e){ /* default anchor will navigate */ });
-        });
-                // In the main 404 page script section
-                // Add this to a script tag in your main 404 page in the /404/ directory
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if we have an error path stored
-            const errorPath = sessionStorage.getItem('errorPath');
-            const isCannotGet = sessionStorage.getItem('isCannotGet') === 'true';
-            
-            // Get elements to update
-            const errorPathElement = document.getElementById('error-path');
-            const errorTypeElement = document.getElementById('error-type');
-            
-            if (errorPathElement && errorPath) {
-                // Display the path that caused the error
-                errorPathElement.textContent = errorPath;
-            }
-            
-            if (errorTypeElement && isCannotGet) {
-                // Change the error type message for Cannot GET errors
-                errorTypeElement.textContent = 'Cannot GET this resource';
-            }
-            
-            // Clear the stored data
-            sessionStorage.removeItem('errorPath');
-            sessionStorage.removeItem('isCannotGet');
-        });
+    (function () {
+        const GAME_INDEX_URL = '/games/';
+        const POPULARITY_CSV_URL = '/games%20popularity%20ranking%20-%20Pages_and_screens_Page_path_and_screen_class.csv';
+        const input = document.getElementById('errorSearch');
+        const searchButton = document.getElementById('errorSearchButton');
+        const randomButton = document.getElementById('randomGameButton');
+        const results = document.getElementById('gameResults');
+        const emptyResults = document.getElementById('emptyResults');
+        const resultTitle = document.getElementById('resultTitle');
+        const pathNode = document.getElementById('errorPath');
+        let games = [];
 
-        // Add a global error handler to capture Cannot GET errors
-        window.addEventListener('error', function(e) {
-            // Check if this is likely a routing error
-            if (e.message && e.message.includes('GET') && e.filename.includes(window.location.hostname)) {
-                // Store error info
-                sessionStorage.setItem('isCannotGet', 'true');
-                sessionStorage.setItem('errorPath', window.location.pathname);
-                
-                // Redirect to custom error page
-                if (!window.location.pathname.includes('/404/')) {
-                    window.location.href = '/404/';
-                }
+        function normalize(value) {
+            return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+        }
+
+        function parseCsv(text) {
+            return text.trim().split(/\r?\n/).slice(1).map((line) => {
+                const comma = line.lastIndexOf(',');
+                return comma > -1 ? [line.slice(0, comma), line.slice(comma + 1)] : [line, '0'];
+            });
+        }
+
+        async function loadGames() {
+            const [htmlResponse, popularityResponse] = await Promise.all([
+                fetch(GAME_INDEX_URL, { cache: 'no-store' }),
+                fetch(POPULARITY_CSV_URL, { cache: 'no-store' })
+            ]);
+            const html = await htmlResponse.text();
+            const popularityText = await popularityResponse.text();
+            const views = new Map(parseCsv(popularityText).map(([path, count]) => [
+                path.replace(/^\/games\//, '').replace(/\/$/, ''),
+                Number(count.replace(/[^0-9]/g, '')) || 0
+            ]));
+            games = Array.from(html.matchAll(/<a class="game[^"]*" href="([^"]+)"><span class="game-title">([^<]+)<\/span><\/a>/g))
+                .map((match) => ({
+                    href: `/games/${match[1].replace(/^\.?\//, '').replace(/\/$/, '')}/`,
+                    path: match[1].replace(/^\.?\//, '').replace(/\/$/, ''),
+                    title: match[2].trim()
+                }))
+                .filter((game) => game.path && !/^https?:/i.test(game.path))
+                .map((game) => ({ ...game, views: views.get(game.path) || 0, search: `${game.title} ${game.path} ${normalize(game.title)} ${normalize(game.path)}`.toLowerCase() }));
+            render(games.sort((a, b) => b.views - a.views).slice(0, 6), 'Popular Games');
+        }
+
+        function render(items, title) {
+            resultTitle.textContent = title;
+            results.innerHTML = '';
+            items.slice(0, 8).forEach((game) => {
+                const link = document.createElement('a');
+                link.className = 'game-result';
+                link.href = game.href;
+                link.textContent = game.title;
+                results.appendChild(link);
+            });
+            emptyResults.hidden = items.length > 0;
+        }
+
+        function search() {
+            const query = input.value.trim().toLowerCase();
+            const compact = normalize(query);
+            if (!query) {
+                render(games.sort((a, b) => b.views - a.views).slice(0, 6), 'Popular Games');
+                return;
             }
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if we have an error path stored
-            const errorPath = sessionStorage.getItem('errorPath');
-            
-            // Display the path that caused the error if available
-            if (errorPath) {
-                // You can use this to display which URL caused the error
-                document.getElementById('error-path').textContent = errorPath;
-                
-                // Clear the stored path
-                sessionStorage.removeItem('errorPath');
-            }
-        });
+            render(games.filter((game) => game.search.includes(query) || game.search.includes(compact)), 'Search Results');
+        }
+
+        function randomGame() {
+            if (!games.length) return;
+            const game = games[Math.floor(Math.random() * games.length)];
+            window.location.href = game.href;
+        }
+
+        pathNode.textContent = sessionStorage.getItem('errorPath') || window.location.pathname;
+        sessionStorage.removeItem('errorPath');
+        sessionStorage.removeItem('isCannotGet');
+        input.addEventListener('input', search);
+        searchButton.addEventListener('click', search);
+        randomButton.addEventListener('click', randomGame);
+        loadGames().catch(() => render([], 'Game Search'));
+    })();
     </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

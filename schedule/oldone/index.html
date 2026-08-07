@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bell Schedule</title>
+  <style>
+    :root{
+      --white:#fefefe;
+      --north-blue:#00305d;
+      --north-orange:#fa4906;
+      --north-ochre:#e2781c;
+      --central-red:#cc0000;
+      --central-grey:#444444;
+      --bg-black:#0b0b0b;
+      --glass: rgba(255,255,255,0.06);
+      --card-bg: rgba(255,255,255,0.98);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,#002847 0%, #00305d 100%);
+      color: var(--white);
+      min-height:100vh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:28px;
+    }
+
+    .app{
+      width:100%;
+      max-width:700px;
+      display:block;
+    }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+      padding:18px;
+      border-radius:14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{font-size:20px;margin:0;color:var(--north-orange)}
+    
+    /* Big "Today's Schedule" label */
+    #dayType{
+      font-size:18px;
+      font-weight:800;
+      margin-top:12px;
+      margin-bottom:8px;
+      color:var(--north-ochre);
+    }
+
+    .card{background:var(--card-bg);color:var(--card-text,#111);padding:14px;border-radius:10px;margin-top:14px}
+
+    .period{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.06);transition:all .15s ease}
+    .period .name{font-weight:800;font-size:18px}
+    .period .time{font-weight:600;color:#333}
+    .period.now{background:var(--north-ochre);color:var(--white);border-color:rgba(0,0,0,0.08)}
+
+    .bottomRow{display:flex;justify-content:flex-end;margin-top:12px}
+
+    .miniCard{background:var(--card-bg);color:var(--card-text,#111);padding:14px;border-radius:10px;margin-top:14px}
+
+    .btn{
+      background:var(--north-orange);
+      border:none;
+      padding:8px 12px;
+      border-radius:10px;
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .btn:hover{
+      opacity:0.85;
+    }
+    .btn.school-toggle{
+      background: var(--north-orange);
+      color:#fff;
+      border:1px solid rgba(255,255,255,0.2);
+    }
+
+    @media (max-width:920px){
+      .app{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="panel">
+      <header>
+        <div>
+          <h1 id="schoolName">NNHS Schedule</h1>
+        </div>
+      </header>
+
+      <div id="dayType">Loading…</div>
+
+      <div class="miniCard">
+        <div style="font-size:13px;color:#666">Now</div>
+        <div id="currentPeriod" style="font-size:20px;font-weight:800;margin-top:6px">—</div>
+        <div id="timeRemaining" style="margin-top:8px;color:#666">—</div>
+      </div>
+
+      <div class="card" id="scheduleCard"></div>
+
+      <div class="bottomRow">
+        <button id="toggleBtnSmall" class="btn school-toggle">Switch to NCHS</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ----------------- Schedules -----------------
+const schedules = {
+  Regular: {
+    type: "Regular Schedule",
+    periods: {
+      "Period 1": "7:45 - 8:35",
+      "Period 2": "8:41 - 9:34",
+      "Period 3": "9:40 - 10:30",
+      "Period 4": "10:36 - 11:26",
+      "Period 5": "11:32 - 12:22",
+      "Period 6": "12:28 - 13:18",
+      "Period 7": "13:24 - 14:14",
+      "Period 8": "14:20 - 15:10"
+    }
+  },
+  Homeroom: {
+    typeNNHS: "Homeroom/WIN",
+    typeNCHS: "Homeroom/SOAR",
+    periods: {
+      "Period 1": "7:45 - 8:30",
+      "Period 2": "8:35 - 9:20",
+      "Homeroom": "9:25 - 10:10",
+      "Period 3": "10:15 - 11:00",
+      "Period 4": "11:05 - 11:50",
+      "Period 5": "11:55 - 12:40",
+      "Period 6": "12:45 - 13:30",
+      "Period 7": "13:35 - 14:20",
+      "Period 8": "14:25 - 15:10"
+    }
+  },
+  LateStart: {
+    type: "Late Start",
+    periods: {
+      "Period 1": "9:00 - 9:42",
+      "Period 2": "9:47 - 10:29",
+      "Period 3": "10:34 - 11:16",
+      "Period 4": "11:21 - 12:03",
+      "Period 5": "12:08 - 12:49",
+      "Period 6": "12:54 - 13:36",
+      "Period 7": "13:41 - 14:23",
+      "Period 8": "14:28 - 15:10"
+    }
+  }
+};
+
+// Define school breaks. You can add single dates or date ranges here.
+// Examples:
+// { start: '2025-12-22', end: '2026-01-02', title: 'Winter Break' }
+// { start: '2026-03-20', end: '2026-03-20', title: 'Staff Development Day' }
+const breaks = [
+  // sample: winter break range (uncomment and adjust as needed)
+  { start: '2025-12-22', end: '2026-01-05', title: 'Winter Break' },
+  { start: '2026-01-20', end: '2026-01-20', title: 'MLK Day' },
+  { start: '2026-02-16', end: '2026-02-16', title: 'Presidents Day' },
+  { start: '2026-03-30', end: '2026-04-03', title: 'Spring Break' },
+  { start: '2026-05-25', end: '2026-05-25', title: 'Memorial Day' }
+];
+const LS_KEYS = { school: 'liveSched_school' };
+let currentSchool = localStorage.getItem(LS_KEYS.school) || "NNHS";
+
+function parseHMToMinutes(hm){ const [h,m]=hm.split(':'); return Number(h)*60+Number(m);} 
+function nowSecondsOfDay(){ const d=new Date(); return d.getHours()*3600 + d.getMinutes()*60 + d.getSeconds();}
+function twoDigit(n){return String(n).padStart(2,'0');}
+function escapeHtml(t){return t.replace(/[&<>'"]/g,m=>({ "&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[m]));}
+
+// Format an "HH:MM" string to 12-hour with AM/PM (e.g. "15:10" -> "3:10 PM") for UI display.
+function formatHM12(hm){
+  if(!hm || typeof hm !== 'string') return hm;
+  const [hRaw,mRaw] = hm.split(':').map(s=>s.trim());
+  if(hRaw === undefined || hRaw === '') return hm;
+  const h = Number(hRaw);
+  const m = mRaw || '00';
+  const period = h >= 12 ? 'PM' : 'AM';
+  const hh = ((h % 12) === 0) ? 12 : (h % 12);
+  return `${hh}:${twoDigit(Number(m))} ${period}`;
+}
+
+function applyTheme(){
+  const root=document.documentElement, body=document.body;
+  if(currentSchool==="NNHS"){
+    root.style.setProperty("--north-orange","#fa4906");
+    root.style.setProperty("--north-ochre","#e2781c");
+    root.style.setProperty("--card-bg","rgba(255,255,255,0.98)");
+    root.style.setProperty("--card-text","#111");
+    body.style.background="linear-gradient(180deg,#002847 0%, #00305d 100%)";
+    document.getElementById("schoolName").style.color="#fa4906";
+  }else{
+    root.style.setProperty("--north-orange","#cc0000");
+    root.style.setProperty("--north-ochre","#444444");
+    root.style.setProperty("--card-bg","rgba(20,20,20,0.98)");
+    root.style.setProperty("--card-text","#f5f5f5");
+    body.style.background="linear-gradient(180deg,#0b0b0b 0%, #111111 100%)";
+    document.getElementById("schoolName").style.color="#cc0000";
+  }
+}
+
+function renderSchedule(typeKey){
+  const container = document.getElementById("scheduleCard");
+  container.innerHTML = "";
+  const template = schedules[typeKey];
+  if(!template) return {};
+
+  const periodsArray = Object.entries(template.periods).map(([name, range]) => {
+    const [start,end] = range.split("-").map(s=>s.trim());
+    return { name, start, end, startM: parseHMToMinutes(start), endM: parseHMToMinutes(end) };
+  });
+
+  const nowM = nowSecondsOfDay() / 60;
+  let currentPeriodFound = false;
+
+  for(let i=0; i<periodsArray.length; i++){
+    const p = periodsArray[i];
+    const div = document.createElement("div");
+    div.className = "period";
+    div.innerHTML = `<div class="name">${escapeHtml(p.name)}</div>
+             <div class="time">${escapeHtml(formatHM12(p.start))} - ${escapeHtml(formatHM12(p.end))}</div>`;
+
+    if(nowM >= p.startM && nowM < p.endM){
+      // Currently in a period
+      div.classList.add("now");
+      document.getElementById("currentPeriod").textContent = p.name;
+      const remainingSec = p.endM*60 - nowSecondsOfDay();
+      const m = Math.floor(remainingSec/60), s = remainingSec % 60;
+      document.getElementById("timeRemaining").textContent = `Time Remaining: ${m}m ${twoDigit(s)}s`;
+      currentPeriodFound = true;
+    }
+
+    container.appendChild(div);
+  }
+
+  // Determine school-day bounds
+  const firstStartM = periodsArray.length ? periodsArray[0].startM : null;
+  const lastEndM = periodsArray.length ? periodsArray[periodsArray.length-1].endM : null;
+
+  // Now handle non-current times: Before School, Passing, After School
+  if(!currentPeriodFound){
+    if(firstStartM !== null && nowM < firstStartM){
+      // Before school
+      document.getElementById("dayType").textContent = "Before School";
+      document.getElementById("currentPeriod").textContent = "Before School";
+      const untilStart = Math.max(0, Math.round(firstStartM*60 - nowSecondsOfDay()));
+      const m1 = Math.floor(untilStart/60), s1 = untilStart % 60;
+      document.getElementById("timeRemaining").textContent = `First period starts in ${m1}m ${twoDigit(s1)}s`;
+    }else if(lastEndM !== null && nowM >= lastEndM){
+      // After school
+      document.getElementById("dayType").textContent = "After School";
+      document.getElementById("currentPeriod").textContent = "After School";
+      const lastEnd = periodsArray[periodsArray.length-1].end;
+      document.getElementById("timeRemaining").textContent = `School ended at ${formatHM12(lastEnd)}`;
+    }else{
+      // Passing period (between first start and last end but not inside a period)
+      for(let i=0;i<periodsArray.length;i++){
+        if(nowM < periodsArray[i].startM){
+          const next = periodsArray[i];
+          document.getElementById("dayType").textContent = "Passing Period";
+          document.getElementById("currentPeriod").textContent = "Passing Period";
+          const untilStart = Math.max(0, Math.round(next.startM*60 - nowSecondsOfDay()));
+          const m1 = Math.floor(untilStart/60), s1 = untilStart % 60;
+          const duration = next.endM - next.startM;
+          document.getElementById("timeRemaining").textContent = 
+            `Next: ${next.name} (${duration} min) starts in ${m1}m ${twoDigit(s1)}s`;
+          break;
+        }
+      }
+    }
+  }else{
+    // We are inside a period — show Today's schedule label elsewhere (renderCurrentDay handles label)
+  }
+
+  return { periodsArray, currentPeriodFound, firstStartM, lastEndM };
+}
+
+function renderCurrentDay(){
+  const d = new Date();
+  const dateKey = d.toISOString().split("T")[0];
+  const day = d.toLocaleDateString("en-US",{weekday:"long"});
+  // Check breaks first. `breaks` supports range entries: {start:'YYYY-MM-DD', end:'YYYY-MM-DD', title:'...'}
+  const breakEntry = (function(){
+    for(const b of breaks){
+      if(!b || !b.start || !b.title) continue;
+      const start = new Date(b.start + 'T00:00:00');
+      const end = new Date((b.end || b.start) + 'T23:59:59');
+      const today = new Date(dateKey + 'T12:00:00');
+      if(today >= start && today <= end) return b;
+    }
+    return null;
+  })();
+  if(breakEntry){
+    document.getElementById("dayType").textContent = breakEntry.title;
+    document.getElementById("scheduleCard").innerHTML = `<div style='padding:12px;color:#444'>No school (${escapeHtml(breakEntry.title)})</div>`;
+    document.getElementById("currentPeriod").textContent = "No school";
+    document.getElementById("timeRemaining").textContent = "";
+    return;
+  }
+
+  // Weekend (only if not overridden by a break)
+  if(day==="Saturday"||day==="Sunday"){ 
+    document.getElementById("dayType").textContent="Weekend"; 
+    document.getElementById("scheduleCard").innerHTML="<div style='padding:12px;color:#444'>No school today</div>"; 
+    document.getElementById("currentPeriod").textContent="No school"; 
+    document.getElementById("timeRemaining").textContent=""; 
+    return; 
+  }
+  let scheduleKey="Regular"; 
+  if(day==="Wednesday") scheduleKey="LateStart"; 
+  else if(day==="Tuesday"||day==="Thursday") scheduleKey="Homeroom";
+  const typeLabel=schedules[scheduleKey].type || (currentSchool==="NNHS"?schedules[scheduleKey].typeNNHS:schedules[scheduleKey].typeNCHS);
+  document.getElementById("dayType").textContent=`Today's Schedule: ${typeLabel}`;
+  renderSchedule(scheduleKey);
+}
+
+document.getElementById("toggleBtnSmall").onclick = ()=>{
+  currentSchool=currentSchool==="NNHS"?"NCHS":"NNHS"; 
+  localStorage.setItem(LS_KEYS.school,currentSchool); 
+  applyTheme(); 
+  renderCurrentDay(); 
+};
+
+applyTheme(); 
+renderCurrentDay(); 
+setInterval(renderCurrentDay,1000);
+</script>
+</body>
+</html>

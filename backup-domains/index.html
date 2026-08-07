@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="SGGames">
-    <meta name="keywords" content="sggames, backup domains, domain status, unblocked games">
-    <title>Backup Domains - SGGames</title>
+        <meta name="description" content="Find SG Games backup domains and status details for alternate access.">
+<meta name="author" content="SG Games">
+    <meta name="keywords" content="SG Games, backup domains, domain status, unblocked games">
+    <title>Backup Domains - SG Games</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="/js/mimicry.js"></script>
+    <script src="/js/mimicry.js" defer></script>
     <style>
         :root {
             --primary-color: #0a0e17;
@@ -294,6 +295,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/css/master.css">
 </head>
 <body>
     <header class="header">
@@ -305,7 +307,7 @@
 
     <main>
         <h1>Backup Domain Status</h1>
-        <p class="subtitle">Track every domain hosting SGGames and keep statuses updated fast.</p>
+        <p class="subtitle">Track every domain hosting SG Games and keep statuses updated fast.</p>
 
         <section class="legend" aria-label="Status legend">
             <div class="legend-item"><strong>&#x1F7E2; Green</strong> Live &amp; not blocked</div>
@@ -315,7 +317,7 @@
         </section>
 
         <div class="table-wrap">
-            <table aria-label="SGGames domain status table">
+            <table aria-label="SG Games domain status table">
                 <thead>
                     <tr>
                         <th>Domain</th>
@@ -334,7 +336,7 @@
             <p>Sheet tab must be named <code>domains</code>. Row 1 headers must stay in this exact order:</p>
             <div class="sheet-template">
                 <code>domain	url	status	deployed	blocked	notes
-sggames.example	https://sggames.example/	green	true	false	Main live domain
+SG Games.example	https://SG Games.example/	green	true	false	Main live domain
 alt1.example		blue	false	false	DNS ready, not deployed yet
 blocked-live.example	https://blocked-live.example/	orange	true	true	Live but filtered
 blocked-offline.example	https://blocked-offline.example/	red	false	true	Hard blocked
@@ -354,7 +356,7 @@ unknown.example		gray			Not tested yet</code>
     </main>
 
     <footer>
-        <p class="footer-company">&copy; 2026 SGGames. All rights reserved.</p>
+        <p class="footer-company">&copy; 2026 SG Games. All rights reserved.</p>
         <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
         <nav class="footer-links" aria-label="Footer">
             <a href="/legal/privacy-policy/">Privacy Policy</a>
@@ -569,5 +571,6 @@ unknown.example		gray			Not tested yet</code>
 
         initDomains();
     </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

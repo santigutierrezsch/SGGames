@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="santigutierrezsch">
-    <meta name="keywords" content="games, unblocked games, video games, unity, webgl, swf, html5, unblocked, unblocker, sggames, sggame">
+        <meta name="description" content="Customize SG Games tab cloaking, panic key, redirect, and close verification settings.">
+<meta name="author" content="santigutierrezsch">
+    <meta name="keywords" content="games, unblocked games, video games, unity, webgl, swf, html5, unblocked, unblocker, SG Games, sggame">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
-    <link rel="apple-touch-icon" href="/images/logo/favi/apple-touch-icon.png" sizes="180x180">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-    <title>Settings - SGGames</title>
+    <title>Settings - SG Games</title>
     <!-- Add mimicry.js to enable site-wide tab cloaking -->
-    <script src="/js/mimicry.js"></script>
+    <script src="/js/mimicry.js" defer></script>
     <style>
         :root {
             --primary-color: #0a0e17;
             --secondary-color: #1a1f2c;
-            --accent-color: #5644ff;
+            --accent-color: #6653d6;
             --text-color: #ffffff;
-            --button-hover: #7366ff;
+            --button-hover: #7d6ceb;
             --highlight-color: #ff4656;
         }
         
@@ -51,11 +49,9 @@
         h1 {
             font-size: 3rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #5644ff, #9f44ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-color);
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 0;
         }
         
         h2 {
@@ -425,12 +421,13 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/css/master.css">
 </head>
 
-<body>
+<body data-sg-settings-page>
     <div class="container">
         <header>
-            <h1>SETTINGS</h1>
+            <h1>Settings</h1>
             <p>Customize your experience</p>
         </header>
         
@@ -593,7 +590,7 @@
     </div>
     
     <footer>
-        <p class="footer-company">&copy; 2026 SGGames. All rights reserved.</p>
+        <p class="footer-company">&copy; 2026 SG Games. All rights reserved.</p>
         <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
         <nav class="footer-links" aria-label="Footer">
             <a href="/legal/privacy-policy/">Privacy Policy</a>
@@ -613,271 +610,6 @@
         © 2026 Santiago Gutierrez
         
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize settings
-            loadSavedSettingsPage();
-            
-            // Setup rename options
-            const renameOptions = document.querySelectorAll('.rename-option');
-            renameOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove active class from all options
-                    renameOptions.forEach(opt => opt.classList.remove('active'));
-                    // Add active class to clicked option
-                    this.classList.add('active');
-                    
-                    // Show/hide email customization if Gmail is selected
-                    const emailCustomization = document.getElementById('emailCustomization');
-                    if (emailCustomization) {
-                        if (this.dataset.type === 'gmail') {
-                            emailCustomization.style.display = 'block';
-                        } else {
-                            emailCustomization.style.display = 'none';
-                        }
-                    }
-                    
-                    // Auto-save when option is selected
-                    savePageStyle();
-                });
-            });
-            
-            // Setup email customization apply button
-            const applyEmailBtn = document.querySelector('.apply-email');
-            if (applyEmailBtn) {
-                applyEmailBtn.addEventListener('click', function() {
-                    applyCustomEmail();
-                });
-            }
-            
-            // Setup toggles to auto-save on change
-            const toggleInputs = document.querySelectorAll('.toggle-switch input');
-            toggleInputs.forEach(input => {
-                input.addEventListener('change', function() {
-                    saveSecuritySettings();
-                });
-            });
-            
-            // Setup panic key input to save on change
-            const panicKeyInput = document.getElementById('panicKeyInput');
-            if (panicKeyInput) {
-                panicKeyInput.addEventListener('change', function() {
-                    saveSecuritySettings();
-                });
-            }
-
-            const panicRedirectInput = document.getElementById('panicRedirectInput');
-            if (panicRedirectInput) {
-                panicRedirectInput.addEventListener('change', function() {
-                    saveSecuritySettings();
-                });
-            }
-        });
-
-        function normalizePanicRedirectUrl(url) {
-            const trimmedUrl = (url || '').trim();
-            if (!trimmedUrl) {
-                return '';
-            }
-
-            if (/^https?:\/\//i.test(trimmedUrl)) {
-                return trimmedUrl;
-            }
-
-            return `https://${trimmedUrl}`;
-        }
-        
-        function loadSavedSettingsPage() {
-            // Tab cloaking settings
-            const savedType = localStorage.getItem('pageMimicType') || 'gdocs';
-            
-            // Highlight the correct option
-            const options = document.querySelectorAll('.rename-option');
-            options.forEach(opt => {
-                if (opt.dataset.type === savedType) {
-                    opt.classList.add('active');
-                    
-                    // Show email customization if Gmail is selected
-                    if (savedType === 'gmail') {
-                        const emailCustomization = document.getElementById('emailCustomization');
-                        if (emailCustomization) {
-                            emailCustomization.style.display = 'block';
-                        }
-                    }
-                }
-            });
-            
-            // Security settings
-            const verificationToggle = document.getElementById('verificationToggle');
-            const panicButtonToggle = document.getElementById('panicButtonToggle');
-            const panicKeyInput = document.getElementById('panicKeyInput');
-            const panicRedirectInput = document.getElementById('panicRedirectInput');
-            
-            if (verificationToggle) {
-                const verificationEnabled = localStorage.getItem('verificationEnabled') === 'true';
-                verificationToggle.checked = verificationEnabled;
-            }
-            
-            if (panicButtonToggle) {
-                const panicEnabled = localStorage.getItem('panicEnabled') !== 'false'; // Default to true
-                panicButtonToggle.checked = panicEnabled;
-            }
-            
-            if (panicKeyInput) {
-                const panicKey = localStorage.getItem('panicKey') || '[';
-                panicKeyInput.value = panicKey;
-            }
-
-            if (panicRedirectInput) {
-                const panicRedirectUrl = localStorage.getItem('panicRedirectUrl') || 'https://www.google.com';
-                panicRedirectInput.value = panicRedirectUrl;
-            }
-            
-            // Email customization settings
-            const usernameInput = document.getElementById('username');
-            const domainInput = document.getElementById('domain');
-            
-            if (usernameInput && domainInput) {
-                usernameInput.value = localStorage.getItem('emailUsername') || '';
-                domainInput.value = localStorage.getItem('emailDomain') || 'gmail.com';
-            }
-        }
-        
-        function savePageStyle() {
-            const selectedOption = document.querySelector('.rename-option.active');
-            if (selectedOption) {
-                const pageType = selectedOption.dataset.type;
-                let pageTitle = selectedOption.dataset.title;
-                const pageIcon = selectedOption.dataset.icon;
-                
-                // If this is a Gmail type and we have a custom email, use it
-                if (pageType === 'gmail') {
-                    const username = localStorage.getItem('emailUsername');
-                    const domain = localStorage.getItem('emailDomain');
-                    
-                    if (username && domain) {
-                        pageTitle = `Inbox - ${username}@${domain} - Gmail`;
-                    }
-                }
-                
-                // Save preferences to localStorage
-                localStorage.setItem('pageMimicType', pageType);
-                localStorage.setItem('pageMimicTitle', pageTitle);
-                localStorage.setItem('pageMimicIcon', pageIcon);
-                
-                // Apply changes immediately
-                document.title = pageTitle;
-                const favicon = document.querySelector('link[rel="icon"]');
-                if (favicon) {
-                    favicon.href = pageIcon;
-                }
-                
-                // Show feedback
-                showSavedFeedback();
-            }
-        }
-        
-        function applyCustomEmail() {
-            const usernameInput = document.getElementById('username');
-            const domainInput = document.getElementById('domain');
-            
-            if (usernameInput && domainInput) {
-                const username = usernameInput.value.trim();
-                const domain = domainInput.value.trim() || 'gmail.com';
-                
-                // Save to localStorage
-                localStorage.setItem('emailUsername', username);
-                localStorage.setItem('emailDomain', domain);
-                
-                // If Gmail is currently selected, update the title immediately
-                const selectedOption = document.querySelector('.rename-option.active');
-                if (selectedOption && selectedOption.dataset.type === 'gmail') {
-                    const newTitle = `Inbox - ${username}@${domain} - Gmail`;
-                    document.title = newTitle;
-                    localStorage.setItem('pageMimicTitle', newTitle);
-                }
-                
-                // Show feedback
-                const applyButton = document.querySelector('.apply-email');
-                if (applyButton) {
-                    const originalText = applyButton.textContent;
-                    applyButton.textContent = 'Saved!';
-                    applyButton.style.backgroundColor = '#4CAF50'; // Green
-                    
-                    // Reset after a short delay
-                    setTimeout(() => {
-                        applyButton.textContent = originalText;
-                        applyButton.style.backgroundColor = '';
-                    }, 1500);
-                }
-            }
-        }
-        
-        function saveSecuritySettings() {
-            const verificationToggle = document.getElementById('verificationToggle');
-            const panicButtonToggle = document.getElementById('panicButtonToggle');
-            const panicKeyInput = document.getElementById('panicKeyInput');
-            const panicRedirectInput = document.getElementById('panicRedirectInput');
-            
-            if (verificationToggle) {
-                localStorage.setItem('verificationEnabled', verificationToggle.checked);
-            }
-            
-            if (panicButtonToggle) {
-                localStorage.setItem('panicEnabled', panicButtonToggle.checked);
-            }
-            
-            if (panicKeyInput && panicKeyInput.value) {
-                localStorage.setItem('panicKey', panicKeyInput.value);
-            }
-
-            if (panicRedirectInput) {
-                const normalizedRedirectUrl = normalizePanicRedirectUrl(panicRedirectInput.value);
-                if (normalizedRedirectUrl) {
-                    localStorage.setItem('panicRedirectUrl', normalizedRedirectUrl);
-                    panicRedirectInput.value = normalizedRedirectUrl;
-                } else {
-                    localStorage.removeItem('panicRedirectUrl');
-                    panicRedirectInput.value = 'https://www.google.com';
-                }
-            }
-            
-            // Show feedback
-            showSavedFeedback();
-        }
-        
-        function showSavedFeedback() {
-            // Check if the feedback element already exists
-            let feedbackEl = document.getElementById('savedFeedback');
-            
-            // Create it if it doesn't exist
-            if (!feedbackEl) {
-                feedbackEl = document.createElement('div');
-                feedbackEl.id = 'savedFeedback';
-                feedbackEl.style.position = 'fixed';
-                feedbackEl.style.bottom = '20px';
-                feedbackEl.style.left = '50%';
-                feedbackEl.style.transform = 'translateX(-50%)';
-                feedbackEl.style.backgroundColor = '#4CAF50';
-                feedbackEl.style.color = 'white';
-                feedbackEl.style.padding = '10px 20px';
-                feedbackEl.style.borderRadius = '4px';
-                feedbackEl.style.zIndex = '9999';
-                feedbackEl.style.opacity = '0';
-                feedbackEl.style.transition = 'opacity 0.3s ease';
-                feedbackEl.textContent = 'Settings saved!';
-                document.body.appendChild(feedbackEl);
-            }
-            
-            // Show the feedback
-            feedbackEl.style.opacity = '1';
-            
-            // Hide after 1.5 seconds
-            setTimeout(() => {
-                feedbackEl.style.opacity = '0';
-            }, 1500);
-        }
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

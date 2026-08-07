@@ -7,24 +7,22 @@ hello huzz
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="CybriaTech">
+        <meta name="description" content="Play SG Games, browse site tools, request games, find sponsors, and get the latest SG Games links.">
+<meta name="author" content="CybriaTech">
     <meta name="keywords"
         content="games, unblocked games, video games, unity, webgl, swf, html5, cybriagames, cybriagames sequel, emulators, sggame">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
-    <link rel="apple-touch-icon" href="/images/logo/favi/apple-touch-icon.png" sizes="180x180">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-    <title>SG GAMES - SGGames</title>
+    <title>SG Games - SG Games</title>
     <!-- Add mimicry.js to enable site-wide tab cloaking -->
-    <script src="/js/mimicry.js"></script>
+    <script src="/js/mimicry.js" defer></script>
     <style>
         :root {
             --primary-color: #0a0e17;
             --secondary-color: #1a1f2c;
-            --accent-color: #5644ff;
+            --accent-color: #6653d6;
             --text-color: #ffffff;
-            --button-hover: #7366ff;
+            --button-hover: #7d6ceb;
             --highlight-color: #ff4656;
         }
         
@@ -93,11 +91,9 @@ hello huzz
         h1 {
             font-size: 3rem;
             margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #5644ff, #9f44ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-color);
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 0;
         }
 
         .version-label {
@@ -143,6 +139,135 @@ hello huzz
             margin-bottom: 2rem;
             align-items: stretch;
         }
+
+        .v3-panel {
+            margin: 1.5rem 0 2rem;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 12px;
+            background: rgba(26, 31, 44, 0.72);
+            text-align: left;
+        }
+
+        .schedule-widget {
+            display: grid;
+            gap: 0.9rem;
+            margin: 0 0 1.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 12px;
+            background: rgba(26, 31, 44, 0.72);
+            text-align: left;
+        }
+
+        .schedule-widget-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .schedule-widget-title {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .schedule-widget-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .schedule-widget-stat {
+            min-width: 0;
+            padding: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(10, 14, 23, 0.45);
+        }
+
+        .schedule-widget-label {
+            margin: 0 0 0.35rem;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .schedule-widget-value {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.3;
+            overflow-wrap: anywhere;
+        }
+
+        .schedule-widget-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-height: 40px;
+            padding: 0.5rem 0.8rem;
+            border-radius: 999px;
+            background: var(--secondary-color);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .schedule-widget-link:hover {
+            background: var(--accent-color);
+        }
+
+        .v3-panel-title {
+            margin: 0 0 0.85rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .v3-actions,
+        .v3-recent-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .v3-action,
+        .v3-recent-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-height: 42px;
+            padding: 0.55rem 0.85rem;
+            border-radius: 999px;
+            background: var(--secondary-color);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .v3-action:hover,
+        .v3-recent-link:hover {
+            background: var(--accent-color);
+            transform: translateY(-1px);
+        }
+
+        .v3-action:disabled {
+            opacity: 0.48;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .v3-recent-list {
+            margin-top: 0.85rem;
+        }
         
         .game-button {
             background-color: var(--secondary-color);
@@ -164,7 +289,7 @@ hello huzz
         
         .game-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(86, 68, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(102, 83, 214, 0.3);
             background-color: var(--button-hover);
         }
         
@@ -349,103 +474,6 @@ hello huzz
             transform: translateY(-3px) rotate(30deg);
         }
 
-        .show-update-button {
-            position: absolute;
-            top: 50%;
-            right: 2rem;
-            transform: translateY(-50%);
-            z-index: 101;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .show-update-button:hover {
-            background-color: var(--accent-color);
-            transform: translateY(calc(-50% - 2px));
-        }
-
-        /* V2 announcement popup */
-        .update-popup-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(10, 14, 23, 0.78);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1200;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-
-        .update-popup-overlay.visible {
-            display: flex;
-        }
-
-        .update-popup {
-            width: 100%;
-            max-width: 520px;
-            background: linear-gradient(160deg, #1a1f2c 0%, #22293a 100%);
-            border: 2px solid var(--accent-color);
-            border-radius: 14px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-            color: var(--text-color);
-            overflow: hidden;
-        }
-
-        .update-popup-header {
-            background: linear-gradient(90deg, #5644ff, #9f44ff);
-            color: #fff;
-            padding: 0.9rem 1rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .update-popup-close {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 1.4rem;
-            line-height: 1;
-            cursor: pointer;
-        }
-
-        .update-popup-content {
-            padding: 1.2rem 1rem 1rem;
-            text-align: left;
-        }
-
-        .update-popup-subtitle {
-            margin: 0 0 0.7rem 0;
-            opacity: 0.9;
-            font-weight: 600;
-        }
-
-        .update-popup-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: grid;
-            gap: 0.4rem;
-        }
-
-        .update-popup-list li {
-            font-size: 1rem;
-        }
-
         .update-plus {
             color: #6df2a5;
             font-weight: 700;
@@ -456,25 +484,6 @@ hello huzz
             color: #ff8f8f;
             font-weight: 700;
             margin-right: 0.35rem;
-        }
-
-        .update-popup-actions {
-            padding: 0 1rem 1rem;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .update-popup-btn {
-            background: var(--highlight-color);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 0.6rem 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
         }
         
         @media (max-width: 768px) {
@@ -489,9 +498,15 @@ hello huzz
                 padding: 0.8rem 1rem;
             }
 
-            .show-update-button {
-                right: 1rem;
+            .schedule-widget-grid {
+                grid-template-columns: 1fr;
             }
+
+            .schedule-widget-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
         }
         
         @media (max-width: 480px) {
@@ -510,8 +525,7 @@ hello huzz
         }
     </style>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4874616183592939"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/master.css">
 </head>
 
 <body>
@@ -523,17 +537,14 @@ hello huzz
                 Home
             </a>
         </div>
-        <button id="showUpdatePopupBtn" class="show-update-button" type="button" aria-label="Show update popup">
-            <i class="fas fa-bullhorn"></i>
-        </button>
     </div>
     
     <div id="particles-js"></div>
     
     <div class="container">
         <header>
-            <h1>SG GAMES</h1>
-            <p class="version-label">V2.0</p>
+            <h1 class="brand-title"><span class="brand-mark">SG</span> Games</h1>
+            <p class="version-label">V3.0 Preview</p>
             <!---
             <p>Browse the collection of unblocked games</p>
         -->
@@ -542,13 +553,9 @@ hello huzz
         <div>
             <h2 class="section-title"></h2>
             <div class="feature-grid">
-                <a href="/games" class="feature-button">
+                <a href="/games" class="game-button">
                     <div class="icon">🎮</div>
                     <div class="name">Games</div>
-                </a>
-                <a href="https://forms.gle/H82qpse4WCmVJs7K8" class="game-button">
-                    <div class="icon">💭</div>
-                    <div class="name">Requests/Feedback</div>
                 </a>
                 <a href="/sponsors" class="game-button">
                     <div class="icon">📢</div>
@@ -565,11 +572,40 @@ hello huzz
                 </a>
                 -->
             </div>
+            <section class="schedule-widget" aria-label="Current schedule">
+                <div class="schedule-widget-top">
+                    <h2 class="schedule-widget-title">Schedule</h2>
+                    <a class="schedule-widget-link" href="/schedule/"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Full Schedule</a>
+                </div>
+                <div class="schedule-widget-grid">
+                    <div class="schedule-widget-stat">
+                        <p class="schedule-widget-label">Now</p>
+                        <p id="homeScheduleNow" class="schedule-widget-value">Loading...</p>
+                    </div>
+                    <div class="schedule-widget-stat">
+                        <p class="schedule-widget-label">Time Left</p>
+                        <p id="homeScheduleTimeLeft" class="schedule-widget-value">--</p>
+                    </div>
+                    <div class="schedule-widget-stat">
+                        <p class="schedule-widget-label">Next</p>
+                        <p id="homeScheduleNext" class="schedule-widget-value">--</p>
+                    </div>
+                </div>
+            </section>
+            <section class="v3-panel" aria-label="Quick play">
+                <h2 class="v3-panel-title">Quick Play</h2>
+                <div class="v3-actions">
+                    <button id="homeContinueGame" class="v3-action" type="button"><i class="fas fa-play" aria-hidden="true"></i> Continue</button>
+                    <button id="homeRandomGame" class="v3-action" type="button"><i class="fas fa-random" aria-hidden="true"></i> Random Game</button>
+                    <a class="v3-action" href="/games/"><i class="fas fa-search" aria-hidden="true"></i> Browse Library</a>
+                </div>
+                <div id="homeRecentGames" class="v3-recent-list" aria-label="Recently played games"></div>
+            </section>
         </div>
     </div>
     
     <footer>
-        <p class="footer-company">&copy; 2026 SGGames. All rights reserved.</p>
+        <p class="footer-company">&copy; 2026 SG Games. All rights reserved.</p>
         <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
         <nav class="footer-links" aria-label="Footer">
             <a href="/legal/privacy-policy/">Privacy Policy</a>
@@ -592,101 +628,7 @@ hello huzz
         </a>
     </div>
 
-    <div id="domainChangePopupOverlay" class="update-popup-overlay" aria-hidden="true">
-        <div class="update-popup" role="dialog" aria-modal="true" aria-labelledby="domainChangePopupTitle">
-            <div class="update-popup-header">
-                <span id="domainChangePopupTitle">Important: Domain Change</span>
-                <button id="domainChangePopupCloseX" class="update-popup-close" type="button" aria-label="Close domain change popup">&times;</button>
-            </div>
-            <div class="update-popup-content">
-                <p class="update-popup-subtitle">Notice:</p>
-                <ul class="update-popup-list">
-                    <li>Our current domain <strong>googledocs1234.github.io</strong> is being blocked.</li>
-                    <li>Please visit our new domain: <strong>googledocs123456.github.io</strong></li>
-                    <li>All games and features are available at the new site.</li>
-                </ul>
-            </div>
-            <div class="update-popup-actions">
-                <button id="domainChangePopupCloseBtn" class="update-popup-btn" type="button">Got it</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        const DOMAIN_CHANGE_POPUP_STORAGE_KEY = 'sggamesSeenDomainChangePopupHome';
-
-        function getFormattedDate() {
-            const options = { weekday: 'long', month: 'long', day: 'numeric' };
-            return new Date().toLocaleDateString('en-US', options);
-        }
-        
-        $(document).ready(function () {
-            // Only apply to elements with class "date-display" instead of "desc"
-            $(".date-display").text(getFormattedDate());
-        });
-        
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#ffffff' },
-                shape: { type: 'circle', stroke: { width: 0, color: '#000000' }, polygon: { nb_sides: 5 }, image: { src: 'img/github.svg', width: 100, height: 100 } },
-                opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } },
-                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
-                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
-            },
-            retina_detect: true
-        });
-
-        (function setupDomainChangePopup() {
-            const overlay = document.getElementById('domainChangePopupOverlay');
-            const closeX = document.getElementById('domainChangePopupCloseX');
-            const closeBtn = document.getElementById('domainChangePopupCloseBtn');
-            const showPopupBtn = document.getElementById('showUpdatePopupBtn');
-            if (!overlay) {
-                return;
-            }
-
-            function showPopup() {
-                overlay.classList.add('visible');
-                overlay.setAttribute('aria-hidden', 'false');
-            }
-
-            if (localStorage.getItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY) !== 'true') {
-                showPopup();
-            }
-
-            function closePopupAndRemember() {
-                localStorage.setItem(DOMAIN_CHANGE_POPUP_STORAGE_KEY, 'true');
-                overlay.classList.remove('visible');
-                overlay.setAttribute('aria-hidden', 'true');
-            }
-
-            if (closeX) {
-                closeX.addEventListener('click', closePopupAndRemember);
-            }
-
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closePopupAndRemember);
-            }
-
-            if (showPopupBtn) {
-                showPopupBtn.addEventListener('click', showPopup);
-            }
-
-            overlay.addEventListener('click', function(event) {
-                if (event.target === overlay) {
-                    closePopupAndRemember();
-                }
-            });
-        })();
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>
 
