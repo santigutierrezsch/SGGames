@@ -1,156 +1,124 @@
-# 🎮 SG Games
+# SG Games
 
-> The ultimate open-source HTML5 game hub — fork, host, and play instantly.
+SG Games is a static browser game site. It includes a homepage, game library, schedule tools, legal pages, backup domain status, settings, and a collection of packaged web games.
 
-**Quick Links:**
-👉 [What is SG Games?](#-what-is-SG Games)
-👉 [How to Host Your Own Version](#-how-to-host-your-own-version)
+The site is designed to run from plain static hosting. There is no build step required for normal use.
 
----
+## Project Structure
 
-## 🕹️ What is SG Games?
+```text
+.
++-- index.html              # Homepage
++-- games.json              # Game library data used by /games/
++-- games/
+|   +-- index.html          # Main game library page
+|   +-- ...                 # Individual packaged games
++-- css/
+|   +-- master.css          # Shared site styling
++-- js/
+|   +-- main.js             # Shared site behavior
+|   +-- mimicry.js          # Tab cloaking/settings behavior
++-- settings/               # Settings page
++-- schedule/               # Schedule page
++-- backup-domains/         # Backup domain status page
++-- sponsors/               # Sponsors page
++-- legal/                  # Legal/contact/about pages
++-- archive/                # Archived tools/pages
++-- apps/                   # Apps placeholder page
++-- 404/                    # Custom 404 page
+```
 
-**SG Games** is a free, open-source web platform that hosts hundreds of HTML5 and Flash-style games directly in your browser.
-It’s built for speed, simplicity, and independence — no logins, no paywalls, no ads, just pure gaming fun.
+## Running Locally
 
-### 🌟 Key Features
-- test
-- 200+ classic and modern web games
-- Works offline and on school networks (depending on host setup)
-- Fully forkable and customizable
-- Auto-updates from the original repo using GitHub Actions
-- Deploys to GitHub Pages in minutes
+Use any static server from the repository root.
 
-**© 2025 Santiago Gutierrez** — Open source under the [MIT License](https://opensource.org/licenses/MIT).
+With Node:
 
----
+```bash
+npx serve .
+```
 
-## 🧠 How to Host Your Own Version
+With Python, if installed:
 
-This guide shows you how to **fork**, **sync**, and **host** your own SG Games website — perfect for anyone, even if you’ve never coded before!
+```bash
+python -m http.server 8000
+```
 
----
+Then open the printed local URL in your browser.
 
-### 1️⃣ Fork the Repository
+Some pages fetch local files such as `games.json`, so opening `index.html` directly from the filesystem may not behave exactly like the hosted site.
 
-1. Go to the original repo:
-   👉 [SG Games repository](https://github.com/santigutierrezsch)
-2. Click **“Fork”** (top-right corner).
-3. Wait for GitHub to make your own copy.
+## Editing the Game Library
 
----
+The main games page reads from `games.json`.
 
-### 2️⃣ Enable GitHub Pages (from `main` branch)
+Each entry should look like this:
 
-1. In your forked repo, go to **Settings → Pages**.
-2. Under **Source**, choose:
-   - **Branch:** `main`
-   - **Folder:** `/ (root)`
-3. Save.
-4. After a few minutes, your site will appear at:
-   `https://<your-username>.github.io/`
+```json
+{
+  "name": "Basket Random",
+  "href": "basket-random",
+  "categories": ["Sports"]
+}
+```
 
-> 💡 If this is your only project on GitHub, rename your repository to
-> `your-username.github.io` — then your site will appear at:
-> `https://your-username.github.io/` (no `/` at the end).
+Fields:
 
-> ⚠️ If your site ever gets blocked, you can create a new GitHub account with a school-related name (example: `googledocs1234`) and host again.
+- `name`: Display name shown on the games page.
+- `href`: Folder/path under `/games/`, without the leading `/games/`.
+- `categories`: List of category names used by the category filter.
 
----
+Use `"Miscellaneous"` for games that do not fit a clear category.
 
-### 3️⃣ Set Up Auto Sync + Hosting (GitHub Actions)
+## Important Editing Rules
 
-This step makes your site **automatically update** every day when the main SG Games repo gets new games or changes.
+- Do not rename public routes unless you also update every link that points to them.
+- Avoid editing individual folders under `games/**` unless you are intentionally changing that packaged game.
+- Shared site changes usually belong in `index.html`, `games/index.html`, `css/master.css`, `js/main.js`, or `js/mimicry.js`.
+- Keep localStorage keys stable because settings and quickplay depend on them.
+- Keep `games.json` valid JSON. A trailing comma will break the games page.
 
-1. Go to your repo’s **Actions** tab.
-2. Click **“New workflow” → “set up a workflow yourself.”**
-3. Name it `sync.yml`.
-4. Paste this code inside:
+## Current Site Features
 
-```yaml
-name: 🔄 Sync Fork + Auto Deploy to Pages
+- Searchable game library
+- Category filtering from `games.json`
+- Favorites saved in localStorage
+- Quick Play controls
+- Tab cloaking/settings support
+- Schedule widget and full schedule page
+- Backup domain status page
+- Custom 404 page with game search
+- Shared footer and legal/contact pages
+- Instagram promo for `@sggames.unblocked`
 
-on:
-  schedule:
-    - cron: '0 0 * * *'  # runs every day at midnight UTC
-  workflow_dispatch:     # allows manual run
+## Deployment
 
-permissions:
-  contents: write        # needed for pushing updates
+Because this is a static site, it can be deployed to GitHub Pages, Netlify, Vercel, Cloudflare Pages, or similar static hosts.
 
-jobs:
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Sync from the original SG Games repo
-        uses: repo-sync/github-sync@v2
-        with:
-          source_repo: SantiagoGutierrez/SG Games
-          source_branch: main
-          destination_branch: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+Deploy the repository root as the site root. Make sure these files are included:
 
-  deploy:
-    needs: sync
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout updated main branch
-        uses: actions/checkout@v4
-        with:
-          ref: main
+- `index.html`
+- `games.json`
+- `games/index.html`
+- `css/**`
+- `js/**`
+- all SG-owned page folders
+- all required game folders under `games/**`
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./       # root folder of your site
-          publish_branch: main  # ✅ deploy directly from main
-````
+## Maintenance Checklist
 
----
+Before publishing a larger update:
 
-### 💡 Important: About the GitHub Token
+- Verify `/` loads.
+- Verify `/games/` loads and search/category filters work.
+- Verify several game links open correctly.
+- Verify `/games.json` returns valid JSON.
+- Verify `/settings/`, `/schedule/`, `/backup-domains/`, `/legal/contact/`, and `/404/`.
+- Check the browser console for new errors.
+- Test at desktop and mobile widths.
 
-When you see `${{ secrets.GITHUB_TOKEN }}` in the workflow, don’t worry —
-you **don’t need to find or create anything** yourself.
+## Credits
 
-GitHub automatically gives every repository a **temporary built-in token** each time a workflow runs.
-This token is what lets your Action push updates and redeploy your Pages site safely.
+SG Games is owned and operated by Santiago Gutierrez.
 
-You **won’t see it in your Settings → Secrets**, because it’s created behind the scenes just for GitHub Actions.
-As long as Actions are enabled in your repo, everything will work automatically ✅
-
----
-
-### ✅ After Setup
-
-Your fork will now:
-
-* Pull the newest version of SG Games **every day automatically**
-* Rebuild and redeploy your GitHub Pages site
-* Stay synced forever — no extra work needed
-
----
-
-## 🧩 Optional Customization
-
-| File / Folder | What It Does                                      |
-| ------------- | ------------------------------------------------- |
-| `index.html`  | The main homepage — edit title, colors, or layout |
-| `/assets/`    | Store custom icons, logos, or scripts             |
-| `/games/`     | Add or remove game folders (each game = 1 folder) |
-| `/css/`       | Customize fonts, colors, or themes                |
-| `/js/`        | Stores JavaScript files                           |
-
----
-
-## 💬 Credits
-
-Created by **© 2025 Santiago Gutierrez**
-Open source under the [MIT License](https://opensource.org/licenses/MIT).
-Please credit the original project if you use or remix this site ❤️
-
----
-
-**Happy gaming! 🎮**
+See [LICENSE](LICENSE) for license details.
