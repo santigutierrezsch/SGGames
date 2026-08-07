@@ -1,0 +1,2312 @@
+[
+  {
+    "name": "1-on-1 Soccer",
+    "href": "1on1soccer",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "1v1.lol",
+    "href": "1v1lol",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "1v1 Space",
+    "href": "1v1space",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "2048",
+    "href": "2048",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "2048 Multitask",
+    "href": "2048-multitask",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "9007199254740992",
+    "href": "9007199254740992",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "2d Rocket League",
+    "href": "2drocketleague",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "60s Burger Run",
+    "href": "60sburgerrun",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "8 Ball",
+    "href": "8ball",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Achievement Unlocked",
+    "href": "achieveunlocked",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Achievement Unlocked 2",
+    "href": "achieveunlocked2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "A Dance of Fire and Ice",
+    "href": "a-dance-of-fire-and-ice",
+    "categories": [
+      "Music / Rhythm"
+    ]
+  },
+  {
+    "name": "A Dark Room",
+    "href": "adarkroom",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Adrenaline Challenge 2",
+    "href": "adrenalinechallenge2",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Adventure Capitalist",
+    "href": "adventure-capitalist",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Adventure Drivers",
+    "href": "adventure-drivers",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Age of War",
+    "href": "ageofwar",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Ages of Conflict",
+    "href": "ages-of-conflict",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Alien Hominid",
+    "href": "alienhominid",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Align 4",
+    "href": "align-4",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Amazing Rope Police",
+    "href": "amazing-rope-police",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Amidst the Clouds",
+    "href": "amidst-the-clouds",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Among Us",
+    "href": "amongus",
+    "categories": [
+      "Multiplayer"
+    ]
+  },
+  {
+    "name": "Angry Sharks",
+    "href": "angry-sharks",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Aquapark Slides",
+    "href": "aquapark-slides",
+    "categories": [
+      "Racing"
+    ]
+  },
+  {
+    "name": "Astray",
+    "href": "astray",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Avalanche",
+    "href": "avalanche",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Awesome Tanks",
+    "href": "awesometanks",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Awesome Tanks 2",
+    "href": "awesometanks2",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Backrooms",
+    "href": "backrooms",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "Bad Ice Cream",
+    "href": "badicecream",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Bad Ice Cream 2",
+    "href": "badicecream2",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Bad Ice Cream 3",
+    "href": "badicecream3",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Bad Piggies",
+    "href": "badpiggies",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Bad Time Simulator",
+    "href": "badtimesimulator",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Baldi's Basics",
+    "href": "baldis-basics",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "Ballistic Chickens",
+    "href": "ballisticchickens",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Basket Random",
+    "href": "basket-random",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Basketball Stars",
+    "href": "basketball-stars",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Basketbros",
+    "href": "basketbros",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Big Tower Tiny Square",
+    "href": "btts",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Big Ice Tower Tiny Square 2",
+    "href": "big-ice-tower-tiny-square-2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Big Neon Tower Tiny Square",
+    "href": "big-neon-tower",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Bit Planes",
+    "href": "bit-planes",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Bitlife",
+    "href": "bitlife",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Black Hole Square",
+    "href": "black-hole-square",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Blood Tournament",
+    "href": "bloodtournament",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Bloxorz",
+    "href": "bloxorz",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Bloons Tower Defense",
+    "href": "btd",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Bloons Tower Defense 2",
+    "href": "btd2",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Bloons Tower Defense 3",
+    "href": "btd3",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Bloons Tower Defense 4",
+    "href": "btd4",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Bloons Tower Defense 5",
+    "href": "btd5",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Bloons Tower Defense 6",
+    "href": "btd6",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Bob The Robber 2",
+    "href": "bobtherobber2",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Bottle Flip 3D",
+    "href": "bottle-flip-3d",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Bounce Back",
+    "href": "bounce-back",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Boxing Physics 2",
+    "href": "boxingphysics2",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Boxing Random",
+    "href": "boxing-random",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Breaking the Bank",
+    "href": "breakingthebank",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Browser Killer",
+    "href": "browserkiller",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Bubble Shooter",
+    "href": "bubbleshooter",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Bubble Tower 3D",
+    "href": "bubble-tower-3d",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Burger and Frights",
+    "href": "burgerandfrights",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "Burrito Bison",
+    "href": "burritobison",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Candy Crush",
+    "href": "candy-crush",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Celeste",
+    "href": "celeste",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Cell Machine",
+    "href": "cell-machine",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Champion Island",
+    "href": "championisland",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Chess",
+    "href": "chess",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Chibi Knight",
+    "href": "chibiknight",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Chrome Dino",
+    "href": "chrome-dino",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Circloo",
+    "href": "circloo",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Civiballs",
+    "href": "civiballs",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Civiballs 2",
+    "href": "civiballs-2",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Clicker Heroes",
+    "href": "clickerheroes",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Cluster Rush",
+    "href": "cluster-rush",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Color Switch",
+    "href": "colorswitch",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Commodore Clicker",
+    "href": "commodoreclicker",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Cookie Clicker",
+    "href": "cookieclicker",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Craftmine",
+    "href": "craftmine",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Crossy Road",
+    "href": "crossyroad",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "CSGO Clicker",
+    "href": "csgoclicker",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "CTR",
+    "href": "ctr",
+    "categories": [
+      "Racing"
+    ]
+  },
+  {
+    "name": "CTR Holiday",
+    "href": "ctr-holiday",
+    "categories": [
+      "Racing"
+    ]
+  },
+  {
+    "name": "CTR Time Travel",
+    "href": "ctr-tr",
+    "categories": [
+      "Racing"
+    ]
+  },
+  {
+    "name": "Cube Field",
+    "href": "cubefield",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Dadish",
+    "href": "dadish",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Dadish 2",
+    "href": "dadish2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Dadish 3",
+    "href": "dadish3",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Dante",
+    "href": "dante",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Deal or No Deal",
+    "href": "deal",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Death Run 3D",
+    "href": "death-run-3d",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Doge Miner",
+    "href": "dogeminer",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Doodle Jump",
+    "href": "doodlejump",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Doom",
+    "href": "doom",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Dragonball Devolution",
+    "href": "dragonballdevolution",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Draw The Hill",
+    "href": "draw-the-hill",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Drift Boss",
+    "href": "drift-boss",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Drift Hunters",
+    "href": "drifthunters",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Drive Mad",
+    "href": "drivemad",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Duck Life 1",
+    "href": "ducklife1",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Duck Life 2",
+    "href": "ducklife2",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Duck Life 3",
+    "href": "ducklife3",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Duck Life 4",
+    "href": "ducklife4",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Duck Life 5",
+    "href": "ducklife5",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Duck Life 6",
+    "href": "ducklife6",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Edge Not Found",
+    "href": "edgenotfound",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Emulator JS",
+    "href": "emulatorjs",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Emulators",
+    "href": "emulators",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Escaping the Prison",
+    "href": "escapingtheprison",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Evil Glitch",
+    "href": "evilglitch",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Factory Balls",
+    "href": "factoryballs",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Factory Balls Forever",
+    "href": "factoryballsforever",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Fancypants Adventures",
+    "href": "fancypantsadventures",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Fancypants Adventures 2",
+    "href": "fancypantsadventures2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Fireboy and Watergirl",
+    "href": "fbwg",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Fireboy and Watergirl 2",
+    "href": "fbwg2",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Fireboy and Watergirl 3",
+    "href": "fbwg3",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Fireboy and Watergirl 4",
+    "href": "fbwg4",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Flappy Bird",
+    "href": "flappybird",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Flappy Plane",
+    "href": "flappyplane",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Flappy Squidward",
+    "href": "flappySquidward",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Flash PLayer Emulator",
+    "href": "flash",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Fleeing the Complex",
+    "href": "fleeingthecomplex",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Flippy Fish",
+    "href": "flippyfish",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Fluidsim",
+    "href": "fluidsim",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "FNAF",
+    "href": "fnaf",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "FNAF 2",
+    "href": "fnaf2",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "FNAF 3",
+    "href": "fnaf3",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "FNAF 4",
+    "href": "fnaf4",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "Five Nights at Epstein's",
+    "href": "fivenightsatepsteins",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "Friday Night Funkin",
+    "href": "fridaynightfunkin",
+    "categories": [
+      "Music / Rhythm"
+    ]
+  },
+  {
+    "name": "Friendly Fire",
+    "href": "friendlyfire",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Fruit Ninja",
+    "href": "fruitninja",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Full Screen Mario",
+    "href": "full-screen-mario",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Funny Ball Game",
+    "href": "funnyballgame",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Funny Mad Racing",
+    "href": "funnymadracing",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Funny Shooter",
+    "href": "funnyshooter",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Funny Shooter 2",
+    "href": "funnyshooter2",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Game Inside",
+    "href": "game-inside",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Game Maker",
+    "href": "gamemaker",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "GBA Emulator",
+    "href": "gba",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Geometry Dash",
+    "href": "real-geometry-dash",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Geometry Dash (Scratch)",
+    "href": "geometrydash",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Geometry Rash",
+    "href": "geometryrash",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Getaway Shooter",
+    "href": "getawayshooter",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Getaway Shootout",
+    "href": "getaway-shootout",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Gold Digger FRVR",
+    "href": "golddiggerfrvr",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Google Snake",
+    "href": "google-snake",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Google Solitaire",
+    "href": "google-solitaire",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Guilty Gear",
+    "href": "guiltygear",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Gun Mayhem",
+    "href": "gunmayhem",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Gun Mayhem 2",
+    "href": "gunmayhem2",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Gun Mayhem Redux",
+    "href": "gunmayhemredux",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Halloween 2016",
+    "href": "halloween2016",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "Happywheels",
+    "href": "happywheels",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Helix Jump",
+    "href": "helixjump",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Hex GL",
+    "href": "hexgl",
+    "categories": [
+      "Racing"
+    ]
+  },
+  {
+    "name": "Hextris",
+    "href": "hextris",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Hill Climb Racing 2",
+    "href": "hillclimbracing2",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Hole.io",
+    "href": "holeio",
+    "categories": [
+      "Multiplayer"
+    ]
+  },
+  {
+    "name": "Ice Dodo",
+    "href": "ice-dodo",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Icy Purple Head 2",
+    "href": "icy-purple-head-2",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Icy Purple Head 3",
+    "href": "icy-purple-head-3",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "I Wanna Be Thy Copy",
+    "href": "iwbtc",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Idle Breakout",
+    "href": "idlebreakout",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Infiltrating the Airship",
+    "href": "infiltratingtheairship",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Jacksmith",
+    "href": "jacksmith",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Jetpack Joyride",
+    "href": "jetpackjoyride",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "JustFall.lol",
+    "href": "justfalllol",
+    "categories": [
+      "Multiplayer"
+    ]
+  },
+  {
+    "name": "Knife Hit",
+    "href": "knifehit",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Last Horizon",
+    "href": "lasthorizon",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Lazy Jump 3D",
+    "href": "lazyjump3d",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Learn to Fly",
+    "href": "learntofly",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Learn to Fly 2",
+    "href": "learntofly2",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Learn to Fly Idle",
+    "href": "learntoflyidle",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Line Rider",
+    "href": "linerider",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Little Alchemy",
+    "href": "littlealchemy",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Lows Adventures 2",
+    "href": "lowsadventures2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Madalin Stunt Cars",
+    "href": "madalincars",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Mario",
+    "href": "mario",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Mindustry",
+    "href": "mindustry",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Minecraft",
+    "href": "minecraft",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Minecraft Classic",
+    "href": "mc-classic",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Minecraft Tower Defense 2",
+    "href": "minecraft-tower-defence-2",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Minekhan",
+    "href": "minekhan",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Minesweeper",
+    "href": "minesweeper",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Monkey Mart",
+    "href": "monkey-mart",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Monster Tracks",
+    "href": "monstertracks",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Moto X3M",
+    "href": "motox3m",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Moto X3M Pool",
+    "href": "motox3m-pool",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Moto X3M Spooky",
+    "href": "motox3m-spooky",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Moto X3M Winter",
+    "href": "motox3m-winter",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Ngon",
+    "href": "ngon",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Nut Simulator",
+    "href": "nutsim",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Offline Paradise",
+    "href": "offlineparadise",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Osu",
+    "href": "osu",
+    "categories": [
+      "Music / Rhythm"
+    ]
+  },
+  {
+    "name": "Osu Mania",
+    "href": "osumania",
+    "categories": [
+      "Music / Rhythm"
+    ]
+  },
+  {
+    "name": "Ovo",
+    "href": "ovo",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Pacman",
+    "href": "pacman",
+    "categories": [
+      "Retro / Flash"
+    ]
+  },
+  {
+    "name": "Pandemic",
+    "href": "pandemic",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Pandemic 2",
+    "href": "pandemic2",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Papa Louie 2",
+    "href": "papa-louie-2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Papa Louie 3",
+    "href": "papa-louie-3",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Papas Burgeria",
+    "href": "papasburgeria",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Papas Freezeria",
+    "href": "papasfreezeria",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Papas Pizzeria",
+    "href": "papaspizzeria",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Papas Wingeria",
+    "href": "papas-wingeria",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Paper.io",
+    "href": "paperio",
+    "categories": [
+      "Multiplayer"
+    ]
+  },
+  {
+    "name": "Paper.io 2",
+    "href": "paperio2",
+    "categories": [
+      "Multiplayer"
+    ]
+  },
+  {
+    "name": "Parking Fury",
+    "href": "parking-fury",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Parking Fury 2",
+    "href": "parking-fury-2",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Parking Fury 3",
+    "href": "parking-fury-3-main",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Perfect Circle",
+    "href": "perfect-circle",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Pizza Tower",
+    "href": "pizzatower",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Pokemon Emerald",
+    "href": "pokemon-emerald",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Pokemon Fire",
+    "href": "pokemon-fire",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Pokemon Leaf",
+    "href": "pokemon-leaf",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Polytrack",
+    "href": "polytrack",
+    "categories": [
+      "Racing"
+    ]
+  },
+  {
+    "name": "Pool",
+    "href": "pool",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Poom",
+    "href": "poom",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Pushback",
+    "href": "pushback",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Redball 3",
+    "href": "redball3",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Redball 4",
+    "href": "redball4",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Redball 4 Vol 2",
+    "href": "redball4vol2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Redball 4 Vol 3",
+    "href": "redball4vol3",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Retro Bowl",
+    "href": "retro-bowl",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Retro Bowl Exploit",
+    "href": "retro-bowl-exploit",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Retrobowl College",
+    "href": "retrobowlcollege",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Riddleschool",
+    "href": "riddleschool",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Riddleschool 2",
+    "href": "riddleschool2",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Riddleschool 3",
+    "href": "riddleschool3",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Riddleschool 4",
+    "href": "riddleschool4",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Riddleschool 5",
+    "href": "riddleschool5",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Riddleschool Transfer",
+    "href": "riddleschooltransfer",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Riddleschool Transfer 2",
+    "href": "riddleschooltransfer2",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Rise Higher",
+    "href": "risehigher",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Rocket League",
+    "href": "rocketleague",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Rooftop Snipers",
+    "href": "rooftop-snipers",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Rooftop Snipers 2",
+    "href": "rooftopsnipers2",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Ruffle Emulator",
+    "href": "ruffle",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Run",
+    "href": "run",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Run 2",
+    "href": "run2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Run 3",
+    "href": "run3",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Russian Car Driver",
+    "href": "russiancardriver",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Sand",
+    "href": "sand",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Sand Game",
+    "href": "sand-game",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Sandtrix",
+    "href": "sandtrix",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Sans Fight",
+    "href": "sans-fight",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Scrap Metal 3",
+    "href": "scrapmetal3",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Skibidi Toilet",
+    "href": "skibiditoilet",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Skibidi Toilet Attack",
+    "href": "skibiditoiletattack",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Skills",
+    "href": "skills",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Slope",
+    "href": "slope",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Slope 2",
+    "href": "slope2",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Slope Ball",
+    "href": "slope-ball",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Snake",
+    "href": "snake",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Snow",
+    "href": "snow",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Snow Rider 3D",
+    "href": "snowrider3d",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Soccer Random",
+    "href": "soccer-random",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Soldier Legend",
+    "href": "soldier-legend",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Solitaire",
+    "href": "solitaire",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Solitaire (Fancy)",
+    "href": "fancy-solitaire",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Sort the Court",
+    "href": "sort-the-court",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Soundboard",
+    "href": "soundboard",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Space",
+    "href": "space",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Spank The Monkey",
+    "href": "spankthemonkey",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Sprinter",
+    "href": "sprinter",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Stack",
+    "href": "stack",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Stealing The Diamond",
+    "href": "stealingthediamond",
+    "categories": [
+      "Adventure"
+    ]
+  },
+  {
+    "name": "Stick Slasher",
+    "href": "stickslasher",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Stickman Boost",
+    "href": "stickmanboost",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Stickman Climb",
+    "href": "stickmanclimb",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Stickman Golf",
+    "href": "stickmangolf",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Stickman Hook",
+    "href": "stickman-hook",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Subway Surfers",
+    "href": "subway-surfers",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Subway Surfers New York",
+    "href": "subway-surfers-ny",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Super Mario 64",
+    "href": "supermario64",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Super Meat Boy",
+    "href": "supermeatboy",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Super Smash Bros",
+    "href": "supersmashbros",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Super Smash Flash",
+    "href": "supersmashflash",
+    "categories": [
+      "Action"
+    ]
+  },
+  {
+    "name": "Superhot",
+    "href": "superhot",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Swerve",
+    "href": "swerve",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "TABS",
+    "href": "tabs",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Tank Trouble 2",
+    "href": "tank-trouble-2",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Tanuki Sunset",
+    "href": "tanuki-sunset",
+    "categories": [
+      "Driving"
+    ]
+  },
+  {
+    "name": "Temple Run 2",
+    "href": "templerun2",
+    "categories": [
+      "Arcade"
+    ]
+  },
+  {
+    "name": "Territorial.io",
+    "href": "territorial.io",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Tetra Legends",
+    "href": "tetra-legends",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Tetris",
+    "href": "tetris",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "The Final Earth 2",
+    "href": "thefinalearth2",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "The Impossible Game",
+    "href": "theimpossiblegame",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "The Impossible Quiz",
+    "href": "theimpossiblequiz",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "There Is No Game",
+    "href": "there-is-no-game",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Thirty Dollar Website",
+    "href": "thirtydollarwebsite",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "This Is The Only Level",
+    "href": "thisistheonlylevel",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "This Is The Only Level 2",
+    "href": "thisistheonlylevel2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Time Shooter 1",
+    "href": "timeshooter1",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Time Shooter 2",
+    "href": "timeshooter2",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Time Shooter 3",
+    "href": "timeshooter3",
+    "categories": [
+      "Shooter"
+    ]
+  },
+  {
+    "name": "Tiny Fishing",
+    "href": "tinyfishing",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Townscaper",
+    "href": "townscaper",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Tron",
+    "href": "tron",
+    "categories": [
+      "Multiplayer"
+    ]
+  },
+  {
+    "name": "TU-46",
+    "href": "tu46",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "TU-95",
+    "href": "tu95",
+    "categories": [
+      "Simulation"
+    ]
+  },
+  {
+    "name": "Tube Jumpers",
+    "href": "tube-jumpers",
+    "categories": [
+      "Multiplayer"
+    ]
+  },
+  {
+    "name": "Tunnel Rush",
+    "href": "tunnelrush",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Universal Paperclips",
+    "href": "universal-paperclips",
+    "categories": [
+      "Idle / Clicker"
+    ]
+  },
+  {
+    "name": "Vex",
+    "href": "vex",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Vex 2",
+    "href": "vex2",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Vex 3",
+    "href": "vex3",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Vex 4",
+    "href": "vex4",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Vex 5",
+    "href": "vex5",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Vex 6",
+    "href": "vex6",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Vex 7",
+    "href": "vex7",
+    "categories": [
+      "Platformer"
+    ]
+  },
+  {
+    "name": "Volley Random",
+    "href": "volley-random",
+    "categories": [
+      "Sports"
+    ]
+  },
+  {
+    "name": "Wall Smash",
+    "href": "wallsmash",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Watermelon Game",
+    "href": "watermelongame",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "We Become What We Behold",
+    "href": "wbwwb",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "Weavesilk",
+    "href": "weavesilk",
+    "categories": [
+      "Sandbox"
+    ]
+  },
+  {
+    "name": "Windows 11 Simulator",
+    "href": "win11",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Windows XP Simulator",
+    "href": "xp",
+    "categories": [
+      "Miscellaneous"
+    ]
+  },
+  {
+    "name": "Winter Falling",
+    "href": "winter-falling",
+    "categories": [
+      "Strategy"
+    ]
+  },
+  {
+    "name": "Wordle",
+    "href": "wordle",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "Wordle Bot",
+    "href": "wordlebot",
+    "categories": [
+      "Puzzle"
+    ]
+  },
+  {
+    "name": "World's Hardest Game",
+    "href": "worlds-hardest-game",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "World's Hardest Game 2",
+    "href": "worldhardestgame2",
+    "categories": [
+      "Skill"
+    ]
+  },
+  {
+    "name": "xx142-b2.exe",
+    "href": "xx142-b2.exe",
+    "categories": [
+      "Horror"
+    ]
+  },
+  {
+    "name": "Zombocalypse",
+    "href": "zombocalypse",
+    "categories": [
+      "Shooter"
+    ]
+  }
+]

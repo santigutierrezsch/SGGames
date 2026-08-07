@@ -149,6 +149,70 @@ hello huzz
             text-align: left;
         }
 
+        .instagram-promo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 0 0 1.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(102, 83, 214, 0.45);
+            border-radius: 12px;
+            background: rgba(26, 31, 44, 0.72);
+            text-align: left;
+        }
+
+        .instagram-promo-copy {
+            min-width: 0;
+        }
+
+        .instagram-promo-title {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin: 0 0 0.25rem;
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .instagram-promo-title i {
+            color: var(--accent-color);
+            font-size: 1.25rem;
+        }
+
+        .instagram-promo-text {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .instagram-promo-handle {
+            color: var(--text-color);
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .instagram-promo-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            min-height: 40px;
+            padding: 0.5rem 0.85rem;
+            border-radius: 999px;
+            background: var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .instagram-promo-link:hover {
+            background: var(--button-hover);
+            transform: translateY(-1px);
+        }
+
         .schedule-widget {
             display: grid;
             gap: 0.9rem;
@@ -507,6 +571,16 @@ hello huzz
                 flex-direction: column;
             }
 
+            .instagram-promo {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .instagram-promo-link {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
         }
         
         @media (max-width: 480px) {
@@ -544,7 +618,7 @@ hello huzz
     <div class="container">
         <header>
             <h1 class="brand-title"><span class="brand-mark">SG</span> Games</h1>
-            <p class="version-label">V3.0 Preview</p>
+            <p class="version-label">V3.0</p>
             <!---
             <p>Browse the collection of unblocked games</p>
         -->
@@ -600,6 +674,15 @@ hello huzz
                     <a class="v3-action" href="/games/"><i class="fas fa-search" aria-hidden="true"></i> Browse Library</a>
                 </div>
                 <div id="homeRecentGames" class="v3-recent-list" aria-label="Recently played games"></div>
+            </section>
+            <section class="instagram-promo" aria-label="SG Games Instagram">
+                <div class="instagram-promo-copy">
+                    <h2 class="instagram-promo-title"><i class="fab fa-instagram" aria-hidden="true"></i> Follow SG Games</h2>
+                    <p class="instagram-promo-text">New domains, drops, and site news will be posted on <span class="instagram-promo-handle">@sggames.unblocked</span>.</p>
+                </div>
+                <a class="instagram-promo-link" href="https://www.instagram.com/sggames.unblocked/" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram" aria-hidden="true"></i> Open Instagram
+                </a>
             </section>
         </div>
     </div>

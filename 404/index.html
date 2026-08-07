@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SG Games 404 page with game search, popular games, and quick links back into the site.">
+    <meta name="description" content="SG Games 404 page with game search, suggested games, and quick links back into the site.">
     <title>404 - SG Games</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
@@ -205,7 +205,7 @@
             </div>
 
             <aside class="help-panel" aria-label="Game suggestions">
-                <h2 id="resultTitle">Popular Games</h2>
+                <h2 id="resultTitle">Suggested Games</h2>
                 <div class="result-grid" id="gameResults"></div>
                 <p class="empty-results" id="emptyResults" hidden>No matches. Try a shorter search.</p>
             </aside>
@@ -214,8 +214,7 @@
 
     <script>
     (function () {
-        const GAME_INDEX_URL = '/games/';
-        const POPULARITY_CSV_URL = '/games%20popularity%20ranking%20-%20Pages_and_screens_Page_path_and_screen_class.csv';
+        const GAMES_JSON_URL = '/games.json';
         const input = document.getElementById('errorSearch');
         const searchButton = document.getElementById('errorSearchButton');
         const randomButton = document.getElementById('randomGameButton');
@@ -229,33 +228,19 @@
             return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
         }
 
-        function parseCsv(text) {
-            return text.trim().split(/\r?\n/).slice(1).map((line) => {
-                const comma = line.lastIndexOf(',');
-                return comma > -1 ? [line.slice(0, comma), line.slice(comma + 1)] : [line, '0'];
-            });
-        }
-
         async function loadGames() {
-            const [htmlResponse, popularityResponse] = await Promise.all([
-                fetch(GAME_INDEX_URL, { cache: 'no-store' }),
-                fetch(POPULARITY_CSV_URL, { cache: 'no-store' })
-            ]);
-            const html = await htmlResponse.text();
-            const popularityText = await popularityResponse.text();
-            const views = new Map(parseCsv(popularityText).map(([path, count]) => [
-                path.replace(/^\/games\//, '').replace(/\/$/, ''),
-                Number(count.replace(/[^0-9]/g, '')) || 0
-            ]));
-            games = Array.from(html.matchAll(/<a class="game[^"]*" href="([^"]+)"><span class="game-title">([^<]+)<\/span><\/a>/g))
-                .map((match) => ({
-                    href: `/games/${match[1].replace(/^\.?\//, '').replace(/\/$/, '')}/`,
-                    path: match[1].replace(/^\.?\//, '').replace(/\/$/, ''),
-                    title: match[2].trim()
+            const response = await fetch(GAMES_JSON_URL, { cache: 'no-store' });
+            const data = await response.json();
+            games = (Array.isArray(data) ? data : [])
+                .map((game) => ({
+                    href: `/games/${String(game.href || '').replace(/^\.?\//, '').replace(/\/$/, '')}/`,
+                    path: String(game.href || '').replace(/^\.?\//, '').replace(/\/$/, ''),
+                    title: String(game.name || '').trim()
                 }))
                 .filter((game) => game.path && !/^https?:/i.test(game.path))
-                .map((game) => ({ ...game, views: views.get(game.path) || 0, search: `${game.title} ${game.path} ${normalize(game.title)} ${normalize(game.path)}`.toLowerCase() }));
-            render(games.sort((a, b) => b.views - a.views).slice(0, 6), 'Popular Games');
+                .map((game) => ({ ...game, search: `${game.title} ${game.path} ${normalize(game.title)} ${normalize(game.path)}`.toLowerCase() }))
+                .sort((a, b) => a.title.localeCompare(b.title));
+            render(games.slice(0, 6), 'Suggested Games');
         }
 
         function render(items, title) {
@@ -275,7 +260,7 @@
             const query = input.value.trim().toLowerCase();
             const compact = normalize(query);
             if (!query) {
-                render(games.sort((a, b) => b.views - a.views).slice(0, 6), 'Popular Games');
+                render(games.slice(0, 6), 'Suggested Games');
                 return;
             }
             render(games.filter((game) => game.search.includes(query) || game.search.includes(compact)), 'Search Results');
@@ -296,6 +281,21 @@
         loadGames().catch(() => render([], 'Game Search'));
     })();
     </script>
+    <footer>
+        <p class="footer-company">&copy; 2026 SG Games. All rights reserved.</p>
+        <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
+        <nav class="footer-links" aria-label="Footer">
+            <a href="/legal/privacy-policy/">Privacy Policy</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/terms-and-conditions/">Terms</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/cookies/">Cookies</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/about/">About</a>
+            <span class="footer-separator" aria-hidden="true">|</span>
+            <a href="/legal/contact/">Contact</a>
+        </nav>
+    </footer>
     <script src="/js/main.js" defer></script>
 </body>
 </html>

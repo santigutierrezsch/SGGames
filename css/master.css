@@ -255,6 +255,73 @@ main {
     opacity: 0.5;
 }
 
+.instagram-promo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border: 1px solid rgba(102, 83, 214, 0.45);
+    border-radius: var(--sg-radius);
+    background: var(--sg-surface);
+    text-align: left;
+    box-shadow: var(--sg-shadow-soft);
+}
+
+.instagram-promo-copy {
+    min-width: 0;
+}
+
+.instagram-promo-title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0 0 0.25rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.instagram-promo-title i {
+    color: var(--accent-color);
+    font-size: 1.25rem;
+}
+
+.instagram-promo-text {
+    margin: 0;
+    color: var(--sg-muted);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.instagram-promo-handle {
+    color: var(--text-color);
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.instagram-promo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 40px;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    background: var(--accent-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 800;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.instagram-promo-link:hover {
+    background: var(--button-hover);
+    transform: translateY(-1px);
+}
+
 input,
 select,
 textarea,
@@ -285,8 +352,14 @@ footer,
 .footer {
     width: 100%;
     margin-top: auto;
+    box-sizing: border-box;
+    padding: 1.75rem 1.25rem 2rem;
+    text-align: center;
     background: rgba(15, 20, 31, 0.94) !important;
     border-top: 1px solid var(--sg-border) !important;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 10;
 }
 
 footer > br,
@@ -294,20 +367,55 @@ footer > a[style] {
     display: none !important;
 }
 
+.footer-company,
+.footer-owner,
 .footer-links {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
     line-height: 1.5;
 }
 
+.footer-company,
+.footer-owner {
+    margin-top: 0;
+    margin-bottom: 0.45rem;
+    opacity: 0.9;
+}
+
+.footer-owner {
+    margin-bottom: 1rem;
+    opacity: 0.75;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
 .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.82;
     min-height: 32px;
     display: inline-flex;
     align-items: center;
     border-radius: 999px;
     padding: 0.15rem 0.4rem;
+    transition: color 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
 }
 
 .footer-links a:hover {
+    color: var(--accent-color);
+    opacity: 1;
     background: rgba(102, 83, 214, 0.12);
+}
+
+.footer-separator {
+    opacity: 0.4;
 }
 
 .settings-container {
@@ -415,8 +523,6 @@ footer > a[style] {
     border-bottom-color: var(--sg-border-strong) !important;
 }
 
-#games,
-#starred-games-grid,
 .game {
     min-height: 122px !important;
     border: 1px solid var(--sg-border) !important;
@@ -512,9 +618,6 @@ footer > a[style] {
     .library-actions {
         padding: 0.65rem !important;
     }
-
-    #games,
-    #starred-games-grid,
 }
 
 @media (max-width: 520px) {
@@ -545,7 +648,7 @@ footer > a[style] {
     }
 
     .quick-filter-chips {
-        grid-template-columns: 1fr 1fr 1fr !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         width: 100%;
     }
 
@@ -554,6 +657,13 @@ footer > a[style] {
         padding-right: 0.45rem !important;
     }
 
-    #games,
-    #starred-games-grid,
+    .instagram-promo {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .instagram-promo-link {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
