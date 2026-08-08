@@ -157,6 +157,33 @@
         footer > br {
             display: none;
         }
+
+        .darby-easter-egg-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: -0.75rem 0 0.75rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .darby-easter-egg {
+            width: 28px;
+            height: 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            opacity: 0.2;
+            text-decoration: none;
+            transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .darby-easter-egg:hover,
+        .darby-easter-egg:focus-visible {
+            background: rgba(102, 83, 214, 0.22);
+            border-color: rgba(102, 83, 214, 0.45);
+            opacity: 1;
+        }
         
         /* Settings Styles */
         .settings-section {
@@ -589,6 +616,10 @@
         </div>
     </div>
     
+    <div class="darby-easter-egg-wrap" aria-label="Hidden easter egg">
+        <a class="darby-easter-egg" href="/darby/" aria-label="Open Darby"></a>
+    </div>
+
     <footer>
         <p class="footer-company">&copy; 2026 SG Games. All rights reserved.</p>
         <p class="footer-owner">Owned and operated by Santiago Gutierrez.</p>
@@ -603,13 +634,7 @@
             <span class="footer-separator" aria-hidden="true">|</span>
             <a href="/legal/contact/">Contact</a>
         </nav>
-        <a href="/darby/" style="display:inline-block;margin-bottom:0.5rem;padding:0.2rem 0.45rem;font-size:0.65rem;line-height:1;border:1px solid rgba(255,255,255,0.25);border-radius:3px;color:rgba(255,255,255,0.75);text-decoration:none;">
-        
-        </a>
-        <br>
-        © 2026 Santiago Gutierrez
-        
-    </footer>
+</footer>
     <script src="/js/main.js" defer></script>
 </body>
 </html>

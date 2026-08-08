@@ -316,6 +316,26 @@
         return `${minutes}m ${twoDigit(remainder)}s`;
     }
 
+    function formatMinutesAsClock(minutes) {
+        const hour = Math.floor(minutes / 60);
+        const minute = minutes % 60;
+        const suffix = hour >= 12 ? "PM" : "AM";
+        const displayHour = hour % 12 || 12;
+        return `${displayHour}:${twoDigit(minute)} ${suffix}`;
+    }
+
+    function shouldShowBeforeSchoolCountdown(date, firstStartM) {
+        const day = date.toLocaleDateString("en-US", { weekday: "long" });
+        const nowM = date.getHours() * 60 + date.getMinutes() + date.getSeconds() / 60;
+        const regularCountdownStart = 7 * 60;
+        const lateArrivalCountdownStart = 8 * 60 + 45;
+
+        if (nowM >= firstStartM) return false;
+        if (day === "Wednesday") return nowM >= lateArrivalCountdownStart;
+        if (["Monday", "Tuesday", "Thursday", "Friday"].includes(day)) return nowM >= regularCountdownStart;
+        return false;
+    }
+
     function schoolYearStart(date) {
         return date.getMonth() >= 6 ? date.getFullYear() : date.getFullYear() - 1;
     }
@@ -347,6 +367,38 @@
         return "Regular";
     }
 
+    function loadScheduleClasses() {
+        try {
+            const saved = JSON.parse(localStorage.getItem("sgScheduleClasses") || "{}");
+            return saved && typeof saved === "object" ? saved : {};
+        } catch (error) {
+            return {};
+        }
+    }
+
+    function schedulePeriodKey(name) {
+        const periodMatch = String(name || "").match(/Period\s+([1-8])/i);
+        if (periodMatch) return `Period ${periodMatch[1]}`;
+        if (/homeroom|win/i.test(String(name || ""))) return "Homeroom";
+        return "";
+    }
+
+    function formatScheduleClassDetail(periodName) {
+        const key = schedulePeriodKey(periodName);
+        if (!key) return "";
+        if (key === "Homeroom") return "Homeroom";
+        const classes = loadScheduleClasses();
+        const saved = classes[key] || {};
+        const className = String(saved.className || "").trim();
+        const teacher = String(saved.teacher || "").trim();
+        const room = String(saved.room || "").trim();
+        const parts = [];
+        if (className) parts.push(className);
+        if (teacher) parts.push(teacher);
+        if (room) parts.push(`Room ${room}`);
+        return parts.join(" | ");
+    }
+
     function getScheduleStatus(scheduleKey, date) {
         const schedule = HOME_SCHEDULES[scheduleKey];
         const periods = Object.entries(schedule.periods).map(([name, range]) => {
@@ -355,6 +407,7 @@
         });
         const nowSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
         const nowM = nowSeconds / 60;
+        const firstStartM = periods[0]?.startM;
 
         for (let index = 0; index < periods.length; index += 1) {
             const period = periods[index];
@@ -362,26 +415,39 @@
                 return {
                     now: period.name,
                     timeLeft: formatDuration(period.endM * 60 - nowSeconds),
-                    next: periods[index + 1]?.name || "After School"
+                    next: periods[index + 1]?.name || "After School",
+                    nowDetail: formatScheduleClassDetail(period.name),
+                    nextDetail: formatScheduleClassDetail(periods[index + 1]?.name || "")
                 };
             }
             if (nowM < period.startM) {
+                const isBeforeFirst = index === 0;
+                const shouldCountdown = !isBeforeFirst || shouldShowBeforeSchoolCountdown(date, firstStartM);
                 return {
-                    now: index === 0 ? "Before School" : "Passing Period",
-                    timeLeft: formatDuration(period.startM * 60 - nowSeconds),
-                    next: period.name
+                    now: isBeforeFirst ? "Before School" : "Passing Period",
+                    timeLeft: shouldCountdown ? formatDuration(period.startM * 60 - nowSeconds) : `Starts at ${formatMinutesAsClock(period.startM)}`,
+                    next: period.name,
+                    nowDetail: "",
+                    nextDetail: formatScheduleClassDetail(period.name)
                 };
             }
         }
 
-        return { now: "After School", timeLeft: "--", next: "Tomorrow" };
+        return { now: "After School", timeLeft: "--", next: "Tomorrow", nowDetail: "", nextDetail: "" };
     }
 
     function setupHomeScheduleWidget() {
         const nowNode = document.getElementById("homeScheduleNow");
         const timeNode = document.getElementById("homeScheduleTimeLeft");
         const nextNode = document.getElementById("homeScheduleNext");
+        const nowDetailNode = document.getElementById("homeScheduleNowDetail");
+        const nextDetailNode = document.getElementById("homeScheduleNextDetail");
         if (!nowNode || !timeNode || !nextNode) return;
+
+        function setDetails(nowDetail, nextDetail) {
+            if (nowDetailNode) nowDetailNode.textContent = nowDetail || "";
+            if (nextDetailNode) nextDetailNode.textContent = nextDetail || "";
+        }
 
         function render() {
             const now = centralNow();
@@ -392,6 +458,7 @@
                 nowNode.textContent = `No School: ${override.title}`;
                 timeNode.textContent = "--";
                 nextNode.textContent = "Full schedule";
+                setDetails("", "");
                 return;
             }
 
@@ -399,6 +466,7 @@
                 nowNode.textContent = override.title;
                 timeNode.textContent = "--";
                 nextNode.textContent = "Full schedule";
+                setDetails("", "");
                 return;
             }
 
@@ -406,6 +474,7 @@
                 nowNode.textContent = "Weekend";
                 timeNode.textContent = "--";
                 nextNode.textContent = "Monday";
+                setDetails("", "");
                 return;
             }
 
@@ -414,6 +483,7 @@
             nowNode.textContent = status.now;
             timeNode.textContent = status.timeLeft;
             nextNode.textContent = status.next;
+            setDetails(status.nowDetail, status.nextDetail);
         }
 
         render();

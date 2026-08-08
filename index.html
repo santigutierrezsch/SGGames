@@ -267,6 +267,15 @@ hello huzz
             overflow-wrap: anywhere;
         }
 
+        .schedule-widget-detail {
+            margin: 0.35rem 0 0;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
         .schedule-widget-link {
             display: inline-flex;
             align-items: center;
@@ -655,6 +664,7 @@ hello huzz
                     <div class="schedule-widget-stat">
                         <p class="schedule-widget-label">Now</p>
                         <p id="homeScheduleNow" class="schedule-widget-value">Loading...</p>
+                        <p id="homeScheduleNowDetail" class="schedule-widget-detail"></p>
                     </div>
                     <div class="schedule-widget-stat">
                         <p class="schedule-widget-label">Time Left</p>
@@ -663,6 +673,7 @@ hello huzz
                     <div class="schedule-widget-stat">
                         <p class="schedule-widget-label">Next</p>
                         <p id="homeScheduleNext" class="schedule-widget-value">--</p>
+                        <p id="homeScheduleNextDetail" class="schedule-widget-detail"></p>
                     </div>
                 </div>
             </section>
