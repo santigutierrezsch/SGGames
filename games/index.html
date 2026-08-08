@@ -509,26 +509,144 @@
     }
 
     .sort-control {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
+        display: grid;
+        gap: 0.35rem;
         font-weight: 600;
         opacity: 0.92;
         justify-self: end;
     }
 
+    .sort-control > span {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 0.78rem;
+        font-weight: 800;
+    }
+
     .select-controls {
         display: flex;
-        align-items: center;
+        align-items: end;
         gap: 0.75rem;
         flex-wrap: wrap;
         justify-content: flex-end;
     }
 
+    .select-shell {
+        position: relative;
+        display: grid;
+        align-items: center;
+        min-width: 180px;
+    }
+
+    .select-shell i {
+        position: absolute;
+        left: 0.8rem;
+        color: rgba(255, 255, 255, 0.58);
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .select-shell::after {
+        content: "\f078";
+        position: absolute;
+        right: 0.8rem;
+        color: rgba(255, 255, 255, 0.58);
+        font-family: "Font Awesome 5 Free";
+        font-size: 0.78rem;
+        font-weight: 900;
+        pointer-events: none;
+    }
+
     .library-select {
-        padding: 0.45rem 2rem 0.45rem 0.8rem;
+        width: 100%;
+        min-height: 46px;
+        padding: 0.55rem 2.2rem 0.55rem 2.35rem;
         cursor: pointer;
-        max-width: 190px;
+        max-width: 230px;
+        appearance: none;
+        background: rgba(10, 14, 23, 0.72);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 10px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .library-select:hover {
+        border-color: rgba(102, 83, 214, 0.5);
+    }
+
+    .category-select-row {
+        display: flex;
+        align-items: end;
+        gap: 0.5rem;
+    }
+
+    .category-favorite-btn {
+        width: 46px;
+        height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        background: rgba(10, 14, 23, 0.72);
+        color: rgba(255, 255, 255, 0.64);
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .category-favorite-btn:hover:not(:disabled),
+    .category-favorite-btn.active {
+        background: rgba(102, 83, 214, 0.22);
+        border-color: rgba(102, 83, 214, 0.66);
+        color: #ffd54a;
+        transform: translateY(-1px);
+    }
+
+    .category-favorite-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+    }
+
+    .favorite-category-shortcuts {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        background: rgba(10, 14, 23, 0.34);
+    }
+
+    .favorite-category-shortcuts[hidden] {
+        display: none;
+    }
+
+    .favorite-category-label {
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 0.78rem;
+        font-weight: 800;
+    }
+
+    .favorite-category-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        min-height: 34px;
+        padding: 0.4rem 0.7rem;
+        border: 1px solid rgba(102, 83, 214, 0.45);
+        border-radius: 999px;
+        background: rgba(102, 83, 214, 0.16);
+        color: var(--text-color);
+        cursor: pointer;
+        font-size: 0.88rem;
+        font-weight: 800;
+        transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .favorite-category-chip:hover,
+    .favorite-category-chip.active {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        transform: translateY(-1px);
     }
     
     /* Games Grid */
@@ -752,8 +870,17 @@
             width: 100%;
         }
 
+        .select-shell,
         .library-select {
             max-width: none;
+        }
+
+        .category-select-row {
+            width: 100%;
+        }
+
+        .category-select-row .select-shell {
+            flex: 1;
         }
     }
 
@@ -888,18 +1015,31 @@
         <div class="select-controls">
             <label class="sort-control">
                 <span>Category</span>
-                <select id="categoryFilter" class="library-select" aria-label="Filter by category">
-                    <option value="all">All categories</option>
-                </select>
+                <div class="category-select-row">
+                    <span class="select-shell">
+                        <i class="fas fa-tags" aria-hidden="true"></i>
+                        <select id="categoryFilter" class="library-select" aria-label="Filter by category">
+                            <option value="all">All categories</option>
+                        </select>
+                    </span>
+                    <button id="favoriteCategoryBtn" class="category-favorite-btn" type="button" aria-label="Favorite selected category" title="Favorite selected category" disabled>
+                        <i class="far fa-star" aria-hidden="true"></i>
+                    </button>
+                </div>
             </label>
             <label class="sort-control">
                 <span>Sort</span>
-                <select id="gameSort" class="library-select" aria-label="Sort games">
-                    <option value="az">A-Z</option>
-                </select>
+                <span class="select-shell">
+                    <i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
+                    <select id="gameSort" class="library-select" aria-label="Sort games">
+                        <option value="az">A-Z</option>
+                        <option value="popular">Popular</option>
+                    </select>
+                </span>
             </label>
         </div>
     </div>
+    <div id="favoriteCategoryShortcuts" class="favorite-category-shortcuts" aria-label="Favorite category shortcuts" hidden></div>
     <div class="library-actions" aria-label="Quick Play">
         <div class="quick-play-heading">
             <span>Quick Play</span>
@@ -1727,6 +1867,7 @@
 <script>
 (function () {
     const STARRED_STORAGE_KEY = 'sggamesStarredGames';
+    const STARRED_CATEGORIES_STORAGE_KEY = 'sggamesStarredCategories';
     const RECENT_STORAGE_KEY = 'sggamesRecentlyPlayed';
     const LAST_PLAYED_STORAGE_KEY = 'sggamesLastPlayed';
     const GAMES_JSON_URL = '/games.json';
@@ -1735,6 +1876,8 @@
         { key: 'favorites', label: 'Favorites' }
     ];
     const state = { filter: 'all', sort: 'az', query: '' };
+    let favoriteCategorySet = new Set();
+    let categoryLabelByKey = new Map();
 
     function normalizeSearchText(value) {
         return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
@@ -1767,7 +1910,8 @@
             const normalizedGames = Array.isArray(games) ? games.map((game) => ({
                 name: String(game.name || '').trim(),
                 href: String(game.href || '').trim(),
-                categories: Array.isArray(game.categories) ? game.categories.map((category) => String(category).trim()).filter(Boolean) : []
+                categories: Array.isArray(game.categories) ? game.categories.map((category) => String(category).trim()).filter(Boolean) : [],
+                ranking: Number.isFinite(Number(game.ranking)) ? Number(game.ranking) : Number.MAX_SAFE_INTEGER
             })).filter((game) => game.name && game.href) : [];
 
             normalizedGames.forEach((game) => {
@@ -1788,6 +1932,23 @@
         } catch (error) {
             return new Set();
         }
+    }
+
+    function safeParseFavoriteCategories() {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(STARRED_CATEGORIES_STORAGE_KEY) || '[]');
+            return new Set(Array.isArray(parsed) ? parsed.map((category) => String(category).toLowerCase()).filter(Boolean) : []);
+        } catch (error) {
+            return new Set();
+        }
+    }
+
+    function saveFavoriteCategories(categories) {
+        localStorage.setItem(STARRED_CATEGORIES_STORAGE_KEY, JSON.stringify(Array.from(categories)));
+    }
+
+    function setQuickFilterActive(key) {
+        document.querySelectorAll('.filter-chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.filter === key));
     }
 
     function safeParseRecentGames() {
@@ -1830,6 +1991,7 @@
             card.className = 'game';
             card.href = game.href;
             card.dataset.jsonCategories = JSON.stringify(game.categories);
+            card.dataset.jsonRanking = String(game.ranking);
 
             const title = document.createElement('span');
             title.className = 'game-title';
@@ -1871,10 +2033,61 @@
         if (meta.children.length) card.appendChild(meta);
     }
 
+    function formatCategoryOptionLabel(label) {
+        return label;
+    }
+
+    function selectedCategoryKey(categorySelect) {
+        return categorySelect?.value?.startsWith('category:') ? categorySelect.value.replace('category:', '') : '';
+    }
+
+    function updateCategoryFavoriteControl() {
+        const categorySelect = document.getElementById('categoryFilter');
+        const favoriteButton = document.getElementById('favoriteCategoryBtn');
+        if (!categorySelect || !favoriteButton) return;
+        const key = selectedCategoryKey(categorySelect);
+        const isFavorite = key && favoriteCategorySet.has(key);
+        favoriteButton.disabled = !key;
+        favoriteButton.classList.toggle('active', Boolean(isFavorite));
+        favoriteButton.innerHTML = isFavorite ? '<i class="fas fa-star" aria-hidden="true"></i>' : '<i class="far fa-star" aria-hidden="true"></i>';
+        favoriteButton.setAttribute('aria-pressed', String(Boolean(isFavorite)));
+        favoriteButton.setAttribute('title', key ? (isFavorite ? 'Unfavorite selected category' : 'Favorite selected category') : 'Choose a category first');
+    }
+
+    function renderFavoriteCategoryShortcuts() {
+        const container = document.getElementById('favoriteCategoryShortcuts');
+        if (!container) return;
+        container.innerHTML = '';
+        const favoriteKeys = Array.from(favoriteCategorySet).filter((key) => categoryLabelByKey.has(key)).sort((a, b) => categoryLabelByKey.get(a).localeCompare(categoryLabelByKey.get(b)));
+        container.hidden = favoriteKeys.length === 0;
+        if (!favoriteKeys.length) return;
+
+        const label = document.createElement('span');
+        label.className = 'favorite-category-label';
+        label.textContent = 'Favorite categories';
+        container.appendChild(label);
+
+        favoriteKeys.forEach((key) => {
+            const button = document.createElement('button');
+            button.className = 'favorite-category-chip';
+            button.type = 'button';
+            button.dataset.category = key;
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-star';
+            icon.setAttribute('aria-hidden', 'true');
+            button.appendChild(icon);
+            button.appendChild(document.createTextNode(categoryLabelByKey.get(key)));
+            button.classList.toggle('active', state.filter === `category:${key}`);
+            container.appendChild(button);
+        });
+    }
+
     function buildCategoryButtons(categoryLabels) {
         const quickFilterContainer = document.querySelector('.quick-filter-chips');
         const categorySelect = document.getElementById('categoryFilter');
         if (!quickFilterContainer || !categorySelect) return;
+
+        categoryLabelByKey = new Map(categoryLabels.map((label) => [label.toLowerCase(), label]));
 
         quickFilterContainer.innerHTML = '';
         SPECIAL_FILTERS.forEach((filter) => {
@@ -1891,10 +2104,12 @@
         categoryLabels.forEach((label) => {
             const option = document.createElement('option');
             option.value = `category:${label.toLowerCase()}`;
-            option.textContent = label;
+            option.textContent = formatCategoryOptionLabel(label);
             categorySelect.appendChild(option);
         });
         categorySelect.value = state.filter.startsWith('category:') ? state.filter : 'all';
+        updateCategoryFavoriteControl();
+        renderFavoriteCategoryShortcuts();
     }
 
     function updateStarButton(button, isStarred) {
@@ -1933,7 +2148,11 @@
 
     function sortCards(cards) {
         const sorted = [...cards];
-        sorted.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
+        if (state.sort === 'popular') {
+            sorted.sort((a, b) => Number(a.dataset.ranking) - Number(b.dataset.ranking) || a.dataset.title.localeCompare(b.dataset.title));
+        } else {
+            sorted.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
+        }
         return sorted;
     }
 
@@ -1950,11 +2169,13 @@
         const searchButton = document.querySelector('.search-enter');
         const sortSelect = document.getElementById('gameSort');
         const categorySelect = document.getElementById('categoryFilter');
+        const favoriteCategoryButton = document.getElementById('favoriteCategoryBtn');
         const continueButton = document.getElementById('continueGameBtn');
         const randomButton = document.getElementById('randomGameBtn');
         const clearButton = document.getElementById('clearLibraryBtn');
         if (!gamesGrid) return;
 
+        favoriteCategorySet = safeParseFavoriteCategories();
         const { games, categoryLabels } = await loadGameData();
         renderGameCards(gamesGrid, games);
         buildCategoryButtons(categoryLabels);
@@ -1971,10 +2192,12 @@
             }
             const title = getGameTitle(card);
             const categories = JSON.parse(card.dataset.jsonCategories || '[]');
+            const ranking = Number(card.dataset.jsonRanking || Number.MAX_SAFE_INTEGER);
             card.dataset.title = title;
             card.dataset.href = path;
             card.dataset.index = String(index);
             card.dataset.gameKey = makeGameKey(card);
+            card.dataset.ranking = String(Number.isFinite(ranking) ? ranking : Number.MAX_SAFE_INTEGER);
             card.dataset.categoryList = categories.map((category) => category.toLowerCase()).join('|');
             card.dataset.searchIndex = buildSearchIndex(title, path, categories);
             addCardMetadata(card, categories);
@@ -2063,7 +2286,32 @@
         });
         categorySelect?.addEventListener('change', () => {
             state.filter = categorySelect.value;
-            document.querySelectorAll('.filter-chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.filter === state.filter));
+            setQuickFilterActive('all');
+            updateCategoryFavoriteControl();
+            renderFavoriteCategoryShortcuts();
+            render();
+        });
+        favoriteCategoryButton?.addEventListener('click', () => {
+            const key = selectedCategoryKey(categorySelect);
+            if (!key) return;
+            if (favoriteCategorySet.has(key)) {
+                favoriteCategorySet.delete(key);
+            } else {
+                favoriteCategorySet.add(key);
+            }
+            saveFavoriteCategories(favoriteCategorySet);
+            buildCategoryButtons(categoryLabels);
+            render();
+        });
+        document.getElementById('favoriteCategoryShortcuts')?.addEventListener('click', (event) => {
+            const button = event.target.closest('.favorite-category-chip');
+            if (!button || !categorySelect) return;
+            const key = button.dataset.category;
+            state.filter = `category:${key}`;
+            categorySelect.value = state.filter;
+            setQuickFilterActive('all');
+            updateCategoryFavoriteControl();
+            renderFavoriteCategoryShortcuts();
             render();
         });
         document.querySelector('.filter-panel')?.addEventListener('click', (event) => {
@@ -2071,7 +2319,9 @@
             if (!button) return;
             state.filter = button.dataset.filter || 'all';
             if (categorySelect) categorySelect.value = 'all';
-            document.querySelectorAll('.filter-chip').forEach((chip) => chip.classList.toggle('active', chip === button));
+            updateCategoryFavoriteControl();
+            setQuickFilterActive(state.filter);
+            renderFavoriteCategoryShortcuts();
             render();
         });
         continueButton?.addEventListener('click', () => {
@@ -2095,7 +2345,9 @@
             if (searchInput) searchInput.value = '';
             if (sortSelect) sortSelect.value = state.sort;
             if (categorySelect) categorySelect.value = 'all';
-            document.querySelectorAll('.filter-chip').forEach((chip) => chip.classList.toggle('active', chip.dataset.filter === 'all'));
+            updateCategoryFavoriteControl();
+            setQuickFilterActive('all');
+            renderFavoriteCategoryShortcuts();
             render();
         });
         document.addEventListener('keydown', (event) => {
