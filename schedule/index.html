@@ -118,31 +118,82 @@
     }
 
     .status-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 0.85rem;
       margin-bottom: 1rem;
     }
 
     .status-card {
-      padding: 1rem;
+      padding: 1rem 1.1rem;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 10px;
       background: rgba(10, 14, 23, 0.45);
+    }
+
+    .status-summary {
+      display: grid;
+      gap: 1rem;
+      padding: 1.15rem 1.2rem;
+      border-color: rgba(102, 83, 214, 0.28);
+      background: rgba(12, 16, 26, 0.92);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+    }
+
+    .status-summary-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .status-block {
+      min-width: 0;
+    }
+
+    .status-block-muted {
+      padding: 0.95rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .status-block-featured {
+      padding: 1rem;
+      border: 1px solid rgba(102, 83, 214, 0.34);
+      border-radius: 14px;
+      background: rgba(102, 83, 214, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .status-block-primary {
+      padding: 1.1rem 1.05rem;
+      border: 1px solid rgba(102, 83, 214, 0.34);
+      border-radius: 14px;
+      background: rgba(102, 83, 214, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
     .eyebrow {
       margin: 0 0 0.35rem;
       color: var(--school-muted);
       font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       font-weight: 700;
     }
 
     #currentPeriod {
       margin: 0;
       color: var(--text-color);
-      font-size: 1.45rem;
+      font-size: clamp(1.3rem, 2.6vw, 1.7rem);
       font-weight: 800;
+      line-height: 1.05;
+    }
+
+    #currentPeriodTime {
+      margin: 0.45rem 0 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.35;
     }
 
     #timeRemaining,
@@ -155,7 +206,16 @@
 
     #dayType {
       color: var(--school-accent);
-      font-size: 1.05rem;
+      font-size: 1.08rem;
+    }
+
+    #timeRemaining {
+      margin: 0;
+      color: var(--text-color);
+      font-size: clamp(1.8rem, 4.6vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
     }
 
     .schedule-card {
@@ -219,6 +279,11 @@
       font-size: 0.9rem;
       font-weight: 600;
       line-height: 1.4;
+    }
+
+    .status-block-featured .period-details {
+      margin-top: 0.45rem;
+      color: rgba(255, 255, 255, 0.78);
     }
 
     .period-main {
@@ -373,8 +438,7 @@
 
     @media (max-width: 700px) {
       .header,
-      .schedule-top,
-      .status-grid {
+      .schedule-top {
         grid-template-columns: 1fr;
       }
 
@@ -382,6 +446,11 @@
       .schedule-top {
         align-items: stretch;
         flex-direction: column;
+      }
+
+      .status-summary-top {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
       }
 
       .home-link {
@@ -434,15 +503,23 @@
       </div>
 
       <div class="status-grid">
-        <div class="status-card">
-          <p class="eyebrow">Today</p>
-          <p id="dayType">Loading...</p>
-        </div>
-        <div class="status-card">
-          <p class="eyebrow">Now</p>
-          <p id="currentPeriod">--</p>
-          <p id="currentPeriodDetails" class="period-details"></p>
-          <p id="timeRemaining">--</p>
+        <div class="status-card status-summary">
+          <div class="status-block status-block-primary">
+            <p class="eyebrow">Time Remaining</p>
+            <p id="timeRemaining">--</p>
+          </div>
+          <div class="status-summary-top">
+            <div class="status-block status-block-featured">
+              <p class="eyebrow">Now</p>
+              <p id="currentPeriod">--</p>
+              <p id="currentPeriodTime">--</p>
+              <p id="currentPeriodDetails" class="period-details"></p>
+            </div>
+            <div class="status-block status-block-muted">
+              <p class="eyebrow">Today</p>
+              <p id="dayType">Loading...</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -471,179 +548,29 @@
     </section>
   </div>
 
+<script src="/js/schedule-shared.js"></script>
 <script>
-const schedules = {
-  Regular: {
-    type: "Normal",
-    periods: {
-      "Period 1": "7:45 - 8:35",
-      "Period 2": "8:41 - 9:34",
-      "Period 3": "9:40 - 10:30",
-      "Period 4": "10:36 - 11:26",
-      "Period 5": "11:32 - 12:22",
-      "Period 6": "12:28 - 13:18",
-      "Period 7": "13:24 - 14:14",
-      "Period 8": "14:20 - 15:10"
-    }
-  },
-  Homeroom: {
-    type: "Homeroom/WIN",
-    periods: {
-      "Period 1": "7:45 - 8:30",
-      "Period 2": "8:35 - 9:20",
-      "Homeroom": "9:25 - 10:10",
-      "Period 3": "10:15 - 11:00",
-      "Period 4": "11:05 - 11:50",
-      "Period 5": "11:55 - 12:40",
-      "Period 6": "12:45 - 13:30",
-      "Period 7": "13:35 - 14:20",
-      "Period 8": "14:25 - 15:10"
-    }
-  },
-  LateArrival: {
-    type: "Late Arrival",
-    periods: {
-      "Period 1": "9:00 - 9:42",
-      "Period 2": "9:47 - 10:29",
-      "Period 3": "10:34 - 11:16",
-      "Period 4": "11:21 - 12:03",
-      "Period 5": "12:08 - 12:49",
-      "Period 6": "12:54 - 13:36",
-      "Period 7": "13:41 - 14:23",
-      "Period 8": "14:28 - 15:10"
-    }
-  },
-  HalfDay: {
-    type: "Half-Day Institute",
-    periods: {
-      "Period 1": "7:45 - 8:11",
-      "Period 2": "8:17 - 8:45",
-      "Period 3": "8:51 - 9:17",
-      "Period 4": "9:23 - 9:49",
-      "Period 5": "9:55 - 10:21",
-      "Period 6": "10:27 - 10:54",
-      "Period 7": "11:00 - 11:27",
-      "Period 8": "11:33 - 12:00"
-    }
-  },
-  DecFinals1: {
-    type: "December Finals: Periods 1, 2, 6",
-    periods: {
-      "Period 1 Exam": "7:45 - 9:25",
-      "Period 2 Exam": "9:35 - 11:15",
-      "Period 6 Exam": "11:25 - 13:05"
-    }
-  },
-  DecFinals2: {
-    type: "December Finals: Periods 8, 3, 4",
-    periods: {
-      "Period 8 Exam": "7:45 - 9:25",
-      "Period 3 Exam": "9:35 - 11:15",
-      "Period 4 Exam": "11:25 - 13:05"
-    }
-  },
-  DecFinals3: {
-    type: "December Finals: Periods 7, 5, Makeup",
-    periods: {
-      "Period 7 Exam": "7:45 - 9:25",
-      "Period 5 Exam": "9:35 - 11:15",
-      "Makeup Exams": "11:25 - 13:05"
-    }
-  },
-  MayFinals1: {
-    type: "May Finals: Periods 1, 2, 6",
-    periods: {
-      "Period 1 Exam": "7:45 - 9:25",
-      "Period 2 Exam": "9:35 - 11:15",
-      "Period 6 Exam": "11:25 - 13:05"
-    }
-  },
-  MayFinals2: {
-    type: "May Finals: Periods 8, 3, 4",
-    periods: {
-      "Period 8 Exam": "7:45 - 9:25",
-      "Period 3 Exam": "9:35 - 11:15",
-      "Period 4 Exam": "11:25 - 13:05"
-    }
-  },
-  MayFinals3: {
-    type: "May Finals: Periods 7, 5, Makeup",
-    periods: {
-      "Period 7 Exam": "7:45 - 9:25",
-      "Period 5 Exam": "9:35 - 11:15",
-      "Makeup Exams": "11:25 - 13:05"
-    }
-  }
-};
+const sharedSchedule = window.SGScheduleShared;
+const {
+  CLASS_PERIODS,
+  CLASS_STORAGE_KEY,
+  centralNow: getNowCentral,
+  formatDuration,
+  formatMinutesAsClock,
+  getCalendarOverride,
+  parseTimeToMinutes: parseHMToMinutes,
+  schedulePeriodKey,
+  schedules,
+  shouldShowBeforeSchoolCountdown,
+  twoDigit
+} = sharedSchedule;
 
-const calendarOverrides = [
-  { start: "08-10", title: "Institute Day", kind: "noSchool" },
-  { start: "08-11", title: "Staff Development Day", kind: "noSchool" },
-  { start: "08-12", title: "Teacher Work Day", kind: "noSchool" },
-  { start: "09-07", title: "Labor Day", kind: "noSchool" },
-  { start: "10-08", title: "Institute Day", kind: "noSchool" },
-  { start: "10-09", title: "Parent/Teacher Conferences", kind: "noSchool" },
-  { start: "10-12", title: "Columbus/Indigenous Peoples' Day", kind: "noSchool" },
-  { start: "11-25", end: "11-27", title: "Thanksgiving Break", kind: "noSchool" },
-  { start: "12-21", end: "01-01", title: "Winter Break", kind: "noSchool" },
-  { start: "01-04", title: "Institute Day", kind: "noSchool" },
-  { start: "01-18", title: "MLK Day", kind: "noSchool" },
-  { start: "02-15", title: "Presidents' Day", kind: "noSchool" },
-  { start: "02-26", title: "County Institute Day", kind: "noSchool" },
-  { start: "03-04", title: "Institute Day", kind: "noSchool" },
-  { start: "03-05", title: "Parent/Teacher Conferences", kind: "noSchool" },
-  { start: "03-26", title: "Spring Holiday", kind: "noSchool" },
-  { start: "03-29", end: "04-02", title: "Spring Break", kind: "noSchool" },
-  { start: "04-05", end: "04-06", title: "Spring Break Continues", kind: "noSchool" },
-  { start: "05-31", title: "Memorial Day", kind: "noSchool" },
-  { start: "11-03", title: "E-Learning Day (Election Day)", kind: "eLearning" },
-  { start: "02-23", title: "Tentative E-Learning Day (Election Day)", kind: "eLearning" },
-  { start: "05-07", title: "Half-Day Institute", kind: "schedule", scheduleKey: "HalfDay" },
-  { start: "12-16", title: "December Finals", kind: "schedule", scheduleKey: "DecFinals1" },
-  { start: "12-17", title: "December Finals", kind: "schedule", scheduleKey: "DecFinals2" },
-  { start: "12-18", title: "December Finals", kind: "schedule", scheduleKey: "DecFinals3" },
-  { start: "05-24", title: "May Finals", kind: "schedule", scheduleKey: "MayFinals1" },
-  { start: "05-25", title: "May Finals", kind: "schedule", scheduleKey: "MayFinals2" },
-  { start: "05-26", title: "May Finals", kind: "schedule", scheduleKey: "MayFinals3" }
-];
-
-const CLASS_STORAGE_KEY = "sgScheduleClasses";
-const CLASS_PERIODS = [
-  "Period 1",
-  "Period 2",
-  "Period 3",
-  "Period 4",
-  "Period 5",
-  "Period 6",
-  "Period 7",
-  "Period 8"
-];
 let classAssignments = loadClassAssignments();
 let statusTimeout;
-
-function parseHMToMinutes(hm) {
-  const [h, m] = hm.split(":");
-  return Number(h) * 60 + Number(m);
-}
-
-function getNowCentral() {
-  return new Date(new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }));
-}
 
 function nowSecondsOfDay() {
   const d = getNowCentral();
   return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
-}
-
-function twoDigit(n) {
-  return String(n).padStart(2, "0");
-}
-
-function formatDuration(seconds) {
-  const safeSeconds = Math.max(0, Math.round(seconds));
-  const minutes = Math.floor(safeSeconds / 60);
-  const remainder = safeSeconds % 60;
-  return `${minutes}m ${twoDigit(remainder)}s`;
 }
 
 function escapeHtml(t) {
@@ -684,7 +611,7 @@ function periodKeyFromName(name) {
 }
 
 function getAssignmentForPeriod(name) {
-  const key = periodKeyFromName(name);
+  const key = schedulePeriodKey(name);
   if (key === "Homeroom") return { className: "Homeroom", teacher: "", room: "" };
   const assignment = key ? cleanAssignment(classAssignments[key]) : cleanAssignment({});
   return assignment;
@@ -719,26 +646,6 @@ function formatHM12(hm) {
   return `${hh}:${twoDigit(Number(m))} ${period}`;
 }
 
-function formatMinutesAsClock(minutes) {
-  const hour = Math.floor(minutes / 60);
-  const minute = minutes % 60;
-  const suffix = hour >= 12 ? "PM" : "AM";
-  const displayHour = hour % 12 || 12;
-  return `${displayHour}:${twoDigit(minute)} ${suffix}`;
-}
-
-function shouldShowBeforeSchoolCountdown(date, firstStartM) {
-  const day = date.toLocaleDateString("en-US", { weekday: "long" });
-  const nowM = date.getHours() * 60 + date.getMinutes() + date.getSeconds() / 60;
-  const regularCountdownStart = 7 * 60;
-  const lateArrivalCountdownStart = 8 * 60 + 45;
-
-  if (nowM >= firstStartM) return false;
-  if (day === "Wednesday") return nowM >= lateArrivalCountdownStart;
-  if (["Monday", "Tuesday", "Thursday", "Friday"].includes(day)) return nowM >= regularCountdownStart;
-  return false;
-}
-
 function updateDateHeader() {
   const now = getNowCentral();
   document.getElementById("todayDate").textContent = now.toLocaleDateString("en-US", {
@@ -746,34 +653,6 @@ function updateDateHeader() {
     month: "long",
     day: "numeric",
     year: "numeric"
-  });
-}
-
-function formatCentralDateKey(date) {
-  const year = date.getFullYear();
-  const month = twoDigit(date.getMonth() + 1);
-  const day = twoDigit(date.getDate());
-  return `${year}-${month}-${day}`;
-}
-
-function getSchoolYearStart(date) {
-  return date.getMonth() >= 6 ? date.getFullYear() : date.getFullYear() - 1;
-}
-
-function dateForMonthDay(monthDay, schoolYearStart) {
-  const [month, day] = monthDay.split("-").map(Number);
-  const year = month >= 7 ? schoolYearStart : schoolYearStart + 1;
-  return `${year}-${twoDigit(month)}-${twoDigit(day)}`;
-}
-
-function getCalendarOverride(date) {
-  const schoolYearStart = getSchoolYearStart(date);
-  const dateKey = formatCentralDateKey(date);
-
-  return calendarOverrides.find((entry) => {
-    const start = dateForMonthDay(entry.start, schoolYearStart);
-    const end = dateForMonthDay(entry.end || entry.start, schoolYearStart);
-    return dateKey >= start && dateKey <= end;
   });
 }
 
@@ -786,6 +665,7 @@ function setNoSchool(title, message) {
   document.getElementById("dayType").textContent = title;
   document.getElementById("scheduleCard").innerHTML = `<div class="empty-day">${escapeHtml(message)}</div>`;
   document.getElementById("currentPeriod").textContent = "No School";
+  document.getElementById("currentPeriodTime").textContent = "";
   document.getElementById("currentPeriodDetails").textContent = "";
   document.getElementById("timeRemaining").textContent = "";
 }
@@ -910,6 +790,7 @@ function bindScheduleEditor() {
 function renderSchedule(typeKey) {
   const container = document.getElementById("scheduleCard");
   container.innerHTML = "";
+  document.getElementById("currentPeriodTime").textContent = "";
   document.getElementById("currentPeriodDetails").textContent = "";
   const template = schedules[typeKey];
   if (!template) return {};
@@ -938,9 +819,10 @@ function renderSchedule(typeKey) {
     if (nowM >= p.startM && nowM < p.endM) {
       div.classList.add("now");
       document.getElementById("currentPeriod").textContent = p.name;
+      document.getElementById("currentPeriodTime").textContent = `${formatHM12(p.start)} - ${formatHM12(p.end)}`;
       document.getElementById("currentPeriodDetails").textContent = details;
       const remainingSec = Math.max(0, Math.round(p.endM * 60 - nowSecondsOfDay()));
-      document.getElementById("timeRemaining").textContent = `Time Remaining: ${formatDuration(remainingSec)}`;
+      document.getElementById("timeRemaining").textContent = formatDuration(remainingSec);
       currentPeriodFound = true;
     }
 
@@ -953,24 +835,30 @@ function renderSchedule(typeKey) {
   if (!currentPeriodFound) {
     if (firstStartM !== null && nowM < firstStartM) {
       document.getElementById("currentPeriod").textContent = "Before School";
+      document.getElementById("currentPeriodTime").textContent = "";
       document.getElementById("currentPeriodDetails").textContent = "";
       const untilStart = Math.max(0, Math.round(firstStartM * 60 - nowSecondsOfDay()));
       const now = getNowCentral();
       document.getElementById("timeRemaining").textContent = shouldShowBeforeSchoolCountdown(now, firstStartM)
-        ? `First period starts in ${formatDuration(untilStart)}`
-        : `First period starts at ${formatMinutesAsClock(firstStartM)}`;
+        ? formatDuration(untilStart)
+        : `Starts at ${formatMinutesAsClock(firstStartM)}`;
     } else if (lastEndM !== null && nowM >= lastEndM) {
       document.getElementById("currentPeriod").textContent = "After School";
+      document.getElementById("currentPeriodTime").textContent = "";
       document.getElementById("currentPeriodDetails").textContent = "";
       const lastEnd = periodsArray[periodsArray.length - 1].end;
-      document.getElementById("timeRemaining").textContent = `School ended at ${formatHM12(lastEnd)}`;
+      document.getElementById("timeRemaining").textContent = `Ended at ${formatHM12(lastEnd)}`;
     } else {
       for (const next of periodsArray) {
         if (nowM < next.startM) {
           document.getElementById("currentPeriod").textContent = "Passing Period";
+          const previous = periodsArray[periodsArray.indexOf(next) - 1];
+          document.getElementById("currentPeriodTime").textContent = previous
+            ? `${formatHM12(previous.end)} - ${formatHM12(next.start)}`
+            : "";
           document.getElementById("currentPeriodDetails").textContent = "";
           const untilStart = Math.max(0, Math.round(next.startM * 60 - nowSecondsOfDay()));
-          document.getElementById("timeRemaining").textContent = `Next: ${next.name} starts in ${formatDuration(untilStart)}`;
+          document.getElementById("timeRemaining").textContent = formatDuration(untilStart);
           break;
         }
       }
@@ -994,6 +882,7 @@ function renderCurrentDay() {
   if (override?.kind === "eLearning") {
     setNoSchool(override.title, `No in-person school: ${override.title}`);
     document.getElementById("currentPeriod").textContent = "E-Learning Day";
+    document.getElementById("currentPeriodTime").textContent = "";
     document.getElementById("currentPeriodDetails").textContent = "";
     return;
   }

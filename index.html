@@ -267,10 +267,24 @@ hello huzz
             overflow-wrap: anywhere;
         }
 
+        .schedule-widget-value-time {
+            font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+            line-height: 1.1;
+        }
+
         .schedule-widget-detail {
             margin: 0.35rem 0 0;
             color: rgba(255, 255, 255, 0.68);
             font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .schedule-widget-time {
+            margin: 0.35rem 0 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.88rem;
             font-weight: 700;
             line-height: 1.35;
             overflow-wrap: anywhere;
@@ -664,11 +678,12 @@ hello huzz
                     <div class="schedule-widget-stat">
                         <p class="schedule-widget-label">Now</p>
                         <p id="homeScheduleNow" class="schedule-widget-value">Loading...</p>
+                        <p id="homeScheduleNowTime" class="schedule-widget-time"></p>
                         <p id="homeScheduleNowDetail" class="schedule-widget-detail"></p>
                     </div>
                     <div class="schedule-widget-stat">
                         <p class="schedule-widget-label">Time Left</p>
-                        <p id="homeScheduleTimeLeft" class="schedule-widget-value">--</p>
+                        <p id="homeScheduleTimeLeft" class="schedule-widget-value schedule-widget-value-time">--</p>
                     </div>
                     <div class="schedule-widget-stat">
                         <p class="schedule-widget-label">Next</p>
@@ -721,6 +736,7 @@ hello huzz
         </a>
     </div>
 
+    <script src="/js/schedule-shared.js" defer></script>
     <script src="/js/main.js" defer></script>
 </body>
 </html>
