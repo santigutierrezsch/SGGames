@@ -19,7 +19,7 @@ function applySavedMimicry() {
     if (!savedType && !savedTitle && !savedIcon) {
         savedType = "gdocs";
         savedTitle = "Untitled document - Google Docs";
-        savedIcon = "https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico";
+        savedIcon = "https://upload.wikimedia.org/wikipedia/commons/1/18/Google_Docs_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
 
         localStorage.setItem("pageMimicType", savedType);
         localStorage.setItem("pageMimicTitle", savedTitle);
@@ -453,6 +453,15 @@ function setupStandaloneSettingsPage() {
     document.querySelector(".apply-email")?.addEventListener("click", function () {
         applyCustomEmail();
         showSavedFeedback();
+    });
+
+    ["username", "domain"].forEach((id) => {
+        document.getElementById(id)?.addEventListener("keydown", function (event) {
+            if (event.key !== "Enter") return;
+            event.preventDefault();
+            applyCustomEmail();
+            showSavedFeedback();
+        });
     });
 
     document.querySelectorAll(".toggle-switch input, .settings-toggle input").forEach((input) => {

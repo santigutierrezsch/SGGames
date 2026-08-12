@@ -252,12 +252,31 @@
         /* Email Customization Styles */
         .email-customization {
             margin-top: 1rem;
+            grid-column: 1 / -1;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            background: rgba(10, 14, 23, 0.42);
             transition: all 0.3s ease;
         }
-        
+
+        .email-customization-title {
+            margin: 0 0 0.35rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .email-customization-copy {
+            margin: 0 0 0.9rem;
+            font-size: 0.95rem;
+            opacity: 0.72;
+        }
+
         .email-input-group {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
         }
         
         .email-input {
@@ -468,7 +487,7 @@
             <p>Change how this page appears in your browser</p>
             
             <div class="rename-options">
-                <div class="rename-option" data-type="gdocs" data-title="Untitled document - Google Docs" data-icon="https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico">
+                <div class="rename-option" data-type="gdocs" data-title="Untitled document - Google Docs" data-icon="https://upload.wikimedia.org/wikipedia/commons/1/18/Google_Docs_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original">
                     <div class="rename-option-icon">📝</div>
                     <div class="rename-option-details">
                         <div class="rename-option-title">Google Docs</div>
@@ -476,7 +495,7 @@
                     </div>
                 </div>
                 
-                <div class="rename-option" data-type="gdrive" data-title="My Drive - Google Drive" data-icon="https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png">
+                <div class="rename-option" data-type="gdrive" data-title="My Drive - Google Drive" data-icon="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Drive_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original">
                     <div class="rename-option-icon">📁</div>
                     <div class="rename-option-details">
                         <div class="rename-option-title">Google Drive</div>
@@ -492,7 +511,7 @@
                     </div>
                 </div>
                 
-                <div class="rename-option" data-type="gsheets" data-title="Untitled spreadsheet - Google Sheets" data-icon="https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico">
+                <div class="rename-option" data-type="gsheets" data-title="Untitled spreadsheet - Google Sheets" data-icon="https://upload.wikimedia.org/wikipedia/commons/d/d6/Google_Sheets_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original">
                     <div class="rename-option-icon">📊</div>
                     <div class="rename-option-details">
                         <div class="rename-option-title">Google Sheets</div>
@@ -500,7 +519,7 @@
                     </div>
                 </div>
                 
-                <div class="rename-option" data-type="gslides" data-title="Untitled presentation - Google Slides" data-icon="https://ssl.gstatic.com/docs/presentations/images/favicon5.ico">
+                <div class="rename-option" data-type="gslides" data-title="Untitled presentation - Google Slides" data-icon="https://upload.wikimedia.org/wikipedia/commons/4/4f/Google_Slides_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original">
                     <div class="rename-option-icon">🖼️</div>
                     <div class="rename-option-details">
                         <div class="rename-option-title">Google Slides</div>
@@ -508,27 +527,19 @@
                     </div>
                 </div>
 
-                <div class="rename-option" data-type="notion" data-title="Notion - Workspace" data-icon="https://www.notion.so/favicon.ico">
-                    <div class="rename-option-icon">📒</div>
+                <div class="rename-option" data-type="gclassroom" data-title="Home - Classroom" data-icon="https://commons.wikimedia.org/wiki/Special:FilePath/Google_Classroom_Logo.svg">
+                    <div class="rename-option-icon">🏫</div>
                     <div class="rename-option-details">
-                        <div class="rename-option-title">Notion</div>
-                        <div class="rename-option-subtitle">Notes & Docs</div>
+                        <div class="rename-option-title">Google Classroom</div>
+                        <div class="rename-option-subtitle">Class dashboard</div>
                     </div>
                 </div>
 
-                <div class="rename-option" data-type="google" data-title="Google" data-icon="https://icons8.com/icon/17949/google">
+                <div class="rename-option" data-type="google" data-title="Google" data-icon="https://www.google.com/favicon.ico">
                     <div class="rename-option-icon">🔎</div>
                     <div class="rename-option-details">
                         <div class="rename-option-title">Google</div>
                         <div class="rename-option-subtitle">Search engine</div>
-                    </div>
-                </div>
-
-                <div class="rename-option" data-type="canvas" data-title="Dashboard" data-icon="https://drive.google.com/uc?id=13EU5WdjXriy8Q-ZSVg3r1BmAJXWpdO5Q">
-                    <div class="rename-option-icon">📝</div>
-                    <div class="rename-option-details">
-                        <div class="rename-option-title">Canvas</div>
-                        <div class="rename-option-subtitle">School classroom organizer</div>
                     </div>
                 </div>
 
@@ -566,11 +577,13 @@
     
             <!-- Email Customization Section (hidden by default) -->
                 <div class="email-customization" id="emailCustomization" style="display: none;">
+                    <p class="email-customization-title">Use your own Gmail address</p>
+                    <p class="email-customization-copy">Set the inbox name shown in the tab when the Gmail cloak is selected.</p>
                     <div class="email-input-group">
                         <input type="text" id="username" placeholder="username" class="email-input">
                         <span>@</span>
                         <input type="text" id="domain" placeholder="gmail.com" class="email-input">
-                        <button class="apply-email">Apply</button>
+                        <button class="apply-email" type="button">Apply</button>
                     </div>
                 </div>
             </div>
