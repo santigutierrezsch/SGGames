@@ -9,21 +9,124 @@ function initGoogleAnalytics() {
     window.__sgGaLoaded = false;
 }
 
+function getDefaultSiteState() {
+    const currentIcon = document.querySelector('link[rel="icon"]')?.href || "/favicon.ico";
+    return {
+        type: "sggames",
+        title: "SG Games",
+        icon: currentIcon
+    };
+}
+
+function applyCloakState(type, title, icon) {
+    localStorage.setItem("pageMimicType", type);
+    localStorage.setItem("pageMimicTitle", title);
+    if (icon) {
+        localStorage.setItem("pageMimicIcon", icon);
+    } else {
+        localStorage.removeItem("pageMimicIcon");
+    }
+
+    document.title = title;
+
+    const favicon = document.querySelector('link[rel="icon"]');
+    if (icon) {
+        if (favicon) {
+            favicon.href = icon;
+        } else {
+            const newFavicon = document.createElement("link");
+            newFavicon.rel = "icon";
+            newFavicon.href = icon;
+            document.head.appendChild(newFavicon);
+        }
+    }
+}
+
+function setTabCloakDecision(enabled) {
+    localStorage.setItem("sggamesTabCloakDecision", enabled ? "enabled" : "disabled");
+
+    if (enabled) {
+        applyCloakState(
+            "gdocs",
+            "Untitled document - Google Docs",
+            "https://upload.wikimedia.org/wikipedia/commons/1/18/Google_Docs_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+        );
+        return;
+    }
+
+    const defaultState = getDefaultSiteState();
+    applyCloakState(defaultState.type, defaultState.title, defaultState.icon);
+}
+
+function showTabCloakPopup() {
+    if (document.getElementById("sggamesTabCloakPopup")) return;
+
+    const popup = document.createElement("div");
+    popup.id = "sggamesTabCloakPopup";
+    popup.style.position = "fixed";
+    popup.style.inset = "0";
+    popup.style.background = "rgba(10, 14, 23, 0.72)";
+    popup.style.display = "flex";
+    popup.style.alignItems = "center";
+    popup.style.justifyContent = "center";
+    popup.style.zIndex = "99999";
+    popup.style.backdropFilter = "blur(4px)";
+    popup.innerHTML = `
+        <div style="max-width: 420px; width: min(90vw, 420px); background: #111827; border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 1.5rem 1.5rem 1.1rem; box-shadow: 0 18px 45px rgba(0,0,0,0.35); color: white; font-family: Arial, sans-serif; text-align: center;">
+            <div style="font-size: 2.1rem; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 0.7rem;">SG Games</div>
+            <p style="margin: 0 0 1.25rem; color: rgba(255,255,255,0.8); font-size: 0.98rem; line-height: 1.5;">Click below to activate tab cloaking. Otherwise, the site will stay on the normal SG Games tab.</p>
+            <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+                <button id="sggamesEnableCloak" style="background: #6653d6; color: white; border: none; border-radius: 10px; padding: 0.82rem 1.2rem; font-weight: 700; cursor: pointer;">Activate Cloak</button>
+                <button id="sggamesKeepSite" style="background: transparent; color: #dfe7ff; border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; padding: 0.82rem 1.2rem; font-weight: 700; cursor: pointer;">Keep SG Games</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    popup.querySelector("#sggamesEnableCloak").addEventListener("click", function () {
+        setTabCloakDecision(true);
+        popup.remove();
+    });
+
+    popup.querySelector("#sggamesKeepSite").addEventListener("click", function () {
+        setTabCloakDecision(false);
+        popup.remove();
+    });
+}
+
 function applySavedMimicry() {
     // Check if there's a saved style and apply it
     let savedType = localStorage.getItem("pageMimicType");
     let savedTitle = localStorage.getItem("pageMimicTitle");
     let savedIcon = localStorage.getItem("pageMimicIcon");
+    const cloakDecision = localStorage.getItem("sggamesTabCloakDecision");
 
-    // First-time default: use Google Docs cloak until user picks another option.
-    if (!savedType && !savedTitle && !savedIcon) {
-        savedType = "gdocs";
-        savedTitle = "Untitled document - Google Docs";
-        savedIcon = "https://upload.wikimedia.org/wikipedia/commons/1/18/Google_Docs_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original";
+    const hasLegacyCloakState = savedType === "gdocs" || /Google Docs|Untitled document/i.test(String(savedTitle || ""));
 
-        localStorage.setItem("pageMimicType", savedType);
-        localStorage.setItem("pageMimicTitle", savedTitle);
-        localStorage.setItem("pageMimicIcon", savedIcon);
+    if (cloakDecision === null) {
+        if (hasLegacyCloakState) {
+            localStorage.removeItem("pageMimicType");
+            localStorage.removeItem("pageMimicTitle");
+            localStorage.removeItem("pageMimicIcon");
+            savedType = null;
+            savedTitle = null;
+            savedIcon = null;
+        }
+
+        const defaultState = getDefaultSiteState();
+        if (cloakDecision === "enabled") {
+            applyCloakState(
+                "gdocs",
+                "Untitled document - Google Docs",
+                "https://upload.wikimedia.org/wikipedia/commons/1/18/Google_Docs_icon_%282026%29.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+            );
+        } else {
+            applyCloakState(defaultState.type, defaultState.title, defaultState.icon);
+        }
+        savedType = localStorage.getItem("pageMimicType");
+        savedTitle = localStorage.getItem("pageMimicTitle");
+        savedIcon = localStorage.getItem("pageMimicIcon");
     }
 
     // Apply saved title if available
@@ -303,6 +406,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Apply any saved mimicry settings immediately
     applySavedMimicry();
+
+    const cloakDecision = localStorage.getItem("sggamesTabCloakDecision");
+    if (cloakDecision === null) {
+        showTabCloakPopup();
+    }
 
     // Set up the settings button and modal if they exist on this page
     setupSettingsModal();
