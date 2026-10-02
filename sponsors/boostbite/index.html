@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support BoostBite, a student-run business from NNHS, with a quick two-minute form.">
+    <meta name="theme-color" content="#0a0e17">
+    <title>BoostBite | SG Games</title>
+    <link rel="icon" href="/boostbite.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        :root {
+            color-scheme: dark;
+            --page: var(--primary-color);
+            --surface: var(--secondary-color);
+            --line: var(--sg-border);
+            --cyan: var(--accent-color);
+            --text: var(--text-color);
+            --muted: var(--sg-muted);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--primary-color);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem max(1.25rem, calc((100vw - 1080px) / 2));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+            background: rgba(7, 19, 28, 0.82);
+        }
+
+        .topbar a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .topbar a:hover {
+            color: var(--cyan);
+        }
+
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        main {
+            width: min(100% - 2rem, 920px);
+            margin: 0 auto;
+            padding: 2.25rem 0 3rem;
+        }
+
+        .brand {
+            display: block;
+            width: 104px;
+            height: auto;
+            margin: 0 auto 1.3rem;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .intro {
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 0.8rem;
+            font-size: clamp(1.8rem, 5vw, 2.7rem);
+            line-height: 1.12;
+        }
+
+        .intro p {
+            margin: 0.65rem 0;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .intro strong {
+            color: var(--text);
+        }
+
+        .form-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 2rem 0 0.75rem;
+        }
+
+        .form-heading h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .form-heading span {
+            color: var(--cyan);
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .form-frame {
+            display: block;
+            width: 100%;
+            height: 1120px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .direct-link {
+            margin: 0.8rem 0 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .direct-link a {
+            color: var(--cyan);
+        }
+
+        @media (max-width: 560px) {
+            .topbar {
+                padding: 0.9rem 1rem;
+            }
+
+            main {
+                width: min(100% - 1.25rem, 920px);
+                padding-top: 1.4rem;
+            }
+
+            .brand {
+                width: 88px;
+            }
+
+            .form-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.35rem;
+            }
+
+            .form-frame {
+                height: 1180px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/css/master.css">
+    <script src="/js/mimicry.js" defer></script>
+    <style>
+        .intro { max-width: none; padding: 1.5rem; background: var(--sg-surface); border: 1px solid var(--sg-border); border-radius: 12px; }
+        .intro p { max-width: 650px; margin: 0.75rem auto; }
+        .brand { border-color: var(--sg-border); }
+        .form-frame { border-radius: 12px; }
+        .direct-link a { color: #b6aaff; }
+    </style>
+</head>
+<body>
+    <nav class="topbar header" aria-label="Main navigation">
+        <a class="home-link" href="/"><i class="fas fa-arrow-left" aria-hidden="true"></i> SG Games</a>
+        <a href="/sponsors/">Sponsors</a>
+    </nav>
+
+    <main>
+        <section class="intro" aria-labelledby="pageTitle">
+            <img class="brand" src="/boostbite.png" alt="BoostBite logo">
+            <h1 id="pageTitle">Support BoostBite</h1>
+            <p>BoostBite is a <strong>student-run business from NNHS</strong> and an SG Games sponsor. Their support helps keep SG Games up and makes the site possible.</p>
+            <p>Please take their quick <strong>two-minute form</strong>. It would be really appreciated and helps support their business.</p>
+        </section>
+
+        <div class="form-heading">
+            <h2>BoostBite's quick form</h2>
+            <span>About 2 minutes</span>
+        </div>
+        <iframe
+            class="form-frame"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfMpdN1iW7IItwr-nCf89Dp7btXimCW72SDbA-TR7wm0bU7VQ/viewform?embedded=true"
+            title="BoostBite two-minute support form"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+            Loading the BoostBite form...
+        </iframe>
+        <p class="direct-link">If the form does not load, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMpdN1iW7IItwr-nCf89Dp7btXimCW72SDbA-TR7wm0bU7VQ/viewform" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
+    </main>
+</body>
+</html>

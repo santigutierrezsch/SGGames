@@ -316,6 +316,20 @@
     }
 </style>
     <link rel="stylesheet" href="/css/master.css">
+    <style>
+        .business-sponsors { margin: 0 0 2rem; text-align: left; }
+        .business-sponsors h2 { margin: 0 0 0.5rem; font-size: 1.35rem; }
+        .business-sponsors-intro { margin: 0 0 1rem; color: var(--sg-muted); line-height: 1.5; }
+        .business-sponsor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1rem; }
+        .business-sponsor-card { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; border: 1px solid var(--sg-border); border-radius: 12px; background: var(--sg-surface); color: var(--text-color); text-decoration: none; transition: border-color 0.2s ease, background-color 0.2s ease; }
+        .business-sponsor-card:hover { border-color: var(--accent-color); background: var(--sg-surface-hover); }
+        .business-sponsor-card img { width: 64px; height: auto; flex-shrink: 0; border-radius: 6px; }
+        .business-sponsor-copy { display: grid; gap: 0.45rem; min-width: 0; line-height: 1.5; }
+        .business-sponsor-copy strong { font-size: 1.1rem; }
+        .business-sponsor-copy > span { font-size: 0.9rem; color: var(--sg-muted); }
+        .business-sponsor-copy .business-sponsor-link { color: #b6aaff; font-weight: 600; }
+        .business-sponsor-link i { margin-left: 0.3rem; }
+    </style>
 </head>
 
 <body>
@@ -338,6 +352,21 @@
 
 <main>
     <h1>Sponsors</h1>
+
+    <section class="business-sponsors" aria-labelledby="businessSponsorsTitle">
+        <h2 id="businessSponsorsTitle">Business Sponsors</h2>
+        <p class="business-sponsors-intro">Meet the businesses helping keep SG Games running.</p>
+        <div class="business-sponsor-grid">
+            <a class="business-sponsor-card" href="/sponsors/boostbite/">
+                <img src="/boostbite.png" alt="" width="64" loading="lazy">
+                <span class="business-sponsor-copy">
+                    <strong>BoostBite</strong>
+                    <span>A student-run business from NNHS.</span>
+                    <span class="business-sponsor-link">Visit sponsor page <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                </span>
+            </a>
+        </div>
+    </section>
 
     <div class="funding-card">
         <div class="funding-head">

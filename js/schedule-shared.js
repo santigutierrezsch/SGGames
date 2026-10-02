@@ -2,6 +2,20 @@
     "use strict";
 
     const schedules = {
+        AssemblyDay: {
+            type: "Assembly Schedule",
+            periods: {
+                "Period 1": "7:45 - 8:23",
+                "Period 2": "8:28 - 9:07",
+                "Period 3": "9:12 - 9:50",
+                "Period 4": "9:55 - 10:33",
+                "Period 5": "10:38 - 11:16",
+                "Period 6": "11:21 - 11:59",
+                "Period 7": "12:04 - 12:47",
+                Assembly: "13:02 - 14:17",
+                "Period 8": "14:32 - 15:10"
+            }
+        },
         Regular: {
             type: "Normal",
             periods: {
@@ -106,6 +120,7 @@
     };
 
     const calendarOverrides = [
+        { date: "2026-10-02", title: "Assembly", kind: "schedule", scheduleKey: "AssemblyDay" },
         { start: "09-07", title: "Labor Day", kind: "noSchool" },
         { start: "10-08", title: "Institute Day", kind: "noSchool" },
         { start: "10-09", title: "Parent/Teacher Conferences", kind: "noSchool" },
@@ -187,6 +202,7 @@
         const startYear = schoolYearStart(date);
         const today = currentDateKey(date);
         return calendarOverrides.find((entry) => {
+            if (entry.date) return today === entry.date;
             const start = dateForMonthDay(entry.start, startYear);
             const end = dateForMonthDay(entry.end || entry.start, startYear);
             return today >= start && today <= end;
@@ -222,6 +238,7 @@
     }
 
     function schedulePeriodKey(name) {
+        if (name === "Assembly") return "Assembly";
         const periodMatch = String(name || "").match(/Period\s+([1-8])/i);
         if (periodMatch) return `Period ${periodMatch[1]}`;
         if (/homeroom|win/i.test(String(name || ""))) return "Homeroom";
@@ -231,6 +248,7 @@
     function formatScheduleClassDetail(periodName, classes) {
         const key = schedulePeriodKey(periodName);
         if (!key) return "";
+        if (key === "Assembly") return "Room Fieldhouse";
         if (key === "Homeroom") return "Homeroom";
         const saved = (classes || loadScheduleClasses())[key] || {};
         const className = String(saved.className || "").trim();

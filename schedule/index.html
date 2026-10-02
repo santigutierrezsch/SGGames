@@ -612,6 +612,7 @@ function periodKeyFromName(name) {
 
 function getAssignmentForPeriod(name) {
   const key = schedulePeriodKey(name);
+  if (key === "Assembly") return { className: "", teacher: "", room: "Fieldhouse" };
   if (key === "Homeroom") return { className: "Homeroom", teacher: "", room: "" };
   const assignment = key ? cleanAssignment(classAssignments[key]) : cleanAssignment({});
   return assignment;
